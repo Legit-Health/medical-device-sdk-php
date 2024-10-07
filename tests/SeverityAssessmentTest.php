@@ -112,12 +112,9 @@ class SeverityAssessmentTest extends TestCase
 
 
         $this->assertCount(0, $apasiLocalScoringSystemValue->getFacetScore('surface')->additionalData);
-        $this->assertThat(
+        $this->assertEquals(
+            3,
             $apasiLocalScoringSystemValue->getFacetScore('surface')->value,
-            $this->logicalAnd(
-                $this->greaterThanOrEqual(0),
-                $this->lessThanOrEqual(6)
-            )
         );
         $this->assertCount(1, $apasiLocalScoringSystemValue->attachments);
 
@@ -449,12 +446,9 @@ class SeverityAssessmentTest extends TestCase
 
 
         $this->assertCount(0, $auasLocalScoringSystemValue->getFacetScore('itchiness')->additionalData);
-        $this->assertThat(
-            $auasLocalScoringSystemValue->getFacetScore('itchiness')->value,
-            $this->logicalAnd(
-                $this->greaterThanOrEqual(0),
-                $this->lessThanOrEqual(3)
-            )
+        $this->assertEquals(
+            2,
+            $auasLocalScoringSystemValue->getFacetScore('itchiness')->value
         );
 
         $this->assertGreaterThan(0, \count($auasLocalScoringSystemValue->attachments));
@@ -638,12 +632,9 @@ class SeverityAssessmentTest extends TestCase
         );
 
         $this->assertCount(0, $ascoradLocalScoringSystemValue->getFacetScore('surface')->additionalData);
-        $this->assertThat(
-            $ascoradLocalScoringSystemValue->getFacetScore('surface')->value,
-            $this->logicalAnd(
-                $this->greaterThanOrEqual(0),
-                $this->lessThanOrEqual(100)
-            )
+        $this->assertEquals(
+            27,
+            $ascoradLocalScoringSystemValue->getFacetScore('surface')->value
         );
 
         $this->assertCount(1, $ascoradLocalScoringSystemValue->attachments);
@@ -710,21 +701,15 @@ class SeverityAssessmentTest extends TestCase
         );
 
         $this->assertCount(0, $scoradLocalScoringSystemValue->getFacetScore('itchiness')->additionalData);
-        $this->assertThat(
-            $ascoradLocalScoringSystemValue->getFacetScore('itchiness')->value,
-            $this->logicalAnd(
-                $this->greaterThanOrEqual(0),
-                $this->lessThanOrEqual(10)
-            )
+        $this->assertEquals(
+            2,
+            $ascoradLocalScoringSystemValue->getFacetScore('itchiness')->value
         );
 
         $this->assertCount(0, $scoradLocalScoringSystemValue->getFacetScore('sleeplessness')->additionalData);
-        $this->assertThat(
-            $ascoradLocalScoringSystemValue->getFacetScore('sleeplessness')->value,
-            $this->logicalAnd(
-                $this->greaterThanOrEqual(0),
-                $this->lessThanOrEqual(10)
-            )
+        $this->assertEquals(
+            3,
+            $ascoradLocalScoringSystemValue->getFacetScore('sleeplessness')->value
         );
 
         $this->assertCount(0, $scoradLocalScoringSystemValue->getFacetScore('surface')->additionalData);
@@ -810,9 +795,18 @@ class SeverityAssessmentTest extends TestCase
 
     public function testNevus()
     {
+        $questionnaire7pc = [
+            'irregularSize' => 0,
+            'irregularPigmentation' => 1,
+            'irregularBorder' => 0,
+            'inflammation' => 1,
+            'largerThanOtherLesions' => 0,
+            'itchOrAltered' => 1,
+            'crustedOrBleeding' => 0
+        ];
         $fileToUpload = $this->currentDir . '/tests/resources/nevus.jpg';
         $image = file_get_contents($fileToUpload);
-        $sevenPC = new SevenPCQuestionnaire(1, 1, 1, 0, 0, 0, 1);
+        $sevenPC = new SevenPCQuestionnaire(...$questionnaire7pc);
         $questionnaires = new Questionnaires([$sevenPC]);
         $severityAssessmentArguments = new SeverityAssessmentArguments(
             base64_encode($image),
@@ -840,13 +834,11 @@ class SeverityAssessmentTest extends TestCase
         $this->assertGreaterThanOrEqual(0, $sevenPcScoringSystemValue->score->value);
         $this->assertNotNull($sevenPcScoringSystemValue->score->interpretation);
 
-        foreach (['irregularSize', 'irregularPigmentation', 'irregularBorder', 'inflammation', 'largerThanOtherLesions', 'itchOrAltered', 'crustedOrBleeding'] as $facetCode) {
+        foreach (\array_keys($questionnaire7pc) as $facetCode) {
             $facetScore = $sevenPcScoringSystemValue->getFacetScore($facetCode);
-            $this->assertThat(
-                $facetScore->value,
-                $this->logicalAnd(
-                    $this->greaterThanOrEqual(0)
-                )
+            $this->assertEquals(
+                $questionnaire7pc[$facetCode],
+                $facetScore->value
             );
             $this->assertCount(0, $facetScore->additionalData);
         }
@@ -923,7 +915,8 @@ class SeverityAssessmentTest extends TestCase
             $this->assertThat(
                 $facetScore->value,
                 $this->logicalAnd(
-                    $this->greaterThanOrEqual(0)
+                    $this->greaterThanOrEqual(0),
+                    $this->lessThanOrEqual(4),
                 )
             );
             $this->assertCount(0, $facetScore->additionalData);
