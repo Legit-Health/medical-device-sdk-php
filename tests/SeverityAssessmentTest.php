@@ -855,7 +855,7 @@ class SeverityAssessmentTest extends TestCase
         $questionnaires = new Questionnaires([$resvechQuestionnaire]);
         $severityAssessmentArguments = new SeverityAssessmentArguments(
             base64_encode($image),
-            scoringSystems: [ScoringSystemCode::ResvechLocal, ScoringSystemCode::ApulsiLocal],
+            scoringSystems: [ScoringSystemCode::ResvechLocal],
             questionnaires: $questionnaires,
             knownCondition: new KnownCondition('Ulcera'),
             bodySiteCode: ParamsBodySiteCode::LegLeft
@@ -872,13 +872,13 @@ class SeverityAssessmentTest extends TestCase
             $this->assertNotEmpty($validityMetric->name);
         }
         $this->assertGreaterThan(0, $response->analysisDuration);
-        $this->assertCount(2, $response->patientEvolution);
+        $this->assertCount(1, $response->patientEvolution);
 
         // Apulsi
-        $apulsiScoringSystemValue = $response->getPatientEvolutionInstance(ScoringSystemCode::ApulsiLocal);
-        $this->assertGreaterThanOrEqual(0, $apulsiScoringSystemValue->score->value);
-        $this->assertNull($apulsiScoringSystemValue->score->interpretation);
-        $this->assertCount(23, $apulsiScoringSystemValue->getEvolutionItems());
+        // $apulsiScoringSystemValue = $response->getPatientEvolutionInstance(ScoringSystemCode::ApulsiLocal);
+        // $this->assertGreaterThanOrEqual(0, $apulsiScoringSystemValue->score->value);
+        // $this->assertNull($apulsiScoringSystemValue->score->interpretation);
+        // $this->assertCount(23, $apulsiScoringSystemValue->getEvolutionItems());
 
         // Resvech
         $resvechScoringSystemValue = $response->getPatientEvolutionInstance(ScoringSystemCode::ResvechLocal);

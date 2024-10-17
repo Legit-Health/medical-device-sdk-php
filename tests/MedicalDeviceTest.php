@@ -165,7 +165,7 @@ class MedicalDeviceTest extends TestCase
         $this->assertEquals('value_error', $json['detail'][0]['type']);
         $this->assertArrayNotHasKey('input', $json['detail'][0]);
         $this->assertEquals(
-            "Value error, Please, submit the questionnaire answers for the following scoring systems: ['pasiLocal', 'dlqi', 'pure4', 'apasiLocal']",
+            "Value error, Please, submit the questionnaire answers for the following scoring systems: ['dlqi', 'pasiLocal', 'pure4', 'apasiLocal']",
             $json['detail'][0]['msg']
         );
     }
