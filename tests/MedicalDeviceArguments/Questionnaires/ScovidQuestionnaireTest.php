@@ -64,38 +64,18 @@ class ScovidQuestionnaireTest extends TestCase
         $questionnaire = new ScovidQuestionnaire(8, 10, 0, 1, 2, 3, 0, 1, 2, 3);
         $arr = $questionnaire->toArray();
 
-        $this->assertCount(10, array_keys($arr['item']));
-        $this->assertEquals('scovid', $arr['questionnaire']);
+        $this->assertCount(10, $arr['item']);
 
-        $this->assertEquals(8, $arr['item'][0]['answer'][0]['value']);
-        $this->assertEquals('pain', $arr['item'][0]['code']);
-
-        $this->assertEquals(10, $arr['item'][1]['answer'][0]['value']);
-        $this->assertEquals('itchiness', $arr['item'][1]['code']);
-
-        $this->assertEquals(0, $arr['item'][2]['answer'][0]['value']);
-        $this->assertEquals('fever', $arr['item'][2]['code']);
-
-        $this->assertEquals(1, $arr['item'][3]['answer'][0]['value']);
-        $this->assertEquals('cough', $arr['item'][3]['code']);
-
-        $this->assertEquals(2, $arr['item'][4]['answer'][0]['value']);
-        $this->assertEquals('cephalea', $arr['item'][4]['code']);
-
-        $this->assertEquals(3, $arr['item'][5]['answer'][0]['value']);
-        $this->assertEquals('myalgiaOrArthralgia', $arr['item'][5]['code']);
-
-        $this->assertEquals(0, $arr['item'][6]['answer'][0]['value']);
-        $this->assertEquals('malaise', $arr['item'][6]['code']);
-
-        $this->assertEquals(1, $arr['item'][7]['answer'][0]['value']);
-        $this->assertEquals('lossOfTasteOrOlfactory', $arr['item'][7]['code']);
-
-        $this->assertEquals(2, $arr['item'][8]['answer'][0]['value']);
-        $this->assertEquals('shortnessOfBreath', $arr['item'][8]['code']);
-
-        $this->assertEquals(3, $arr['item'][9]['answer'][0]['value']);
-        $this->assertEquals('otherSkinProblems', $arr['item'][9]['code']);
+        $this->assertEquals(8, $arr['item']['pain']);
+        $this->assertEquals(10, $arr['item']['itchiness']);
+        $this->assertEquals(0, $arr['item']['fever']);
+        $this->assertEquals(1, $arr['item']['cough']);
+        $this->assertEquals(2, $arr['item']['cephalea']);
+        $this->assertEquals(3, $arr['item']['myalgiaOrArthralgia']);
+        $this->assertEquals(0, $arr['item']['malaise']);
+        $this->assertEquals(1, $arr['item']['lossOfTasteOrOlfactory']);
+        $this->assertEquals(2, $arr['item']['shortnessOfBreath']);
+        $this->assertEquals(3, $arr['item']['otherSkinProblems']);
     }
 
     public function testGetName()

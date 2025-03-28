@@ -1,4 +1,4 @@
-FROM php:8.2-fpm-alpine
+FROM php:8.4-fpm-alpine
 
 RUN apk update && apk add git curl zip unzip autoconf g++ make linux-headers
 

@@ -24,40 +24,11 @@ readonly class Pure4Questionnaire extends Questionnaire
     public function toArray(): array
     {
         return [
-            'questionnaire' => $this::getName(),
             'item' => [
-                [
-                    'code' => 'question1',
-                    'answer' => [
-                        [
-                            'value' => $this->question1
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'question2',
-                    'answer' => [
-                        [
-                            'value' => $this->question2
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'question3',
-                    'answer' => [
-                        [
-                            'value' => $this->question3
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'question4',
-                    'answer' => [
-                        [
-                            'value' => $this->question4
-                        ]
-                    ]
-                ]
+                'question1' => $this->question1,
+                'question2' => $this->question2,
+                'question3' => $this->question3,
+                'question4' => $this->question4,
             ]
         ];
     }

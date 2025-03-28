@@ -11,8 +11,7 @@ readonly class DiagnosisSupportArguments implements MedicalDeviceArguments
      * @param string[] $medias
      */
     public function __construct(
-        public array $medias,
-        public ?Subject $subject = null
+        public array $medias
     ) {
         if (\count($medias) > 3) {
             throw new InvalidArgumentException('The maximum lenght of the medias array is 3');
@@ -22,14 +21,11 @@ readonly class DiagnosisSupportArguments implements MedicalDeviceArguments
     public function toArray(): array
     {
         $json = [
-            "media" => array_map(fn ($mediaContent) => [
-                'data' => $mediaContent
+            "payload" => array_map(fn($attachment) => [
+                "contentAttachment" => ["data" => $attachment]
             ], $this->medias)
+
         ];
-        $subject = $this->subject;
-        if ($subject !== null) {
-            $json["subject"] = $subject->toArray();
-        }
         return $json;
     }
 }

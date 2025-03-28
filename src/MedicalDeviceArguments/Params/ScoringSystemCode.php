@@ -4,22 +4,29 @@ namespace LegitHealth\MedicalDevice\MedicalDeviceArguments\Params;
 
 enum ScoringSystemCode: string
 {
-    case Aihs4Local = 'aihs4Local';
-    case AladinLocal = 'aladinLocal';
-    case ApasiLocal = 'apasiLocal';
-    case ApulsiLocal = 'apulsiLocal';
-    case AscoradLocal = 'ascoradLocal';
-    case AuasLocal = 'auasLocal';
+    case Aeasi = 'aeasi';
+    case Agppga = 'agppga';
+    case Aihs4 = 'aihs4';
+    case Aladin = 'aladin';
+    case Apasi = 'apasi';
+    case Asalt = 'asalt';
+    case Ascorad = 'ascorad';
+    case Auas = 'auas';
+    case Awosi = 'awosi';
+    case Nsil = 'nsil';
+
     case Dlqi = 'dlqi';
     case Gags = 'gags';
-    case Ihs4Local = 'ihs4Local';
+    case Ihs4 = 'ihs4';
+    case Pasi = 'pasi';
     case Pga = 'pga';
     case Pure4 = 'pure4';
-    case PasiLocal = 'pasiLocal';
-    case ResvechLocal = 'resvechLocal';
-    case SevenPc = '7Pc';
-    case ScoradLocal = 'scoradLocal';
+    case Resvech = 'resvech';
+    case Scorad = 'scorad';
     case Scovid = 'scovid';
-    case UasLocal = 'uasLocal';
+    case SevenPc = 'sevenPc';
+    case Uas = 'uas';
     case Uct = 'uct';
+
+    case Avasi = 'avasi';
 }

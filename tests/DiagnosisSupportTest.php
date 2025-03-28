@@ -2,13 +2,11 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\DiagnosisSupportArguments;
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\{DiagnosisSupportArguments, BearerToken, RequestOptions};
 use LegitHealth\MedicalDevice\MedicalDeviceClient;
 use DateTimeImmutable;
 use Dotenv\Dotenv;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\BearerToken;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\Subject;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\RequestOptions;
+use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\ModalityValue;
 use PHPUnit\Framework\TestCase;
 
 class DiagnosisSupportTest extends TestCase
@@ -27,7 +25,7 @@ class DiagnosisSupportTest extends TestCase
         $this->bearerToken = new BearerToken($accessToken->value);
     }
 
-    public function testBaseDiagnosisSupport()
+    public function testBaseDiagnosisSupport(): void
     {
         $fileToUpload1 = $this->currentDir . '/tests/resources/psoriasis_01.png';
         $image1 = file_get_contents($fileToUpload1);
@@ -47,154 +45,67 @@ class DiagnosisSupportTest extends TestCase
         );
         $response = $this->medicalDeviceClient->diagnosisSupport($diagnosisSupportArguments, $this->bearerToken);
 
-
         $this->assertEquals(
             (new DateTimeImmutable())->format('Ymd'),
-            $response->effectiveDateTime->format('Ymd')
+            $response->issued->format('Ymd')
         );
 
-        $clinicalIndicators = $response->clinicalIndicators;
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->hasCondition);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->malignancy);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->highPriorityReferral);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->pigmentedLesion);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->urgentReferral);
+        $clinicalIndicator = $response->clinicalIndicator;
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->hasCondition);
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->malignancy);
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->highPriorityReferral);
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->pigmentedLesion);
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->urgentReferral);
 
-        $performanceIndicators = $response->performanceIndicators;
-        $this->assertGreaterThan(0, $performanceIndicators->sensitivity);
-        $this->assertGreaterThan(0, $performanceIndicators->specificity);
-        $this->assertGreaterThan(0, $performanceIndicators->entropy);
+        $performanceIndicator = $response->performanceIndicator;
+        $this->assertGreaterThan(0, $performanceIndicator->sensitivity);
+        $this->assertGreaterThan(0, $performanceIndicator->specificity);
+        $this->assertGreaterThan(0, $performanceIndicator->entropy);
 
-        foreach ($response->imagingStudySeries as $imagingStudySeriesInstance) {
-            $this->assertGreaterThan(0, count($imagingStudySeriesInstance->conclusions));
-            $firstConclusion = $imagingStudySeriesInstance->conclusions[0];
-            $this->assertNotEmpty($firstConclusion->conclusionCoding->code);
-            $this->assertNotEmpty($firstConclusion->conclusionCoding->system);
-            $this->assertNotEmpty($firstConclusion->conclusionCoding->systemAlias);
-            $this->assertNotEmpty($firstConclusion->conclusionCoding->display);
+        foreach ($response->imagingAnalysis as $imagingAnalysisInstance) {
+            $this->assertGreaterThan(0, count($imagingAnalysisInstance->conclusions));
+            $firstConclusion = $imagingAnalysisInstance->conclusions[0];
+            $this->assertNotEmpty($firstConclusion->code->code);
+            $this->assertNotEmpty($firstConclusion->code->system);
+            $this->assertNotEmpty($firstConclusion->code->systemAlias);
+            $this->assertNotEmpty($firstConclusion->code->display);
             $this->assertNotEmpty($firstConclusion->probability);
 
-            $media = $imagingStudySeriesInstance->media;
-            $this->assertNotEmpty($media->modality);
-            $this->assertTrue($media->validity->isValid);
-            foreach ($media->validity->metrics as $validityMetric) {
-                $this->assertTrue($validityMetric->isValid);
-                $this->assertNotEmpty($validityMetric->name);
-            }
+            // Media validity
+            $this->assertTrue($imagingAnalysisInstance->mediaValidity->isValid);
+            $this->assertTrue($imagingAnalysisInstance->mediaValidity->quality->acceptable);
+            $this->assertGreaterThan(0, $imagingAnalysisInstance->mediaValidity->quality->score);
+            $this->assertNotEmpty($imagingAnalysisInstance->mediaValidity->quality->interpretation);
+            $this->assertTrue($imagingAnalysisInstance->mediaValidity->domain->isDermatological);
+            $this->assertGreaterThan(0, $imagingAnalysisInstance->mediaValidity->domain->aiConfidence->value);
 
-            $this->assertGreaterThan(50.0, $media->validity->getDiqaScore());
-            $this->assertNull($media->validity->getFailedValidityMetric());
+            $this->assertEquals(ModalityValue::Clinical, $imagingAnalysisInstance->mediaValidity->modality->modality);
+            $this->assertGreaterThan(0, $imagingAnalysisInstance->mediaValidity->modality->additionalData->aiConfidenceClinical);
+            $this->assertGreaterThan(0, $imagingAnalysisInstance->mediaValidity->modality->additionalData->aiConfidenceDermoscopic);
 
-            $performanceIndicators = $imagingStudySeriesInstance->performanceIndicators;
-            $this->assertGreaterThan(0, $performanceIndicators->sensitivity);
-            $this->assertGreaterThan(0, $performanceIndicators->specificity);
-            $this->assertGreaterThan(0, $performanceIndicators->entropy);
+            $performanceIndicator = $imagingAnalysisInstance->performanceIndicator;
+            $this->assertGreaterThan(0, $performanceIndicator->entropy);
 
-            $clinicalIndicators = $imagingStudySeriesInstance->clinicalIndicators;
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicators->hasCondition);
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicators->malignancy);
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicators->highPriorityReferral);
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicators->pigmentedLesion);
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicators->urgentReferral);
+            $clinicalIndicator = $imagingAnalysisInstance->clinicalIndicator;
+            $this->assertGreaterThanOrEqual(0, $clinicalIndicator->hasCondition);
+            $this->assertGreaterThanOrEqual(0, $clinicalIndicator->malignancy);
+            $this->assertGreaterThanOrEqual(0, $clinicalIndicator->highPriorityReferral);
+            $this->assertGreaterThanOrEqual(0, $clinicalIndicator->pigmentedLesion);
+            $this->assertGreaterThanOrEqual(0, $clinicalIndicator->urgentReferral);
         }
 
         $this->assertGreaterThan(0, count($response->conclusions));
         $firstConclusion = $response->conclusions[0];
-        $this->assertNotEmpty($firstConclusion->conclusionCoding->code);
-        $this->assertNotEmpty($firstConclusion->conclusionCoding->system);
-        $this->assertNotEmpty($firstConclusion->conclusionCoding->systemAlias);
-        $this->assertNotEmpty($firstConclusion->conclusionCoding->display);
+        $this->assertNotEmpty($firstConclusion->code->code);
+        $this->assertNotEmpty($firstConclusion->code->system);
+        $this->assertNotEmpty($firstConclusion->code->systemAlias);
+        $this->assertNotEmpty($firstConclusion->code->display);
         $this->assertNotEmpty($firstConclusion->probability);
 
         $this->assertGreaterThan(0, $response->analysisDuration);
     }
 
-    public function testDiagnosisSupportWithSubject()
-    {
-        $fileToUpload1 = $this->currentDir . '/tests/resources/psoriasis_01.png';
-        $image1 = file_get_contents($fileToUpload1);
-
-        $fileToUpload2 = $this->currentDir . '/tests/resources/psoriasis_02.png';
-        $image2 = file_get_contents($fileToUpload2);
-
-        $fileToUpload3 = $this->currentDir . '/tests/resources/psoriasis_03.png';
-        $image3 = file_get_contents($fileToUpload3);
-
-        $diagnosisSupportArguments = new DiagnosisSupportArguments(
-            subject: new Subject('xxx'),
-            medias: [
-                base64_encode($image1),
-                base64_encode($image2),
-                base64_encode($image3)
-            ]
-        );
-        $response = $this->medicalDeviceClient->diagnosisSupport($diagnosisSupportArguments, $this->bearerToken);
-
-
-        $this->assertEquals(
-            (new DateTimeImmutable())->format('Ymd'),
-            $response->effectiveDateTime->format('Ymd')
-        );
-
-        $clinicalIndicators = $response->clinicalIndicators;
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->hasCondition);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->malignancy);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->highPriorityReferral);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->pigmentedLesion);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->urgentReferral);
-
-        $performanceIndicators = $response->performanceIndicators;
-        $this->assertGreaterThan(0, $performanceIndicators->sensitivity);
-        $this->assertGreaterThan(0, $performanceIndicators->specificity);
-        $this->assertGreaterThan(0, $performanceIndicators->entropy);
-
-        foreach ($response->imagingStudySeries as $imagingStudySeriesInstance) {
-            $this->assertGreaterThan(0, count($imagingStudySeriesInstance->conclusions));
-            $firstConclusion = $imagingStudySeriesInstance->conclusions[0];
-            $this->assertNotEmpty($firstConclusion->conclusionCoding->code);
-            $this->assertNotEmpty($firstConclusion->conclusionCoding->system);
-            $this->assertNotEmpty($firstConclusion->conclusionCoding->systemAlias);
-            $this->assertNotEmpty($firstConclusion->conclusionCoding->display);
-            $this->assertNotEmpty($firstConclusion->probability);
-
-
-
-            $media = $imagingStudySeriesInstance->media;
-            $this->assertNotEmpty($media->modality);
-            $this->assertTrue($media->validity->isValid);
-            foreach ($media->validity->metrics as $validityMetric) {
-                $this->assertTrue($validityMetric->isValid);
-                $this->assertNotEmpty($validityMetric->name);
-            }
-
-            $this->assertGreaterThan(50.0, $media->validity->getDiqaScore());
-            $this->assertNull($media->validity->getFailedValidityMetric());
-
-            $performanceIndicators = $imagingStudySeriesInstance->performanceIndicators;
-            $this->assertGreaterThan(0, $performanceIndicators->sensitivity);
-            $this->assertGreaterThan(0, $performanceIndicators->specificity);
-            $this->assertGreaterThan(0, $performanceIndicators->entropy);
-
-            $clinicalIndicators = $imagingStudySeriesInstance->clinicalIndicators;
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicators->hasCondition);
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicators->malignancy);
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicators->highPriorityReferral);
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicators->pigmentedLesion);
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicators->urgentReferral);
-        }
-
-        $this->assertGreaterThan(0, count($response->conclusions));
-        $firstConclusion = $response->conclusions[0];
-        $this->assertNotEmpty($firstConclusion->conclusionCoding->code);
-        $this->assertNotEmpty($firstConclusion->conclusionCoding->system);
-        $this->assertNotEmpty($firstConclusion->conclusionCoding->systemAlias);
-        $this->assertNotEmpty($firstConclusion->conclusionCoding->display);
-        $this->assertNotEmpty($firstConclusion->probability);
-
-        $this->assertGreaterThan(0, $response->analysisDuration);
-    }
-
-    public function testInvalidImage()
+    public function testInvalidImage(): void
     {
         $fileToUpload1 = $this->currentDir . '/tests/resources/psoriasis_01.png';
         $fileToUpload2 = $this->currentDir . '/tests/resources/invalid.png';
@@ -208,27 +119,21 @@ class DiagnosisSupportTest extends TestCase
         );
         $response = $this->medicalDeviceClient->diagnosisSupport($diagnosisSupportArguments, $this->bearerToken);
 
-        $clinicalIndicators = $response->clinicalIndicators;
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->hasCondition);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->malignancy);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->highPriorityReferral);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->pigmentedLesion);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicators->urgentReferral);
+        $clinicalIndicator = $response->clinicalIndicator;
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->hasCondition);
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->malignancy);
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->highPriorityReferral);
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->pigmentedLesion);
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->urgentReferral);
 
-        $performanceIndicators = $response->performanceIndicators;
-        $this->assertGreaterThan(0, $performanceIndicators->sensitivity);
-        $this->assertGreaterThan(0, $performanceIndicators->specificity);
-        $this->assertGreaterThan(0, $performanceIndicators->entropy);
+        $performanceIndicator = $response->performanceIndicator;
+        $this->assertGreaterThan(0, $performanceIndicator->sensitivity);
+        $this->assertGreaterThan(0, $performanceIndicator->specificity);
+        $this->assertGreaterThan(0, $performanceIndicator->entropy);
 
         $this->assertGreaterThan(0, $response->analysisDuration);
         $failedMedias = $response->getIndexOfFailedMedias();
         $this->assertCount(2, $failedMedias);
-
-        $this->assertEquals('quality', $failedMedias[0]->failedMetric->name);
-        $this->assertEquals(1, $failedMedias[0]->index);
-
-        $this->assertEquals('quality', $failedMedias[1]->failedMetric->name);
-        $this->assertEquals(2, $failedMedias[1]->index);
     }
 
     public function testSendWithTimeout()
@@ -237,7 +142,6 @@ class DiagnosisSupportTest extends TestCase
         $image1 = file_get_contents($fileToUpload1);
 
         $diagnosisSupportArguments = new DiagnosisSupportArguments(
-            subject: new Subject('xxx'),
             medias: [
                 base64_encode($image1)
             ]
@@ -246,7 +150,7 @@ class DiagnosisSupportTest extends TestCase
 
         $this->assertEquals(
             (new DateTimeImmutable())->format('Ymd'),
-            $response->effectiveDateTime->format('Ymd')
+            $response->issued->format('Ymd')
         );
     }
 }

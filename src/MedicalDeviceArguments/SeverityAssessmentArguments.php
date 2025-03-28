@@ -2,37 +2,28 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceArguments;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\{KnownCondition, BodySiteCode, Questionnaires, Subject};
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\{KnownCondition, BodySiteCode, ScoringSystems, Subject};
 
 readonly class SeverityAssessmentArguments implements MedicalDeviceArguments
 {
     public function __construct(
         public string $mediaContent,
-        public array $scoringSystems,
         public KnownCondition $knownCondition,
         public BodySiteCode $bodySiteCode,
-        public Questionnaires $questionnaires = new Questionnaires([]),
-        public ?Subject $subject = null
-    ) {
-    }
+        public ScoringSystems $scoringSystems = new ScoringSystems([])
+    ) {}
 
     public function toArray(): array
     {
-        $json = [
-            "media" => [
-                "data" => $this->mediaContent
+        return [
+            "payload" => [
+                "contentAttachment" => [
+                    "data" => $this->mediaContent
+                ]
             ],
-            "scoringSystems" => $this->scoringSystems,
-            'questionnaireResponse' => $this->questionnaires->toArray(),
+            "bodySite" => $this->bodySiteCode->value,
+            "knownCondition" => $this->knownCondition->toArray(),
+            "scoringSystem" => $this->scoringSystems->toArray(),
         ];
-        $knownCondition = $this->knownCondition;
-        $json['knownCondition']['conclusion'] = $knownCondition->toArray();
-        $bodySiteCode = $this->bodySiteCode;
-        $json['bodySite'] = $bodySiteCode->value;
-        $subject = $this->subject;
-        if ($subject !== null) {
-            $json['subject'] = $subject->toArray();
-        }
-        return $json;
     }
 }

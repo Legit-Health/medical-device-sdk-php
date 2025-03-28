@@ -2,19 +2,19 @@
 
 namespace LegitHealth\MedicalDevice\Tests\MedicalDeviceArguments\Questionnaires;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\AscoradLocalQuestionnaire;
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\SingleZoneAscoradQuestionnaire;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
-class AscoradLocalQuestionnaireTest extends TestCase
+class SingleZoneAscoradQuestionnaireTest extends TestCase
 {
     public function testValidate()
     {
         $exceptionIsThrown = false;
         try {
-            new AscoradLocalQuestionnaire(...[
+            new SingleZoneAscoradQuestionnaire(...[
                 'surface' => 0,
-                'itchiness' => 0,
+                'pruritus' => 0,
                 'sleeplessness' => 0
             ]);
         } catch (Throwable) {
@@ -24,9 +24,9 @@ class AscoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new AscoradLocalQuestionnaire(...[
+            new SingleZoneAscoradQuestionnaire(...[
                 'surface' => 100,
-                'itchiness' => 10,
+                'pruritus' => 10,
                 'sleeplessness' => 10
             ]);
         } catch (Throwable) {
@@ -36,9 +36,9 @@ class AscoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new AscoradLocalQuestionnaire(...[
+            new SingleZoneAscoradQuestionnaire(...[
                 'surface' => random_int(0, 100),
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable) {
@@ -48,9 +48,9 @@ class AscoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new AscoradLocalQuestionnaire(...[
+            new SingleZoneAscoradQuestionnaire(...[
                 'surface' => 101,
-                'itchiness' => 11,
+                'pruritus' => 11,
                 'sleeplessness' => 11
             ]);
         } catch (Throwable) {
@@ -60,9 +60,9 @@ class AscoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new AscoradLocalQuestionnaire(...[
+            new SingleZoneAscoradQuestionnaire(...[
                 'surface' => 100,
-                'itchiness' => 11,
+                'pruritus' => 11,
                 'sleeplessness' => 11
             ]);
         } catch (Throwable) {
@@ -72,9 +72,9 @@ class AscoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new AscoradLocalQuestionnaire(...[
+            new SingleZoneAscoradQuestionnaire(...[
                 'surface' => 100,
-                'itchiness' => 10,
+                'pruritus' => 10,
                 'sleeplessness' => 11
             ]);
         } catch (Throwable) {
@@ -84,9 +84,9 @@ class AscoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new AscoradLocalQuestionnaire(...[
+            new SingleZoneAscoradQuestionnaire(...[
                 'surface' => -1,
-                'itchiness' => -1,
+                'pruritus' => -1,
                 'sleeplessness' => -1
             ]);
         } catch (Throwable) {
@@ -96,9 +96,9 @@ class AscoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new AscoradLocalQuestionnaire(...[
+            new SingleZoneAscoradQuestionnaire(...[
                 'surface' => 0,
-                'itchiness' => -1,
+                'pruritus' => -1,
                 'sleeplessness' => -1
             ]);
         } catch (Throwable) {
@@ -108,9 +108,9 @@ class AscoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new AscoradLocalQuestionnaire(...[
+            new SingleZoneAscoradQuestionnaire(...[
                 'surface' => 0,
-                'itchiness' => 0,
+                'pruritus' => 0,
                 'sleeplessness' => -1
             ]);
         } catch (Throwable) {
@@ -121,22 +121,17 @@ class AscoradLocalQuestionnaireTest extends TestCase
 
     public function testToArray()
     {
-        $ascoradLocalQuestionnaire = new AscoradLocalQuestionnaire(27, 2, 1);
-        $arr = $ascoradLocalQuestionnaire->toArray();
-        $this->assertEquals('ascoradLocal', $arr['questionnaire']);
+        $singleZoneAscoradQuestionnaire = new SingleZoneAscoradQuestionnaire(27, 2, 1);
+        $arr = $singleZoneAscoradQuestionnaire->toArray();
         $this->assertCount(3, array_keys($arr['item']));
-
-        $this->assertEquals(27, $arr['item'][0]['answer'][0]['value']);
-        $this->assertEquals('surface', $arr['item'][0]['code']);
-        $this->assertEquals(2, $arr['item'][1]['answer'][0]['value']);
-        $this->assertEquals('itchiness', $arr['item'][1]['code']);
-        $this->assertEquals(1, $arr['item'][2]['answer'][0]['value']);
-        $this->assertEquals('sleeplessness', $arr['item'][2]['code']);
+        $this->assertEquals(27, $arr['item']['surface']);
+        $this->assertEquals(2, $arr['item']['pruritus']);
+        $this->assertEquals(1, $arr['item']['sleeplessness']);
     }
 
     public function testGetName()
     {
-        $ascoradLocalQuestionnaire = new AscoradLocalQuestionnaire(27, 2, 2);
-        $this->assertEquals('ascoradLocal', $ascoradLocalQuestionnaire::getName());
+        $singleZoneAscoradQuestionnaire = new SingleZoneAscoradQuestionnaire(27, 2, 2);
+        $this->assertEquals('ascorad', $singleZoneAscoradQuestionnaire::getName());
     }
 }

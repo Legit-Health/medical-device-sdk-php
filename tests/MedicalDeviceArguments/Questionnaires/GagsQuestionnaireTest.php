@@ -58,31 +58,22 @@ class GagsQuestionnaireTest extends TestCase
         $gagsQuestionnaire = new GagsQuestionnaire(0, 1, 2, 3, 4, 1);
         $arr = $gagsQuestionnaire->toArray();
 
-        $this->assertEquals('gags', $arr['questionnaire']);
-        $this->assertCount(6, array_keys($arr['item']));
-
-        $this->assertEquals(0, $arr['item'][0]['answer'][0]['value']);
-        $this->assertEquals('forehead', $arr['item'][0]['code']);
-        $this->assertEquals(1, $arr['item'][1]['answer'][0]['value']);
-        $this->assertEquals('rightCheek', $arr['item'][1]['code']);
-        $this->assertEquals(2, $arr['item'][2]['answer'][0]['value']);
-        $this->assertEquals('leftCheek', $arr['item'][2]['code']);
-        $this->assertEquals(3, $arr['item'][3]['answer'][0]['value']);
-        $this->assertEquals('nose', $arr['item'][3]['code']);
-        $this->assertEquals(4, $arr['item'][4]['answer'][0]['value']);
-        $this->assertEquals('chin', $arr['item'][4]['code']);
-        $this->assertEquals(1, $arr['item'][5]['answer'][0]['value']);
-        $this->assertEquals('chestAndUpperBack', $arr['item'][5]['code']);
+        $this->assertEquals(0, $arr['item']['forehead']);
+        $this->assertEquals(1, $arr['item']['rightCheek']);
+        $this->assertEquals(2, $arr['item']['leftCheek']);
+        $this->assertEquals(3, $arr['item']['nose']);
+        $this->assertEquals(4, $arr['item']['chin']);
+        $this->assertEquals(1, $arr['item']['chestAndUpperBack']);
 
         $gagsQuestionnaire = new GagsQuestionnaire(4, 3, 2, 1, 0, 4);
         $arr = $gagsQuestionnaire->toArray();
-        $this->assertCount(6, array_keys($arr['item']));
-        $this->assertEquals(4, $arr['item'][0]['answer'][0]['value']);
-        $this->assertEquals(3, $arr['item'][1]['answer'][0]['value']);
-        $this->assertEquals(2, $arr['item'][2]['answer'][0]['value']);
-        $this->assertEquals(1, $arr['item'][3]['answer'][0]['value']);
-        $this->assertEquals(0, $arr['item'][4]['answer'][0]['value']);
-        $this->assertEquals(4, $arr['item'][5]['answer'][0]['value']);
+
+        $this->assertEquals(4, $arr['item']['forehead']);
+        $this->assertEquals(3, $arr['item']['rightCheek']);
+        $this->assertEquals(2, $arr['item']['leftCheek']);
+        $this->assertEquals(1, $arr['item']['nose']);
+        $this->assertEquals(0, $arr['item']['chin']);
+        $this->assertEquals(4, $arr['item']['chestAndUpperBack']);
     }
 
     public function testGetName()

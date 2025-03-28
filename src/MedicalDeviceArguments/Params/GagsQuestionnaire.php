@@ -28,14 +28,13 @@ readonly class GagsQuestionnaire extends Questionnaire
     public function toArray(): array
     {
         return [
-            'questionnaire' => $this::getName(),
             'item' => [
-                ['code' => 'forehead', 'answer' => [['value' => $this->forehead]]],
-                ['code' => 'rightCheek', 'answer' => [['value' => $this->rightCheek]]],
-                ['code' => 'leftCheek', 'answer' => [['value' => $this->leftCheek]]],
-                ['code' => 'nose', 'answer' => [['value' => $this->nose]]],
-                ['code' => 'chin', 'answer' => [['value' => $this->chin]]],
-                ['code' => 'chestAndUpperBack', 'answer' => [['value' => $this->chestAndUpperBack]]],
+                'forehead' => $this->forehead,
+                'rightCheek' => $this->rightCheek,
+                'leftCheek' => $this->leftCheek,
+                'nose' => $this->nose,
+                'chin' => $this->chin,
+                'chestAndUpperBack' => $this->chestAndUpperBack
             ]
         ];
     }

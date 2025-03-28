@@ -32,92 +32,20 @@ readonly class DlqiQuestionnaire extends Questionnaire
     {
         return ScoringSystemCode::Dlqi->value;
     }
-
     public function toArray(): array
     {
         return [
-            'questionnaire' => $this::getName(),
             'item' => [
-                [
-                    'code' => 'question1',
-                    'answer' => [
-                        [
-                            'value' => $this->question1
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'question2',
-                    'answer' => [
-                        [
-                            'value' => $this->question2
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'question3',
-                    'answer' => [
-                        [
-                            'value' => $this->question3
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'question4',
-                    'answer' => [
-                        [
-                            'value' => $this->question4
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'question5',
-                    'answer' => [
-                        [
-                            'value' => $this->question5
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'question6',
-                    'answer' => [
-                        [
-                            'value' => $this->question6
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'question7',
-                    'answer' => [
-                        [
-                            'value' => $this->question7
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'question8',
-                    'answer' => [
-                        [
-                            'value' => $this->question8
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'question9',
-                    'answer' => [
-                        [
-                            'value' => $this->question9
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'question10',
-                    'answer' => [
-                        [
-                            'value' => $this->question10
-                        ]
-                    ]
-                ]
+                'question1' => $this->question1,
+                'question2' => $this->question2,
+                'question3' => $this->question3,
+                'question4' => $this->question4,
+                'question5' => $this->question5,
+                'question6' => $this->question6,
+                'question7' => $this->question7,
+                'question8' => $this->question8,
+                'question9' => $this->question9,
+                'question10' => $this->question10
             ]
         ];
     }

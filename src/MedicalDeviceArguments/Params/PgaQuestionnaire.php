@@ -22,32 +22,10 @@ readonly class PgaQuestionnaire extends Questionnaire
     public function toArray(): array
     {
         return [
-            'questionnaire' => $this::getName(),
             'item' => [
-                [
-                    'code' => 'erythema',
-                    'answer' => [
-                        [
-                            'value' => $this->erythema
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'desquamation',
-                    'answer' => [
-                        [
-                            'value' => $this->desquamation
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'induration',
-                    'answer' => [
-                        [
-                            'value' => $this->induration
-                        ]
-                    ]
-                ]
+                'erythema' => $this->erythema,
+                'desquamation' => $this->desquamation,
+                'induration' => $this->induration,
             ]
         ];
     }

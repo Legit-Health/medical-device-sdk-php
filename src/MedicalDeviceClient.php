@@ -2,22 +2,19 @@
 
 namespace LegitHealth\MedicalDevice;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\{DiagnosisSupportArguments, MedicalDeviceArguments, RequestOptions, SeverityAssessmentArguments};
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\BearerToken;
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\{BearerToken, DiagnosisSupportArguments, MedicalDeviceArguments, RequestOptions, SeverityAssessmentArguments};
 use LegitHealth\MedicalDevice\MedicalDeviceResponse\{AccessToken, DiagnosisSupportResponse, SeverityAssessmentResponse};
+use Throwable;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
-use Throwable;
 
 final class MedicalDeviceClient
 {
-    private const SEVERITY_ASSESSMENT = '/severity-assessment';
-    private const DIAGNOSIS_SUPPORT_ENDPOINT = '/diagnosis-support';
-    private const LOGIN = '/login';
+    private const SEVERITY_ASSESSMENT_AUTOMATIC_LOCAL = 'severity-assessment/image-based/local';
+    private const DIAGNOSIS_SUPPORT_ENDPOINT = 'diagnosis-support';
+    private const LOGIN = 'login';
 
-    public function __construct(private HttpClientInterface $httpClient)
-    {
-    }
+    public function __construct(private HttpClientInterface $httpClient) {}
 
     public static function createWithBaseUri(string $baseUri): self
     {
@@ -55,9 +52,9 @@ final class MedicalDeviceClient
     /**
      * @throws RequestException
      */
-    public function severityAssessment(SeverityAssessmentArguments $arguments, BearerToken $bearerToken, ?RequestOptions $requestOptions = null): SeverityAssessmentResponse
+    public function severityAssessmentAutomaticLocal(SeverityAssessmentArguments $arguments, BearerToken $bearerToken, ?RequestOptions $requestOptions = null): SeverityAssessmentResponse
     {
-        $json = $this->send($arguments, self::SEVERITY_ASSESSMENT, $bearerToken, $requestOptions);
+        $json = $this->send($arguments, self::SEVERITY_ASSESSMENT_AUTOMATIC_LOCAL, $bearerToken, $requestOptions);
         return SeverityAssessmentResponse::fromJson($json);
     }
 

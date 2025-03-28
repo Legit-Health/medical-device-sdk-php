@@ -6,7 +6,6 @@ final readonly class FailedMedia
 {
     public function __construct(
         public int $index,
-        public ?ValidityMetric $failedMetric
-    ) {
-    }
+        public MediaValidity $mediaValidity
+    ) {}
 }

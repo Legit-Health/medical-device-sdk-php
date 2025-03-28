@@ -2,7 +2,7 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceArguments\Params;
 
-readonly class ResvechLocalQuestionnaire extends Questionnaire
+readonly class ResvechQuestionnaire extends Questionnaire
 {
     public function __construct(
         public int $woundDimensions,
@@ -54,36 +54,35 @@ readonly class ResvechLocalQuestionnaire extends Questionnaire
 
     public static function getName(): string
     {
-        return ScoringSystemCode::ResvechLocal->value;
+        return ScoringSystemCode::Resvech->value;
     }
 
     public function toArray(): array
     {
         return [
-            'questionnaire' => $this::getName(),
             'item' => [
-                ['code' => 'woundDimensions', 'answer' => [['value' => $this->woundDimensions]]],
-                ['code' => 'tissues', 'answer' => [['value' => $this->tissues]]],
-                ['code' => 'edges', 'answer' => [['value' => $this->edges]]],
-                ['code' => 'tissueInWoundBed', 'answer' => [['value' => $this->tissueInWoundBed]]],
-                ['code' => 'exudate', 'answer' => [['value' => $this->exudate]]],
-                ['code' => 'frequencyOfPain', 'answer' => [['value' => $this->frequencyOfPain]]],
-                ['code' => 'macerationAroundWound', 'answer' => [['value' => $this->macerationAroundWound]]],
-                ['code' => 'tunneling', 'answer' => [['value' => $this->tunneling]]],
-                ['code' => 'increasingPain', 'answer' => [['value' => $this->increasingPain]]],
-                ['code' => 'erythemaAroundWound', 'answer' => [['value' => $this->erythemaAroundWound]]],
-                ['code' => 'edemaAroundWound', 'answer' => [['value' => $this->edemaAroundWound]]],
-                ['code' => 'temperatureRise', 'answer' => [['value' => $this->temperatureRise]]],
-                ['code' => 'increasingExudate', 'answer' => [['value' => $this->increasingExudate]]],
-                ['code' => 'purulentExudate', 'answer' => [['value' => $this->purulentExudate]]],
-                ['code' => 'tissueFriableOrBleedsEasily', 'answer' => [['value' => $this->tissueFriableOrBleedsEasily]]],
-                ['code' => 'stationaryWound', 'answer' => [['value' => $this->stationaryWound]]],
-                ['code' => 'biofilmCompatibleTissue', 'answer' => [['value' => $this->biofilmCompatibleTissue]]],
-                ['code' => 'odor', 'answer' => [['value' => $this->odor]]],
-                ['code' => 'hypergranulation', 'answer' => [['value' => $this->hypergranulation]]],
-                ['code' => 'increasingWound', 'answer' => [['value' => $this->increasingWound]]],
-                ['code' => 'satelliteLesions', 'answer' => [['value' => $this->satelliteLesions]]],
-                ['code' => 'tissuePaleness', 'answer' => [['value' => $this->tissuePaleness]]],
+                'woundDimensions' => $this->woundDimensions,
+                'tissues' => $this->tissues,
+                'edges' => $this->edges,
+                'tissueInWoundBed' => $this->tissueInWoundBed,
+                'exudate' => $this->exudate,
+                'frequencyOfPain' => $this->frequencyOfPain,
+                'macerationAroundWound' => $this->macerationAroundWound,
+                'tunneling' => $this->tunneling,
+                'increasingPain' => $this->increasingPain,
+                'erythemaAroundWound' => $this->erythemaAroundWound,
+                'edemaAroundWound' => $this->edemaAroundWound,
+                'temperatureRise' => $this->temperatureRise,
+                'increasingExudate' => $this->increasingExudate,
+                'purulentExudate' => $this->purulentExudate,
+                'tissueFriableOrBleedsEasily' => $this->tissueFriableOrBleedsEasily,
+                'stationaryWound' => $this->stationaryWound,
+                'biofilmCompatibleTissue' => $this->biofilmCompatibleTissue,
+                'odor' => $this->odor,
+                'hypergranulation' => $this->hypergranulation,
+                'increasingWound' => $this->increasingWound,
+                'satelliteLesions' => $this->satelliteLesions,
+                'tissuePaleness' => $this->tissuePaleness,
             ]
         ];
     }

@@ -60,22 +60,20 @@ class PgaQuestionnaireTest extends TestCase
         $pgaQuestionnaire = new PgaQuestionnaire(0, 1, 1);
         $arr = $pgaQuestionnaire->toArray();
 
-        $this->assertEquals('pga', $arr['questionnaire']);
-        $this->assertCount(3, array_keys($arr['item']));
+        $this->assertCount(3, $arr['item']);
 
-        $this->assertEquals(0, $arr['item'][0]['answer'][0]['value']);
-        $this->assertEquals('erythema', $arr['item'][0]['code']);
-        $this->assertEquals(1, $arr['item'][1]['answer'][0]['value']);
-        $this->assertEquals('desquamation', $arr['item'][1]['code']);
-        $this->assertEquals(1, $arr['item'][2]['answer'][0]['value']);
-        $this->assertEquals('induration', $arr['item'][2]['code']);
+        $this->assertEquals(0, $arr['item']['erythema']);
+        $this->assertEquals(1, $arr['item']['desquamation']);
+        $this->assertEquals(1, $arr['item']['induration']);
 
         $pgaQuestionnaire = new PgaQuestionnaire(4, 2, 0);
         $arr = $pgaQuestionnaire->toArray();
-        $this->assertCount(3, array_keys($arr['item']));
-        $this->assertEquals(4, $arr['item'][0]['answer'][0]['value']);
-        $this->assertEquals(2, $arr['item'][1]['answer'][0]['value']);
-        $this->assertEquals(0, $arr['item'][2]['answer'][0]['value']);
+
+        $this->assertCount(3, $arr['item']);
+
+        $this->assertEquals(4, $arr['item']['erythema']);
+        $this->assertEquals(2, $arr['item']['desquamation']);
+        $this->assertEquals(0, $arr['item']['induration']);
     }
 
     public function testGetName()

@@ -2,17 +2,17 @@
 
 namespace LegitHealth\MedicalDevice\Tests\MedicalDeviceArguments\Questionnaires;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\AuasLocalQuestionnaire;
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\SingleZoneAuasQuestionnaire;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
-class AuasLocalQuestionnaireTest extends TestCase
+class SingleZoneAuasQuestionnaireTest extends TestCase
 {
     public function testValidate()
     {
         $exceptionIsThrown = false;
         try {
-            new AuasLocalQuestionnaire(3);
+            new SingleZoneAuasQuestionnaire(3);
         } catch (Throwable) {
             $exceptionIsThrown = true;
         }
@@ -20,7 +20,7 @@ class AuasLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new AuasLocalQuestionnaire(0);
+            new SingleZoneAuasQuestionnaire(0);
         } catch (Throwable) {
             $exceptionIsThrown = true;
         }
@@ -28,7 +28,7 @@ class AuasLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new AuasLocalQuestionnaire(-1);
+            new SingleZoneAuasQuestionnaire(-1);
         } catch (Throwable) {
             $exceptionIsThrown = true;
         }
@@ -36,7 +36,7 @@ class AuasLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new AuasLocalQuestionnaire(10);
+            new SingleZoneAuasQuestionnaire(10);
         } catch (Throwable) {
             $exceptionIsThrown = true;
         }
@@ -45,19 +45,16 @@ class AuasLocalQuestionnaireTest extends TestCase
 
     public function testToArray()
     {
-        $auasLocalQuestionnaire = new AuasLocalQuestionnaire(3);
+        $auasLocalQuestionnaire = new SingleZoneAuasQuestionnaire(3);
         $arr = $auasLocalQuestionnaire->toArray();
 
-        $this->assertEquals('auasLocal', $arr['questionnaire']);
         $this->assertCount(1, array_keys($arr['item']));
-
-        $this->assertEquals(3, $arr['item'][0]['answer'][0]['value']);
-        $this->assertEquals('itchiness', $arr['item'][0]['code']);
+        $this->assertEquals(3, $arr['item']['pruritus']);
     }
 
     public function testGetName()
     {
-        $auasLocalQuestionnaire = new AuasLocalQuestionnaire(3);
-        $this->assertEquals('auasLocal', $auasLocalQuestionnaire::getName());
+        $singleZoneAuasQuestionnaire = new SingleZoneAuasQuestionnaire(3);
+        $this->assertEquals('auas', $singleZoneAuasQuestionnaire::getName());
     }
 }

@@ -86,34 +86,21 @@ class SevenPcQuestionnaireTest extends TestCase
     {
         $questionnaire = new SevenPCQuestionnaire(0, 1, 0, 1, 0, 1, 0);
         $arr = $questionnaire->toArray();
-        $this->assertCount(7, array_keys($arr['item']));
-        $this->assertEquals('7Pc', $arr['questionnaire']);
 
-        $this->assertEquals(0, $arr['item'][0]['answer'][0]['value']);
-        $this->assertEquals('irregularSize', $arr['item'][0]['code']);
+        $this->assertCount(7, $arr['item']);
 
-        $this->assertEquals(1, $arr['item'][1]['answer'][0]['value']);
-        $this->assertEquals('irregularPigmentation', $arr['item'][1]['code']);
-
-        $this->assertEquals(0, $arr['item'][2]['answer'][0]['value']);
-        $this->assertEquals('irregularBorder', $arr['item'][2]['code']);
-
-        $this->assertEquals(1, $arr['item'][3]['answer'][0]['value']);
-        $this->assertEquals('inflammation', $arr['item'][3]['code']);
-
-        $this->assertEquals(0, $arr['item'][4]['answer'][0]['value']);
-        $this->assertEquals('largerThanOtherLesions', $arr['item'][4]['code']);
-
-        $this->assertEquals(1, $arr['item'][5]['answer'][0]['value']);
-        $this->assertEquals('itchOrAltered', $arr['item'][5]['code']);
-
-        $this->assertEquals(0, $arr['item'][6]['answer'][0]['value']);
-        $this->assertEquals('crustedOrBleeding', $arr['item'][6]['code']);
+        $this->assertEquals(0, $arr['item']['irregularSize']);
+        $this->assertEquals(1, $arr['item']['irregularPigmentation']);
+        $this->assertEquals(0, $arr['item']['irregularBorder']);
+        $this->assertEquals(1, $arr['item']['inflammation']);
+        $this->assertEquals(0, $arr['item']['largerThanOtherLesions']);
+        $this->assertEquals(1, $arr['item']['itchOrAltered']);
+        $this->assertEquals(0, $arr['item']['crustedOrBleeding']);
     }
 
     public function testGetName()
     {
         $questionnaire = new SevenPCQuestionnaire(0, 1, 0, 1, 0, 1, 0);
-        $this->assertEquals('7Pc', $questionnaire::getName());
+        $this->assertEquals('sevenPc', $questionnaire::getName());
     }
 }

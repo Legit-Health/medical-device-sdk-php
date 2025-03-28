@@ -85,17 +85,12 @@ class Pure4QuestionnaireTest extends TestCase
         $pure4Questionnaire = new Pure4Questionnaire(0, 1, 0, 1);
         $arr = $pure4Questionnaire->toArray();
 
-        $this->assertEquals('pure4', $arr['questionnaire']);
-        $this->assertCount(4, array_keys($arr['item']));
+        $this->assertCount(4, $arr['item']);
 
-        $this->assertEquals(0, $arr['item'][0]['answer'][0]['value']);
-        $this->assertEquals('question1', $arr['item'][0]['code']);
-        $this->assertEquals(1, $arr['item'][1]['answer'][0]['value']);
-        $this->assertEquals('question2', $arr['item'][1]['code']);
-        $this->assertEquals(0, $arr['item'][2]['answer'][0]['value']);
-        $this->assertEquals('question3', $arr['item'][2]['code']);
-        $this->assertEquals(1, $arr['item'][3]['answer'][0]['value']);
-        $this->assertEquals('question4', $arr['item'][3]['code']);
+        $this->assertEquals(0, $arr['item']['question1']);
+        $this->assertEquals(1, $arr['item']['question2']);
+        $this->assertEquals(0, $arr['item']['question3']);
+        $this->assertEquals(1, $arr['item']['question4']);
 
         $pure4Questionnaire = new Pure4Questionnaire(...[
             'question1' => 1,
@@ -104,12 +99,15 @@ class Pure4QuestionnaireTest extends TestCase
             'question4' => 0,
         ]);
         $arr = $pure4Questionnaire->toArray();
-        $this->assertCount(4, array_keys($arr['item']));
-        $this->assertEquals(1, $arr['item'][0]['answer'][0]['value']);
-        $this->assertEquals(0, $arr['item'][1]['answer'][0]['value']);
-        $this->assertEquals(1, $arr['item'][2]['answer'][0]['value']);
-        $this->assertEquals(0, $arr['item'][3]['answer'][0]['value']);
+
+        $this->assertCount(4, $arr['item']);
+
+        $this->assertEquals(1, $arr['item']['question1']);
+        $this->assertEquals(0, $arr['item']['question2']);
+        $this->assertEquals(1, $arr['item']['question3']);
+        $this->assertEquals(0, $arr['item']['question4']);
     }
+
 
     public function testGetName()
     {

@@ -3,14 +3,15 @@
 namespace LegitHealth\MedicalDevice\MedicalDeviceResponse;
 
 use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\{
-    ClinicalIndicators,
+    ClinicalIndicator,
     Conclusion,
-    ConclusionCoding,
+    ConclusionCode,
     FailedMedia,
-    ImagingStudySeriesInstance,
+    ImagingAnalysisInstance,
+    ImagingAnalysisInstancePerformanceIndicator,
     MediaValidity,
     Media,
-    PerformanceIndicators
+    PerformanceIndicator
 };
 use DateTimeImmutable;
 
@@ -18,99 +19,59 @@ final readonly class DiagnosisSupportResponse
 {
     /**
      * @param Conclusion[] $conclusions
-     * @param ImagingStudySeriesInstance[] $imagingStudySeries
+     * @param ImagingAnalysisInstance[] $imagingAnalysis
      */
     public function __construct(
-        public ClinicalIndicators $clinicalIndicators,
-        public PerformanceIndicators $performanceIndicators,
+        public ClinicalIndicator $clinicalIndicator,
+        public PerformanceIndicator $performanceIndicator,
         public array $conclusions,
-        public array $imagingStudySeries,
+        public array $imagingAnalysis,
         public float $analysisDuration,
-        public DateTimeImmutable $effectiveDateTime
-    ) {
-    }
+        public DateTimeImmutable $issued
+    ) {}
 
     public static function createFromJson(array $json): self
     {
-        $clinicalIndicators = new ClinicalIndicators(
-            hasCondition: $json['clinicalIndicators']['hasCondition'],
-            pigmentedLesion: $json['clinicalIndicators']['pigmentedLesion'],
-            malignancy: $json['clinicalIndicators']['malignancy'],
-            urgentReferral: $json['clinicalIndicators']['urgentReferral'],
-            highPriorityReferral: $json['clinicalIndicators']['highPriorityReferral'],
-        );
-
-
-        $metrics = new PerformanceIndicators(
-            $json['performanceIndicators']['sensitivity'],
-            $json['performanceIndicators']['specificity'],
-            $json['performanceIndicators']['entropy'],
-            $json['performanceIndicators']['category'],
-            $json['performanceIndicators']['type'],
-        );
+        $clinicalIndicator = ClinicalIndicator::fromJson($json['clinicalIndicator']);
+        $performanceIndicator = PerformanceIndicator::fromJson($json['performanceIndicator']);
 
         $finalConclusions = [];
-        if (isset($json['conclusions'])) {
-            foreach ($json['conclusions'] as $singleConclusion) {
+        if (isset($json['conclusion'])) {
+            foreach ($json['conclusion'] as $singleConclusion) {
                 $finalConclusions[] = new Conclusion(
                     $singleConclusion['probability'],
-                    new ConclusionCoding(
-                        $singleConclusion['coding']['code'],
-                        $singleConclusion['coding']['display'],
-                        $singleConclusion['coding']['system'],
-                        $singleConclusion['coding']['systemAlias']
-                    )
+                    ConclusionCode::fromJson($singleConclusion['code'])
                 );
             }
         }
 
 
-        $imagingStudySeries = [];
-        foreach ($json['imagingStudySeries'] as $imagingStudySeriesRecord) {
+        $imagingAnalysis = [];
+        foreach ($json['imagingAnalysis'] as $imagingAnalysisRecord) {
             $conclusions = [];
 
-            foreach (($imagingStudySeriesRecord['conclusions'] ?? []) as $singleConclusion) {
+            foreach (($imagingAnalysisRecord['conclusion'] ?? []) as $singleConclusion) {
                 $conclusions[] = new Conclusion(
                     $singleConclusion['probability'],
-                    new ConclusionCoding(
-                        $singleConclusion['coding']['code'],
-                        $singleConclusion['coding']['display'],
-                        $singleConclusion['coding']['system'],
-                        $singleConclusion['coding']['systemAlias']
-                    )
+                    ConclusionCode::fromJson($singleConclusion['code'])
                 );
             }
 
-            $imagingStudySeries[] = new ImagingStudySeriesInstance(
+            $imagingAnalysis[] = new ImagingAnalysisInstance(
                 $conclusions,
-                new Media(
-                    $imagingStudySeriesRecord['media']['modality'],
-                    MediaValidity::fromJson($imagingStudySeriesRecord['media']['validity'])
-                ),
-                new PerformanceIndicators(
-                    $imagingStudySeriesRecord['performanceIndicators']['sensitivity'],
-                    $imagingStudySeriesRecord['performanceIndicators']['specificity'],
-                    $imagingStudySeriesRecord['performanceIndicators']['entropy'],
-                    $imagingStudySeriesRecord['performanceIndicators']['category'],
-                    $imagingStudySeriesRecord['performanceIndicators']['type'],
-                ),
-                new ClinicalIndicators(
-                    hasCondition: $imagingStudySeriesRecord['clinicalIndicators']['hasCondition'],
-                    pigmentedLesion: $imagingStudySeriesRecord['clinicalIndicators']['pigmentedLesion'],
-                    malignancy: $imagingStudySeriesRecord['clinicalIndicators']['malignancy'],
-                    urgentReferral: $imagingStudySeriesRecord['clinicalIndicators']['urgentReferral'],
-                    highPriorityReferral: $imagingStudySeriesRecord['clinicalIndicators']['highPriorityReferral'],
-                )
+                MediaValidity::fromJson($imagingAnalysisRecord['mediaValidity']),
+                ImagingAnalysisInstancePerformanceIndicator::fromJson($imagingAnalysisRecord['performanceIndicator']),
+                ClinicalIndicator::fromJson($imagingAnalysisRecord['clinicalIndicator'])
             );
         }
 
         return new self(
-            $clinicalIndicators,
-            $metrics,
+            $clinicalIndicator,
+            $performanceIndicator,
             $finalConclusions,
-            $imagingStudySeries,
-            \floatval(str_replace(' secs', '', $json['analysisDuration'] ?? '')),
-            new DateTimeImmutable($json['effectiveDateTime'])
+            $imagingAnalysis,
+            $json['analysisDuration'],
+            new DateTimeImmutable($json['issued'])
         );
     }
 
@@ -119,7 +80,7 @@ final readonly class DiagnosisSupportResponse
      */
     public function getPossibleConclusions(): array
     {
-        return array_filter($this->conclusions, fn ($conclusion) => $conclusion->isPossible());
+        return array_filter($this->conclusions, fn($conclusion) => $conclusion->isPossible);
     }
 
     /**
@@ -128,11 +89,11 @@ final readonly class DiagnosisSupportResponse
     public function getIndexOfFailedMedias(): array
     {
         $indexes = [];
-        foreach ($this->imagingStudySeries as $index => $imagingStudySeriesInstance) {
-            if (!$imagingStudySeriesInstance->media->validity->isValid) {
+        foreach ($this->imagingAnalysis as $index => $imagingAnalysisInstance) {
+            if (!$imagingAnalysisInstance->mediaValidity->isValid) {
                 $indexes[] = new FailedMedia(
                     $index,
-                    $imagingStudySeriesInstance->media->validity->getFailedValidityMetric()
+                    $imagingAnalysisInstance->mediaValidity
                 );
             }
         }

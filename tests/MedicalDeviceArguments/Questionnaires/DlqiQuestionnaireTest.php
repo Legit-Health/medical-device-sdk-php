@@ -80,38 +80,18 @@ class DlqiQuestionnaireTest extends TestCase
     {
         $dlqiQuestionnaire = new DlqiQuestionnaire(1, 2, 3, 1, 2, 3, 1, 2, 3, 1);
         $arr = $dlqiQuestionnaire->toArray();
-        $this->assertCount(10, array_keys($arr['item']));
-        $this->assertEquals('dlqi', $arr['questionnaire']);
 
-        $this->assertEquals(1, $arr['item'][0]['answer'][0]['value']);
-        $this->assertEquals('question1', $arr['item'][0]['code']);
-
-        $this->assertEquals(2, $arr['item'][1]['answer'][0]['value']);
-        $this->assertEquals('question2', $arr['item'][1]['code']);
-
-        $this->assertEquals(3, $arr['item'][2]['answer'][0]['value']);
-        $this->assertEquals('question3', $arr['item'][2]['code']);
-
-        $this->assertEquals(1, $arr['item'][3]['answer'][0]['value']);
-        $this->assertEquals('question4', $arr['item'][3]['code']);
-
-        $this->assertEquals(2, $arr['item'][4]['answer'][0]['value']);
-        $this->assertEquals('question5', $arr['item'][4]['code']);
-
-        $this->assertEquals(3, $arr['item'][5]['answer'][0]['value']);
-        $this->assertEquals('question6', $arr['item'][5]['code']);
-
-        $this->assertEquals(1, $arr['item'][6]['answer'][0]['value']);
-        $this->assertEquals('question7', $arr['item'][6]['code']);
-
-        $this->assertEquals(2, $arr['item'][7]['answer'][0]['value']);
-        $this->assertEquals('question8', $arr['item'][7]['code']);
-
-        $this->assertEquals(3, $arr['item'][8]['answer'][0]['value']);
-        $this->assertEquals('question9', $arr['item'][8]['code']);
-
-        $this->assertEquals(1, $arr['item'][9]['answer'][0]['value']);
-        $this->assertEquals('question10', $arr['item'][9]['code']);
+        $this->assertCount(10, $arr['item']);
+        $this->assertEquals(1, $arr['item']['question1']);
+        $this->assertEquals(2, $arr['item']['question2']);
+        $this->assertEquals(3, $arr['item']['question3']);
+        $this->assertEquals(1, $arr['item']['question4']);
+        $this->assertEquals(2, $arr['item']['question5']);
+        $this->assertEquals(3, $arr['item']['question6']);
+        $this->assertEquals(1, $arr['item']['question7']);
+        $this->assertEquals(2, $arr['item']['question8']);
+        $this->assertEquals(3, $arr['item']['question9']);
+        $this->assertEquals(1, $arr['item']['question10']);
     }
 
     public function testGetName()

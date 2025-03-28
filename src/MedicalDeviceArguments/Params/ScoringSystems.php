@@ -2,15 +2,14 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceArguments\Params;
 
-readonly class Questionnaires
+readonly class ScoringSystems
 {
     /**
      * @param Questionnaire[] $questionnaires
      */
     public function __construct(
         public array $questionnaires
-    ) {
-    }
+    ) {}
 
     public static function createEmpty(): self
     {
@@ -21,7 +20,10 @@ readonly class Questionnaires
     {
         $json = [];
         foreach ($this->questionnaires as $questionnaire) {
-            $json[] = $questionnaire->toArray();
+            $json[$questionnaire->getName()] = [
+                "calculate" => true,
+                "questionnaireResponse" => $questionnaire->toArray()
+            ];
         }
         return $json;
     }

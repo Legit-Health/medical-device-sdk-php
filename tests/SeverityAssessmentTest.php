@@ -57,7 +57,7 @@ class SeverityAssessmentTest extends TestCase
         $questionnaires = new Questionnaires([$apasiLocal, $pasiLocal, $dlqi, $pure4, $pga]);
         $severityAssessmentArguments = new SeverityAssessmentArguments(
             base64_encode($image),
-            scoringSystems: array_map(fn (Questionnaire $questionnaire) => $questionnaire->getName(), $questionnaires->questionnaires),
+            scoringSystems: array_map(fn(Questionnaire $questionnaire) => $questionnaire->getName(), $questionnaires->questionnaires),
             questionnaires: $questionnaires,
             knownCondition: new KnownCondition('Psoriasis'),
             bodySiteCode: ParamsBodySiteCode::ArmLeft
@@ -416,7 +416,7 @@ class SeverityAssessmentTest extends TestCase
 
         $severityAssessmentArguments = new SeverityAssessmentArguments(
             base64_encode($image),
-            scoringSystems: array_map(fn (Questionnaire $questionnaire) => $questionnaire->getName(), $questionnaires->questionnaires),
+            scoringSystems: array_map(fn(Questionnaire $questionnaire) => $questionnaire->getName(), $questionnaires->questionnaires),
             questionnaires: $questionnaires,
             knownCondition: new KnownCondition('Urticaria'),
             bodySiteCode: ParamsBodySiteCode::HeadFront
@@ -535,7 +535,7 @@ class SeverityAssessmentTest extends TestCase
         $questionnaires = new Questionnaires([$scoradLocal, $ascoradLocal]);
         $severityAssessmentArguments = new SeverityAssessmentArguments(
             base64_encode($image),
-            scoringSystems: array_map(fn (Questionnaire $questionnaire) => $questionnaire->getName(), $questionnaires->questionnaires),
+            scoringSystems: array_map(fn(Questionnaire $questionnaire) => $questionnaire->getName(), $questionnaires->questionnaires),
             questionnaires: $questionnaires,
             knownCondition: new KnownCondition('Atopic dermatitis'),
             bodySiteCode: ParamsBodySiteCode::ArmLeft

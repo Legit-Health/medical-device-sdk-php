@@ -2,16 +2,14 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceResponse\Value;
 
-final readonly class Conclusion
+final  class Conclusion
 {
     public function __construct(
-        public float $probability,
-        public ConclusionCoding $conclusionCoding
-    ) {
-    }
+        public readonly float $probability,
+        public readonly ConclusionCode $code
+    ) {}
 
-    public function isPossible(): bool
-    {
-        return $this->probability > 0;
+    public bool $isPossible {
+        get => $this->probability > 0;
     }
 }

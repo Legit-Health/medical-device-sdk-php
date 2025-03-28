@@ -2,17 +2,17 @@
 
 namespace LegitHealth\MedicalDevice\Tests\MedicalDeviceArguments\Questionnaires;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\ScoradLocalQuestionnaire;
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\ScoradQuestionnaire;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
-class ScoradLocalQuestionnaireTest extends TestCase
+class ScoradQuestionnaireTest extends TestCase
 {
     public function testValidate()
     {
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 0,
                 'erythema' => 0,
                 'swelling' => 0,
@@ -30,7 +30,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 100,
                 'erythema' => 3,
                 'swelling' => 3,
@@ -48,7 +48,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => random_int(0, 100),
                 'erythema' => random_int(0, 3),
                 'swelling' => random_int(0, 3),
@@ -66,7 +66,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 101,
                 'erythema' => random_int(0, 3),
                 'swelling' => random_int(0, 3),
@@ -85,7 +85,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => -1,
                 'erythema' => random_int(0, 3),
                 'swelling' => random_int(0, 3),
@@ -104,7 +104,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 4,
                 'swelling' => random_int(0, 3),
@@ -123,7 +123,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => -1,
                 'swelling' => random_int(0, 3),
@@ -142,7 +142,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 1,
                 'swelling' => 4,
@@ -161,7 +161,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 1,
                 'swelling' => -1,
@@ -180,7 +180,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 1,
                 'swelling' => 1,
@@ -199,7 +199,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 1,
                 'swelling' => 1,
@@ -218,7 +218,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 1,
                 'swelling' => 1,
@@ -237,7 +237,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 1,
                 'swelling' => 1,
@@ -256,7 +256,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 1,
                 'swelling' => 1,
@@ -275,7 +275,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 1,
                 'swelling' => 1,
@@ -294,7 +294,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 1,
                 'swelling' => 1,
@@ -313,7 +313,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 1,
                 'swelling' => 1,
@@ -332,7 +332,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 1,
                 'swelling' => 1,
@@ -351,7 +351,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 1,
                 'swelling' => 1,
@@ -370,7 +370,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 1,
                 'swelling' => 1,
@@ -389,7 +389,7 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
         $exceptionIsThrown = false;
         try {
-            new ScoradLocalQuestionnaire(...[
+            new ScoradQuestionnaire(...[
                 'surface' => 50,
                 'erythema' => 1,
                 'swelling' => 1,
@@ -409,42 +409,25 @@ class ScoradLocalQuestionnaireTest extends TestCase
 
     public function testToArray()
     {
-        $scoradLocalQuestionnaire = new ScoradLocalQuestionnaire(25, 0, 1, 2, 3, 0, 1, 5, 6);
+        $scoradLocalQuestionnaire = new ScoradQuestionnaire(25, 0, 1, 2, 3, 0, 1, 5, 6);
         $arr = $scoradLocalQuestionnaire->toArray();
-        $this->assertCount(9, array_keys($arr['item']));
-        $this->assertEquals('scoradLocal', $arr['questionnaire']);
 
-        $this->assertEquals(25, $arr['item'][0]['answer'][0]['value']);
-        $this->assertEquals('surface', $arr['item'][0]['code']);
+        $this->assertCount(9, $arr['item']);
 
-        $this->assertEquals(0, $arr['item'][1]['answer'][0]['value']);
-        $this->assertEquals('erythema', $arr['item'][1]['code']);
-
-        $this->assertEquals(1, $arr['item'][2]['answer'][0]['value']);
-        $this->assertEquals('swelling', $arr['item'][2]['code']);
-
-        $this->assertEquals(2, $arr['item'][3]['answer'][0]['value']);
-        $this->assertEquals('crusting', $arr['item'][3]['code']);
-
-        $this->assertEquals(3, $arr['item'][4]['answer'][0]['value']);
-        $this->assertEquals('excoriation', $arr['item'][4]['code']);
-
-        $this->assertEquals(0, $arr['item'][5]['answer'][0]['value']);
-        $this->assertEquals('lichenification', $arr['item'][5]['code']);
-
-        $this->assertEquals(1, $arr['item'][6]['answer'][0]['value']);
-        $this->assertEquals('dryness', $arr['item'][6]['code']);
-
-        $this->assertEquals(5, $arr['item'][7]['answer'][0]['value']);
-        $this->assertEquals('itchiness', $arr['item'][7]['code']);
-
-        $this->assertEquals(6, $arr['item'][8]['answer'][0]['value']);
-        $this->assertEquals('sleeplessness', $arr['item'][8]['code']);
+        $this->assertEquals(25, $arr['item']['surface']);
+        $this->assertEquals(0, $arr['item']['erythema']);
+        $this->assertEquals(1, $arr['item']['swelling']);
+        $this->assertEquals(2, $arr['item']['crusting']);
+        $this->assertEquals(3, $arr['item']['excoriation']);
+        $this->assertEquals(0, $arr['item']['lichenification']);
+        $this->assertEquals(1, $arr['item']['dryness']);
+        $this->assertEquals(5, $arr['item']['itchiness']);
+        $this->assertEquals(6, $arr['item']['sleeplessness']);
     }
 
     public function testGetName()
     {
-        $scoradLocalQuestionnaire = new ScoradLocalQuestionnaire(25, 3, 3, 3, 2, 1, 3, 5, 10);
-        $this->assertEquals('scoradLocal', $scoradLocalQuestionnaire::getName());
+        $scoradLocalQuestionnaire = new ScoradQuestionnaire(25, 3, 3, 3, 2, 1, 3, 5, 10);
+        $this->assertEquals('scorad', $scoradLocalQuestionnaire::getName());
     }
 }

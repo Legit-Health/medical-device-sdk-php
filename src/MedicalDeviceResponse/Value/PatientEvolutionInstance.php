@@ -17,8 +17,7 @@ final readonly class PatientEvolutionInstance
         public array $items,
         public array $attachments,
         public array $detections
-    ) {
-    }
+    ) {}
 
     public function getEvolutionItem(string $code): EvolutionItem
     {

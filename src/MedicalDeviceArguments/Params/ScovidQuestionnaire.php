@@ -36,88 +36,17 @@ readonly class ScovidQuestionnaire extends Questionnaire
     public function toArray(): array
     {
         return [
-            'questionnaire' => $this::getName(),
             'item' => [
-                [
-                    'code' => 'pain',
-                    'answer' => [
-                        [
-                            'value' => $this->pain
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'itchiness',
-                    'answer' => [
-                        [
-                            'value' => $this->itchiness
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'fever',
-                    'answer' => [
-                        [
-                            'value' => $this->fever
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'cough',
-                    'answer' => [
-                        [
-                            'value' => $this->cough
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'cephalea',
-                    'answer' => [
-                        [
-                            'value' => $this->cephalea
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'myalgiaOrArthralgia',
-                    'answer' => [
-                        [
-                            'value' => $this->myalgiaOrArthralgia
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'malaise',
-                    'answer' => [
-                        [
-                            'value' => $this->malaise
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'lossOfTasteOrOlfactory',
-                    'answer' => [
-                        [
-                            'value' => $this->lossOfTasteOrOlfactory
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'shortnessOfBreath',
-                    'answer' => [
-                        [
-                            'value' => $this->shortnessOfBreath
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'otherSkinProblems',
-                    'answer' => [
-                        [
-                            'value' => $this->otherSkinProblems
-                        ]
-                    ]
-                ]
+                'pain' => $this->pain,
+                'itchiness' => $this->itchiness,
+                'fever' => $this->fever,
+                'cough' => $this->cough,
+                'cephalea' => $this->cephalea,
+                'myalgiaOrArthralgia' => $this->myalgiaOrArthralgia,
+                'malaise' => $this->malaise,
+                'lossOfTasteOrOlfactory' => $this->lossOfTasteOrOlfactory,
+                'shortnessOfBreath' => $this->shortnessOfBreath,
+                'otherSkinProblems' => $this->otherSkinProblems,
             ]
         ];
     }

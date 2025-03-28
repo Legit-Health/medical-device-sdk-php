@@ -26,68 +26,17 @@ readonly class SevenPcQuestionnaire extends Questionnaire
     {
         return ScoringSystemCode::SevenPc->value;
     }
-
     public function toArray(): array
     {
         return [
-            'questionnaire' => $this::getName(),
             'item' => [
-                [
-                    'code' => 'irregularSize',
-                    'answer' => [
-                        [
-                            'value' => $this->irregularSize
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'irregularPigmentation',
-                    'answer' => [
-                        [
-                            'value' => $this->irregularPigmentation
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'irregularBorder',
-                    'answer' => [
-                        [
-                            'value' => $this->irregularBorder
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'inflammation',
-                    'answer' => [
-                        [
-                            'value' => $this->inflammation
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'largerThanOtherLesions',
-                    'answer' => [
-                        [
-                            'value' => $this->largerThanOtherLesions
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'itchOrAltered',
-                    'answer' => [
-                        [
-                            'value' => $this->itchOrAltered
-                        ]
-                    ]
-                ],
-                [
-                    'code' => 'crustedOrBleeding',
-                    'answer' => [
-                        [
-                            'value' => $this->crustedOrBleeding
-                        ]
-                    ]
-                ]
+                'irregularSize' => $this->irregularSize,
+                'irregularPigmentation' => $this->irregularPigmentation,
+                'irregularBorder' => $this->irregularBorder,
+                'inflammation' => $this->inflammation,
+                'largerThanOtherLesions' => $this->largerThanOtherLesions,
+                'itchOrAltered' => $this->itchOrAltered,
+                'crustedOrBleeding' => $this->crustedOrBleeding,
             ]
         ];
     }

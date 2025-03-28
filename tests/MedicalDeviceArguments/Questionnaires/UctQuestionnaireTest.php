@@ -119,16 +119,13 @@ class UctQuestionnaireTest extends TestCase
     {
         $uctQuestionnaire = new UctQuestionnaire(1, 2, 0, 4);
         $arr = $uctQuestionnaire->toArray();
-        $this->assertEquals('uct', $arr['questionnaire']);
-        $this->assertCount(4, array_keys($arr['item']));
-        $this->assertEquals(1, $arr['item'][0]['answer'][0]['value']);
-        $this->assertEquals('physicalSymptoms', $arr['item'][0]['code']);
-        $this->assertEquals(2, $arr['item'][1]['answer'][0]['value']);
-        $this->assertEquals('qualityOfLife', $arr['item'][1]['code']);
-        $this->assertEquals(0, $arr['item'][2]['answer'][0]['value']);
-        $this->assertEquals('treatmentNotEnough', $arr['item'][2]['code']);
-        $this->assertEquals(4, $arr['item'][3]['answer'][0]['value']);
-        $this->assertEquals('overallUnderControl', $arr['item'][3]['code']);
+
+        $this->assertCount(4, $arr['item']);
+
+        $this->assertEquals(1, $arr['item']['physicalSymptoms']);
+        $this->assertEquals(2, $arr['item']['qualityOfLife']);
+        $this->assertEquals(0, $arr['item']['treatmentNotEnough']);
+        $this->assertEquals(4, $arr['item']['overallUnderControl']);
     }
 
     public function testGetName()
