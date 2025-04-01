@@ -9,7 +9,6 @@ use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\{
     Attachment,
     Box,
     Detection,
-    DetectionLabel,
     EvolutionItem,
     Media,
     MediaValidity,
@@ -45,7 +44,7 @@ readonly class SeverityAssessmentResponse
             }
 
             $attachments = [];
-            foreach ($patientEvolutionInstance['media']['attachment'] as $attachmentCode => $attachmentJson) {
+            foreach ($patientEvolutionInstance['media']['attachment'] ?? [] as $attachmentCode => $attachmentJson) {
                 $attachments[$attachmentCode] = Attachment::fromJson($attachmentCode, $attachmentJson);
             }
 

@@ -7,7 +7,7 @@ final readonly class ScoringSystemScore
     public function __construct(
         public float $value,
         public Interpretation $interpretation,
-        public ?GlobalScoreContribution $globalScore
+        public ?GlobalScoreContribution $globalScoreContribution
     ) {}
 
     public static function fromJson(array $json): self
@@ -15,7 +15,7 @@ final readonly class ScoringSystemScore
         return new self(
             value: $json['value'],
             interpretation: new Interpretation($json['interpretation']['category'], Intensity::from($json['interpretation']['intensity'])),
-            globalScore: GlobalScoreContribution::fromJson(
+            globalScoreContribution: GlobalScoreContribution::fromJson(
                 $json['additionalData']['globalScoreContribution'] ?? null
             )
         );

@@ -20,10 +20,13 @@ readonly class ScoringSystems
     {
         $json = [];
         foreach ($this->questionnaires as $questionnaire) {
+            $questionnaireArray = $questionnaire->toArray();
             $json[$questionnaire->getName()] = [
-                "calculate" => true,
-                "questionnaireResponse" => $questionnaire->toArray()
+                "calculate" => true
             ];
+            if (\count($questionnaireArray) > 0) {
+                $json[$questionnaire->getName()]['questionnaireResponse'] = $questionnaireArray;
+            }
         }
         return $json;
     }
