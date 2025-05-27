@@ -1,6 +1,6 @@
 <?php
 
-namespace LegitHealth\MedicalDevice\MedicalDeviceResponse\Value;
+namespace LegitHealth\MedicalDevice\Common;
 
 final readonly class Code
 {
@@ -18,5 +18,13 @@ final readonly class Code
             array_map(fn($json) => CodingItem::fromJson($json), $json['coding'] ?? []),
             $json['text'],
         );
+    }
+
+    public function asArray(): array
+    {
+        return [
+            'text' => $this->text,
+            'coding' => array_map(fn($codingItem) => $codingItem->asArray(), $this->coding)
+        ];
     }
 }

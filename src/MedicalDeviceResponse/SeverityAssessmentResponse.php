@@ -5,17 +5,12 @@ namespace LegitHealth\MedicalDevice\MedicalDeviceResponse;
 use DateTimeImmutable;
 use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\ScoringSystemCode;
 use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\{
-    AdditionalData,
     Attachment,
-    Box,
     Detection,
     EvolutionItem,
-    Media,
     MediaValidity,
     PatientEvolutionInstance,
-    Point2d,
     ScoringSystemScore,
-    ValidityMetric
 };
 
 readonly class SeverityAssessmentResponse
@@ -24,7 +19,9 @@ readonly class SeverityAssessmentResponse
      * @param array<string,PatientEvolutionInstance> $patientEvolution
      */
     public function __construct(
-        public MediaValidity $mediaValidity,
+        public string $resourceType,
+        public string $status,
+        public ?MediaValidity $mediaValidity,
         public array $patientEvolution,
         public float $analysisDuration,
         public DateTimeImmutable $issued
@@ -62,7 +59,9 @@ readonly class SeverityAssessmentResponse
             );
         }
         return new self(
-            MediaValidity::fromJson($json['mediaValidity']),
+            $json['resourceType'],
+            $json['status'],
+            isset($json['mediaValidity']) ? MediaValidity::fromJson($json['mediaValidity']) : null,
             $patientEvolution,
             $json['analysisDuration'],
             new DateTimeImmutable($json['issued'])

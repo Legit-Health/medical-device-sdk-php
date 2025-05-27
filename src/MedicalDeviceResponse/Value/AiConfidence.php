@@ -2,6 +2,8 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceResponse\Value;
 
+use LegitHealth\MedicalDevice\Common\Code;
+
 final readonly class AiConfidence
 {
     public function __construct(

@@ -19,7 +19,7 @@ readonly class SingleZoneAscoradQuestionnaire extends Questionnaire
         return ScoringSystemCode::Ascorad->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [

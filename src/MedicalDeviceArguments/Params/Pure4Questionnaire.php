@@ -21,7 +21,7 @@ readonly class Pure4Questionnaire extends Questionnaire
         return ScoringSystemCode::Pure4->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [

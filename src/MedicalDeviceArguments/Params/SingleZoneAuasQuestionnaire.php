@@ -14,7 +14,7 @@ readonly class SingleZoneAuasQuestionnaire extends Questionnaire
         return ScoringSystemCode::Auas->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [

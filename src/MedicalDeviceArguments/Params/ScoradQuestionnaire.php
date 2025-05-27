@@ -31,7 +31,7 @@ readonly class ScoradQuestionnaire extends Questionnaire
         return ScoringSystemCode::Scorad->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [

@@ -2,18 +2,12 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\{DiagnosisSupportArguments, BearerToken, RequestOptions};
 use LegitHealth\MedicalDevice\MedicalDeviceClient;
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\{DiagnosisSupportArguments, RequestOptions};
+use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\{AiConfidence, ClinicalIndicator, Conclusion, Domain, Modality, ModalityValue, PerformanceIndicator, Quality};
 use DateTimeImmutable;
 use Dotenv\Dotenv;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\AiConfidence;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\ClinicalIndicator;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Conclusion;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Domain;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Modality;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\ModalityValue;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\PerformanceIndicator;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Quality;
+use LegitHealth\MedicalDevice\Common\BearerToken;
 use PHPUnit\Framework\TestCase;
 
 class DiagnosisSupportTest extends TestCase

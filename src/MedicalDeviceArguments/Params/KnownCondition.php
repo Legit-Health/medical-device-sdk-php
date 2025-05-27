@@ -2,29 +2,19 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceArguments\Params;
 
+use LegitHealth\MedicalDevice\Common\Code;
+
 readonly class KnownCondition
 {
     public function __construct(
-        public string $code,
-        public string $display,
-        public string $system,
-        public string $systemAlias
+        public Code $conclusion
     ) {}
 
-    public static function fromIcd11(string $code, string $display): self
-    {
-        return new self($code, $display, 'https://icd.who.int', 'ICD-11');
-    }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
-            'conclusion' => [
-                'code' => $this->code,
-                'display' => $this->display,
-                'system' => $this->system,
-                'systemAlias' => $this->systemAlias
-            ]
+            'conclusion' => $this->conclusion->asArray()
         ];
     }
 }

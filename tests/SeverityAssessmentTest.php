@@ -2,7 +2,7 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\{BearerToken, SeverityAssessmentArguments};
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\{SeverityAssessmentArguments};
 use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\{
     ApasiLocalQuestionnaire,
     AscoradLocalQuestionnaire,
@@ -25,6 +25,7 @@ use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\{
     UctQuestionnaire
 };
 use Dotenv\Dotenv;
+use LegitHealth\MedicalDevice\Common\BearerToken;
 use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\DetectionLabel;
 use LegitHealth\MedicalDevice\MedicalDeviceClient;
 use PHPUnit\Framework\TestCase;

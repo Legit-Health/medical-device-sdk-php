@@ -11,7 +11,7 @@ readonly class SingleZoneAgppgaQuestionnaire extends Questionnaire
         return ScoringSystemCode::Agppga->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [];
     }

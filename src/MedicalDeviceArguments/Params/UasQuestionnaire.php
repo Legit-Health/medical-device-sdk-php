@@ -15,7 +15,7 @@ readonly class UasQuestionnaire extends Questionnaire
         return ScoringSystemCode::Uas->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [

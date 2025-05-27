@@ -2,17 +2,15 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceResponse;
 
+use LegitHealth\MedicalDevice\Common\Code;
 use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\{
     ClinicalIndicator,
-    Code,
     Conclusion,
-    ConclusionCode,
     Explainability,
     FailedMedia,
     ImagingAnalysisInstance,
     ImagingAnalysisInstancePerformanceIndicator,
     MediaValidity,
-    Media,
     PerformanceIndicator
 };
 use DateTimeImmutable;

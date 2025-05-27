@@ -1,13 +1,12 @@
 <?php
 
-namespace LegitHealth\MedicalDevice\MedicalDeviceArguments;
+namespace LegitHealth\MedicalDevice\Common;
 
 readonly class BearerToken
 {
     public function __construct(
         public string $value
-    ) {
-    }
+    ) {}
 
     public function asAuthorizationHeader(): string
     {

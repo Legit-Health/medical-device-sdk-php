@@ -15,7 +15,7 @@ readonly class Ihs4Questionnaire extends Questionnaire
         return ScoringSystemCode::Ihs4->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [

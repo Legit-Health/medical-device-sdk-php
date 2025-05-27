@@ -1,6 +1,6 @@
 <?php
 
-namespace LegitHealth\MedicalDevice\MedicalDeviceResponse\Value;
+namespace LegitHealth\MedicalDevice\Common;
 
 final readonly class CodingItem
 {
@@ -21,5 +21,16 @@ final readonly class CodingItem
             $json['systemDisplay'],
             $json['version']
         );
+    }
+
+    public function asArray(): array
+    {
+        return [
+            'code' => $this->code,
+            'display' => $this->display,
+            'system' => $this->system,
+            'systemDisplay' => $this->systemDisplay,
+            'version' => $this->version,
+        ];
     }
 }

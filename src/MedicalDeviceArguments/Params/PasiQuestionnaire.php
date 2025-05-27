@@ -21,7 +21,7 @@ readonly class PasiQuestionnaire extends Questionnaire
         return ScoringSystemCode::Pasi->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [

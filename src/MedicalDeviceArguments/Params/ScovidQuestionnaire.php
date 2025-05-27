@@ -33,7 +33,7 @@ readonly class ScovidQuestionnaire extends Questionnaire
         return ScoringSystemCode::Scovid->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [

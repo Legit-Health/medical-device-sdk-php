@@ -7,23 +7,25 @@ use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\{KnownCondition, Bod
 readonly class SeverityAssessmentArguments implements MedicalDeviceArguments
 {
     public function __construct(
-        public string $mediaContent,
+        public string $image,
         public KnownCondition $knownCondition,
         public BodySiteCode $bodySiteCode,
-        public ScoringSystems $scoringSystems = new ScoringSystems([])
+        public ScoringSystems $scoringSystem = new ScoringSystems([])
     ) {}
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             "payload" => [
-                "contentAttachment" => [
-                    "data" => $this->mediaContent
+                [
+                    "contentAttachment" => [
+                        "data" => $this->image
+                    ]
                 ]
             ],
             "bodySite" => $this->bodySiteCode->value,
-            "knownCondition" => $this->knownCondition->toArray(),
-            "scoringSystem" => $this->scoringSystems->toArray(),
+            "knownCondition" => $this->knownCondition->asArray(),
+            "scoringSystem" => $this->scoringSystem->asArray(),
         ];
     }
 }

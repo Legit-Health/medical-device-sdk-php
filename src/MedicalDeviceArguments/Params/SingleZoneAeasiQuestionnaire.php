@@ -15,7 +15,7 @@ readonly class SingleZoneAeasiQuestionnaire extends Questionnaire
         return ScoringSystemCode::Aeasi->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [

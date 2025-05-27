@@ -57,7 +57,7 @@ readonly class ResvechQuestionnaire extends Questionnaire
         return ScoringSystemCode::Resvech->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [

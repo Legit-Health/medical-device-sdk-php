@@ -19,7 +19,7 @@ readonly class PgaQuestionnaire extends Questionnaire
         return ScoringSystemCode::Pga->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [

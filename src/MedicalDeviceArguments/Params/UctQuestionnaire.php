@@ -21,7 +21,7 @@ readonly class UctQuestionnaire extends Questionnaire
         return ScoringSystemCode::Uct->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [

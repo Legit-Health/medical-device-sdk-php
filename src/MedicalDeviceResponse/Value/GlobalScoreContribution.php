@@ -2,6 +2,8 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceResponse\Value;
 
+use LegitHealth\MedicalDevice\Common\Code;
+
 final readonly class GlobalScoreContribution
 {
     public function __construct(

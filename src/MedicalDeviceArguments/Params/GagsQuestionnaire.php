@@ -25,7 +25,7 @@ readonly class GagsQuestionnaire extends Questionnaire
         return ScoringSystemCode::Gags->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [

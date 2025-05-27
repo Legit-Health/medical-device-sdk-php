@@ -32,7 +32,7 @@ readonly class DlqiQuestionnaire extends Questionnaire
     {
         return ScoringSystemCode::Dlqi->value;
     }
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [

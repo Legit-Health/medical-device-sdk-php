@@ -4,5 +4,5 @@ namespace LegitHealth\MedicalDevice\MedicalDeviceArguments;
 
 interface MedicalDeviceArguments
 {
-    public function toArray(): array;
+    public function asArray(): array;
 }

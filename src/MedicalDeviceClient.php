@@ -2,7 +2,8 @@
 
 namespace LegitHealth\MedicalDevice;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\{BearerToken, DiagnosisSupportArguments, MedicalDeviceArguments, RequestOptions, SeverityAssessmentArguments};
+use LegitHealth\MedicalDevice\Common\BearerToken;
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\{DiagnosisSupportArguments, MedicalDeviceArguments, RequestOptions, SeverityAssessmentArguments};
 use LegitHealth\MedicalDevice\MedicalDeviceResponse\{AccessToken, DiagnosisSupportResponse, SeverityAssessmentResponse};
 use Throwable;
 use Symfony\Component\HttpClient\HttpClient;
@@ -10,6 +11,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 
 final class MedicalDeviceClient
 {
+    private const SEVERITY_ASSESSMENT_MANUAL = 'severity-assessment/manual';
     private const SEVERITY_ASSESSMENT_AUTOMATIC_LOCAL = 'severity-assessment/image-based/local';
     private const DIAGNOSIS_SUPPORT_ENDPOINT = 'diagnosis-support';
     private const LOGIN = 'login';
@@ -61,6 +63,15 @@ final class MedicalDeviceClient
     /**
      * @throws RequestException
      */
+    public function severityAssessmentManual(SeverityAssessmentArguments $arguments, BearerToken $bearerToken, ?RequestOptions $requestOptions = null): SeverityAssessmentResponse
+    {
+        $json = $this->send($arguments, self::SEVERITY_ASSESSMENT_MANUAL, $bearerToken, $requestOptions);
+        return SeverityAssessmentResponse::fromJson($json);
+    }
+
+    /**
+     * @throws RequestException
+     */
     public function diagnosisSupport(DiagnosisSupportArguments $arguments, BearerToken $bearerToken, ?RequestOptions $requestOptions = null): DiagnosisSupportResponse
     {
         $json = $this->send($arguments, self::DIAGNOSIS_SUPPORT_ENDPOINT, $bearerToken, $requestOptions);
@@ -74,11 +85,11 @@ final class MedicalDeviceClient
     {
         try {
             $response = $this->httpClient->request('POST', $path, [
-                'json' => $arguments->toArray(),
+                'json' => $arguments->asArray(),
                 'headers' => [
                     'Authorization' => $bearerToken->asAuthorizationHeader()
                 ],
-                ...($requestOptions?->toArray() ?? [])
+                ...($requestOptions?->asArray() ?? [])
             ]);
 
             $statusCode = $response->getStatusCode();

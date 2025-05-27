@@ -14,7 +14,7 @@ readonly class SingleZoneApasiQuestionnaire extends Questionnaire
         return ScoringSystemCode::Apasi->value;
     }
 
-    public function toArray(): array
+    public function asArray(): array
     {
         return [
             'item' => [
