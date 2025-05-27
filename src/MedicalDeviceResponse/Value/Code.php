@@ -6,7 +6,6 @@ final readonly class Code
 {
     /**
      * @param CodingItem[] $coding
-     * @param string $text
      */
     public function __construct(
         public array $coding,

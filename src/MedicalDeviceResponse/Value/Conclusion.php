@@ -2,11 +2,12 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceResponse\Value;
 
-final  class Conclusion
+final class Conclusion
 {
     public function __construct(
         public readonly float $probability,
-        public readonly ConclusionCode $code
+        public readonly Code $code,
+        public readonly ?Explainability $explainability = null
     ) {}
 
     public bool $isPossible {

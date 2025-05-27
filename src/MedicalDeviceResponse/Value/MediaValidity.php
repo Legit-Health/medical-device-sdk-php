@@ -2,10 +2,8 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceResponse\Value;
 
-
 final readonly class MediaValidity
 {
-
     public function __construct(
         public Quality $quality,
         public Domain $domain,

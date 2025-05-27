@@ -6,17 +6,14 @@ final readonly class Domain
 {
     public function __construct(
         public bool $isDermatological,
-        public AiConfidence $aiConfidence
+        public DomainAdditionalData $additionalData
     ) {}
 
     public static function fromJson(array $json): self
     {
         return new self(
             isDermatological: $json['isDermatological'],
-            aiConfidence: new AiConfidence(
-                $json['additionalData']['aiConfidence']['value'],
-                Code::fromJson($json['additionalData']['aiConfidence']['code'])
-            )
+            additionalData: new DomainAdditionalData(AiConfidence::fromJson($json['additionalData']['aiConfidence']))
         );
     }
 }

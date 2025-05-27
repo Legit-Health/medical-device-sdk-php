@@ -46,7 +46,7 @@ final class MedicalDeviceClient
         }
         $json = $loginResponse->toArray(false);
 
-        return new AccessToken($json['access_token'], $json['expires_in_minutes']);
+        return new AccessToken($json['access_token'], $json['token_type'], $json['expires_in_minutes']);
     }
 
     /**

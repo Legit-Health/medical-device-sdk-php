@@ -4,8 +4,10 @@ namespace LegitHealth\MedicalDevice\MedicalDeviceResponse;
 
 use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\{
     ClinicalIndicator,
+    Code,
     Conclusion,
     ConclusionCode,
+    Explainability,
     FailedMedia,
     ImagingAnalysisInstance,
     ImagingAnalysisInstancePerformanceIndicator,
@@ -22,6 +24,8 @@ final readonly class DiagnosisSupportResponse
      * @param ImagingAnalysisInstance[] $imagingAnalysis
      */
     public function __construct(
+        public string $resourceType,
+        public string $status,
         public ClinicalIndicator $clinicalIndicator,
         public PerformanceIndicator $performanceIndicator,
         public array $conclusions,
@@ -40,7 +44,7 @@ final readonly class DiagnosisSupportResponse
             foreach ($json['conclusion'] as $singleConclusion) {
                 $finalConclusions[] = new Conclusion(
                     $singleConclusion['probability'],
-                    ConclusionCode::fromJson($singleConclusion['code'])
+                    Code::fromJson($singleConclusion['code'])
                 );
             }
         }
@@ -53,10 +57,10 @@ final readonly class DiagnosisSupportResponse
             foreach (($imagingAnalysisRecord['conclusion'] ?? []) as $singleConclusion) {
                 $conclusions[] = new Conclusion(
                     $singleConclusion['probability'],
-                    ConclusionCode::fromJson($singleConclusion['code'])
+                    Code::fromJson($singleConclusion['code']),
+                    Explainability::fromJson($singleConclusion['explainability'])
                 );
             }
-
             $imagingAnalysis[] = new ImagingAnalysisInstance(
                 $conclusions,
                 MediaValidity::fromJson($imagingAnalysisRecord['mediaValidity']),
@@ -66,6 +70,8 @@ final readonly class DiagnosisSupportResponse
         }
 
         return new self(
+            $json['resourceType'],
+            $json['status'],
             $clinicalIndicator,
             $performanceIndicator,
             $finalConclusions,

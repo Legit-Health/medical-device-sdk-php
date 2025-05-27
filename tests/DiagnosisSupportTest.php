@@ -6,7 +6,14 @@ use LegitHealth\MedicalDevice\MedicalDeviceArguments\{DiagnosisSupportArguments,
 use LegitHealth\MedicalDevice\MedicalDeviceClient;
 use DateTimeImmutable;
 use Dotenv\Dotenv;
+use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\AiConfidence;
+use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\ClinicalIndicator;
+use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Conclusion;
+use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Domain;
+use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Modality;
 use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\ModalityValue;
+use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\PerformanceIndicator;
+use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Quality;
 use PHPUnit\Framework\TestCase;
 
 class DiagnosisSupportTest extends TestCase
@@ -25,89 +32,25 @@ class DiagnosisSupportTest extends TestCase
         $this->bearerToken = new BearerToken($accessToken->value);
     }
 
-    public function testBaseDiagnosisSupport(): void
+    public function testDiagnosisSupportOfPsoriasis(): void
     {
-        $fileToUpload1 = $this->currentDir . '/tests/resources/psoriasis_01.png';
-        $image1 = file_get_contents($fileToUpload1);
-
-        $fileToUpload2 = $this->currentDir . '/tests/resources/psoriasis_02.png';
-        $image2 = file_get_contents($fileToUpload2);
-
-        $fileToUpload3 = $this->currentDir . '/tests/resources/psoriasis_03.png';
-        $image3 = file_get_contents($fileToUpload3);
-
-        $diagnosisSupportArguments = new DiagnosisSupportArguments(
-            medias: [
-                base64_encode($image1),
-                base64_encode($image2),
-                base64_encode($image3)
-            ]
+        $this->assertDiagnosisSupport(
+            ['/tests/resources/psoriasis_01.jpg', '/tests/resources/psoriasis_02.jpg', '/tests/resources/psoriasis_03.jpg'],
+            ['text' => 'Psoriasis', 'code' => 'EA90', 'display' => 'Psoriasis']
         );
-        $response = $this->medicalDeviceClient->diagnosisSupport($diagnosisSupportArguments, $this->bearerToken);
+    }
 
-        $this->assertEquals(
-            (new DateTimeImmutable())->format('Ymd'),
-            $response->issued->format('Ymd')
+    public function testDiagnosisSupportOfAcne(): void
+    {
+        $this->assertDiagnosisSupport(
+            ['/tests/resources/acne.jpg'],
+            ['text' => 'Acne', 'code' => 'ED80.Z', 'display' => 'Acne, unspecified']
         );
-
-        $clinicalIndicator = $response->clinicalIndicator;
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->hasCondition);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->malignancy);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->highPriorityReferral);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->pigmentedLesion);
-        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->urgentReferral);
-
-        $performanceIndicator = $response->performanceIndicator;
-        $this->assertGreaterThan(0, $performanceIndicator->sensitivity);
-        $this->assertGreaterThan(0, $performanceIndicator->specificity);
-        $this->assertGreaterThan(0, $performanceIndicator->entropy);
-
-        foreach ($response->imagingAnalysis as $imagingAnalysisInstance) {
-            $this->assertGreaterThan(0, count($imagingAnalysisInstance->conclusions));
-            $firstConclusion = $imagingAnalysisInstance->conclusions[0];
-            $this->assertNotEmpty($firstConclusion->code->code);
-            $this->assertNotEmpty($firstConclusion->code->system);
-            $this->assertNotEmpty($firstConclusion->code->systemAlias);
-            $this->assertNotEmpty($firstConclusion->code->display);
-            $this->assertNotEmpty($firstConclusion->probability);
-
-            // Media validity
-            $this->assertTrue($imagingAnalysisInstance->mediaValidity->isValid);
-            $this->assertTrue($imagingAnalysisInstance->mediaValidity->quality->acceptable);
-            $this->assertGreaterThan(0, $imagingAnalysisInstance->mediaValidity->quality->score);
-            $this->assertNotEmpty($imagingAnalysisInstance->mediaValidity->quality->interpretation);
-            $this->assertTrue($imagingAnalysisInstance->mediaValidity->domain->isDermatological);
-            $this->assertGreaterThan(0, $imagingAnalysisInstance->mediaValidity->domain->aiConfidence->value);
-
-            $this->assertEquals(ModalityValue::Clinical, $imagingAnalysisInstance->mediaValidity->modality->modality);
-            $this->assertGreaterThan(0, $imagingAnalysisInstance->mediaValidity->modality->additionalData->aiConfidenceClinical);
-            $this->assertGreaterThan(0, $imagingAnalysisInstance->mediaValidity->modality->additionalData->aiConfidenceDermoscopic);
-
-            $performanceIndicator = $imagingAnalysisInstance->performanceIndicator;
-            $this->assertGreaterThan(0, $performanceIndicator->entropy);
-
-            $clinicalIndicator = $imagingAnalysisInstance->clinicalIndicator;
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicator->hasCondition);
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicator->malignancy);
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicator->highPriorityReferral);
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicator->pigmentedLesion);
-            $this->assertGreaterThanOrEqual(0, $clinicalIndicator->urgentReferral);
-        }
-
-        $this->assertGreaterThan(0, count($response->conclusions));
-        $firstConclusion = $response->conclusions[0];
-        $this->assertNotEmpty($firstConclusion->code->code);
-        $this->assertNotEmpty($firstConclusion->code->system);
-        $this->assertNotEmpty($firstConclusion->code->systemAlias);
-        $this->assertNotEmpty($firstConclusion->code->display);
-        $this->assertNotEmpty($firstConclusion->probability);
-
-        $this->assertGreaterThan(0, $response->analysisDuration);
     }
 
     public function testInvalidImage(): void
     {
-        $fileToUpload1 = $this->currentDir . '/tests/resources/psoriasis_01.png';
+        $fileToUpload1 = $this->currentDir . '/tests/resources/psoriasis_01.jpg';
         $fileToUpload2 = $this->currentDir . '/tests/resources/invalid.png';
         $fileToUpload3 = $this->currentDir . '/tests/resources/invalid.png';
         $diagnosisSupportArguments = new DiagnosisSupportArguments(
@@ -138,7 +81,7 @@ class DiagnosisSupportTest extends TestCase
 
     public function testSendWithTimeout()
     {
-        $fileToUpload1 = $this->currentDir . '/tests/resources/psoriasis_01.png';
+        $fileToUpload1 = $this->currentDir . '/tests/resources/psoriasis_01.jpg';
         $image1 = file_get_contents($fileToUpload1);
 
         $diagnosisSupportArguments = new DiagnosisSupportArguments(
@@ -152,5 +95,136 @@ class DiagnosisSupportTest extends TestCase
             (new DateTimeImmutable())->format('Ymd'),
             $response->issued->format('Ymd')
         );
+    }
+
+    public function assertDiagnosisSupport(array $lesionImages, array $firstConclusionJson): void
+    {
+        $medias = [];
+        foreach ($lesionImages as $lesionImage) {
+            $fileToUpload = $this->currentDir . $lesionImage;
+            $medias[] = base64_encode(file_get_contents($fileToUpload));
+        }
+
+        $diagnosisSupportArguments = new DiagnosisSupportArguments(medias: $medias);
+        $response = $this->medicalDeviceClient->diagnosisSupport($diagnosisSupportArguments, $this->bearerToken);
+
+        $this->assertEquals('DiagnosticReport', $response->resourceType);
+        $this->assertGreaterThan(0, $response->analysisDuration);
+        $this->assertEquals('preliminary', $response->status);
+        $this->assertEquals(
+            (new DateTimeImmutable())->format('Ymd'),
+            $response->issued->format('Ymd')
+        );
+        $this->assertClinicalIndicator($response->clinicalIndicator);
+        $this->assertPerformanceIndicator($response->performanceIndicator);
+
+        $this->assertGreaterThan(0, count($response->conclusions));
+        $firstConclusion = $response->conclusions[0];
+        $this->assertConclusion($firstConclusion, $firstConclusionJson['text'], $firstConclusionJson['code'], $firstConclusionJson['display']);
+        // to check that is really a percentage
+        $this->assertGreaterThan(1, $firstConclusion->probability);
+
+        foreach ($response->imagingAnalysis as $imagingAnalysisInstance) {
+
+            // Media validity
+            $this->assertTrue($imagingAnalysisInstance->mediaValidity->isValid);
+            $this->assertMediaValidityQuality($imagingAnalysisInstance->mediaValidity->quality);
+            $this->assertMediaValidityDomain($imagingAnalysisInstance->mediaValidity->domain);
+            $this->assertMediaValidityModality($imagingAnalysisInstance->mediaValidity->modality);
+
+            // to check that is really a percentage
+            $this->assertGreaterThan(1, $imagingAnalysisInstance->performanceIndicator->entropy);
+
+            $this->assertClinicalIndicator($imagingAnalysisInstance->clinicalIndicator);
+
+            $this->assertGreaterThan(0, count($imagingAnalysisInstance->conclusions));
+            $firstConclusion = $imagingAnalysisInstance->conclusions[0];
+            $this->assertConclusion($firstConclusion, $firstConclusionJson['text'], $firstConclusionJson['code'], $firstConclusionJson['display']);
+
+            foreach ($imagingAnalysisInstance->conclusions as $key => $conclusion) {
+                if ($key >= 5) {
+                    break;
+                }
+                $this->assertNotNull($conclusion->explainability);
+                $this->assertNotNull($conclusion->explainability->heatMap);
+                $this->assertNotEmpty($conclusion->explainability->heatMap->data);
+                $this->assertNotEmpty($conclusion->explainability->heatMap->contentType);
+            }
+        }
+    }
+
+    private function assertPerformanceIndicator(PerformanceIndicator $performanceIndicator): void
+    {
+        // to check that is a percentage
+        $this->assertGreaterThan(1, $performanceIndicator->sensitivity);
+        $this->assertLessThanOrEqual(100, $performanceIndicator->sensitivity);
+        $this->assertGreaterThan(1, $performanceIndicator->specificity);
+        $this->assertLessThanOrEqual(100, $performanceIndicator->specificity);
+        $this->assertLessThanOrEqual(100, $performanceIndicator->entropy);
+        $this->assertGreaterThan(0, $performanceIndicator->entropy);
+    }
+
+    private function assertClinicalIndicator(ClinicalIndicator $clinicalIndicator): void
+    {
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->hasCondition);
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->malignancy);
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->highPriorityReferral);
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->pigmentedLesion);
+        $this->assertGreaterThanOrEqual(0, $clinicalIndicator->urgentReferral);
+    }
+
+    private function assertMediaValidityQuality(Quality $quality): void
+    {
+        $this->assertTrue($quality->acceptable);
+        // to check that is really a percentage
+        $this->assertGreaterThan(1, $quality->score);
+        $this->assertNotEmpty($quality->interpretation);
+    }
+
+    private function assertMediaValidityDomain(Domain $domain): void
+    {
+        $this->assertTrue($domain->isDermatological);
+        // to check that is really a percentage
+        $this->assertGreaterThan(1, $domain->additionalData->aiConfidence->value);
+        $this->assertAiConfidence($domain->additionalData->aiConfidence, 'aiConfidence', 'AI model confidence in the image being dermatological');
+    }
+
+    private function assertMediaValidityModality(Modality $modality): void
+    {
+        $this->assertEquals(ModalityValue::Clinical, $modality->value);
+        $this->assertAiConfidence(
+            $modality->additionalData->aiConfidenceClinical,
+            'aiConfidenceClinical',
+            'AI model confidence in identifying the image\'s modality as clinical'
+        );
+        $this->assertAiConfidence(
+            $modality->additionalData->aiConfidenceDermoscopic,
+            'aiConfidenceDermoscopic',
+            'AI model confidence in identifying the image\'s modality as dermoscopic'
+        );
+    }
+
+    private function assertAiConfidence(AiConfidence $aiConfidence, string $code, string $text): void
+    {
+        $this->assertGreaterThanOrEqual(0, $aiConfidence->value);
+        $this->assertLessThanOrEqual(100, $aiConfidence->value);
+        $this->assertEquals($code, $aiConfidence->code->coding[0]->code);
+        $this->assertEquals('Legit.Health', $aiConfidence->code->coding[0]->systemDisplay);
+        $this->assertNull($aiConfidence->code->coding[0]->system);
+        $this->assertNull($aiConfidence->code->coding[0]->version);
+        $this->assertNull($aiConfidence->code->coding[0]->display);
+        $this->assertEquals($text, $aiConfidence->code->text);
+    }
+
+    private function assertConclusion(Conclusion $conclusion, string $text, string $code, string $display): void
+    {
+        $this->assertEquals($text, $conclusion->code->text);
+        $this->assertEquals($code, $conclusion->code->coding[0]->code);
+        $this->assertEquals('https://icd.who.int/browse/2025-01/mms/en', $conclusion->code->coding[0]->system);
+        $this->assertEquals('ICD-11', $conclusion->code->coding[0]->systemDisplay);
+        $this->assertEquals('2025-01', $conclusion->code->coding[0]->version);
+        $this->assertEquals($display, $conclusion->code->coding[0]->display);
+        // to check that is really a percentage
+        $this->assertGreaterThan(1, $conclusion->probability);
     }
 }

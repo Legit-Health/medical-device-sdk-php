@@ -6,9 +6,10 @@ final readonly class CodingItem
 {
     public function __construct(
         public string $code,
-        public string $display,
-        public string $system,
-        public string $systemDisplay
+        public ?string $display,
+        public ?string $system,
+        public string $systemDisplay,
+        public ?string $version
     ) {}
 
     public static function fromJson(array $json): self
@@ -17,7 +18,8 @@ final readonly class CodingItem
             $json['code'],
             $json['display'],
             $json['system'],
-            $json['systemDisplay']
+            $json['systemDisplay'],
+            $json['version']
         );
     }
 }
