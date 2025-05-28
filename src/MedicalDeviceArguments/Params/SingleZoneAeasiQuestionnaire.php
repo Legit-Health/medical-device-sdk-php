@@ -15,12 +15,14 @@ readonly class SingleZoneAeasiQuestionnaire extends Questionnaire
         return ScoringSystemCode::Aeasi->value;
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'surface' => $this->surface,
-                'patientAge' => $this->patientAge
+            'questionnaireResponse' => [
+                'item' => [
+                    'surface' => $this->surface,
+                    'patientAge' => $this->patientAge
+                ]
             ]
         ];
     }

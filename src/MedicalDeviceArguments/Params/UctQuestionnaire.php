@@ -21,14 +21,16 @@ readonly class UctQuestionnaire extends Questionnaire
         return ScoringSystemCode::Uct->value;
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'physicalSymptoms' => $this->physicalSymptoms,
-                'qualityOfLife' => $this->qualityOfLife,
-                'treatmentNotEnough' => $this->treatmentNotEnough,
-                'overallUnderControl' => $this->overallUnderControl,
+            'questionnaireResponse' => [
+                'item' => [
+                    'physicalSymptoms' => $this->physicalSymptoms,
+                    'qualityOfLife' => $this->qualityOfLife,
+                    'treatmentNotEnough' => $this->treatmentNotEnough,
+                    'overallUnderControl' => $this->overallUnderControl,
+                ]
             ]
         ];
     }

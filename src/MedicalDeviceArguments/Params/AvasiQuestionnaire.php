@@ -2,19 +2,19 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceArguments\Params;
 
-use ArrayObject;
+use stdClass;
 
-readonly class SingleZoneAgppgaQuestionnaire extends Questionnaire
+readonly class AvasiQuestionnaire extends Questionnaire
 {
     public function __construct() {}
 
     public static function getName(): string
     {
-        return ScoringSystemCode::Agppga->value;
+        return ScoringSystemCode::Avasi->value;
     }
 
     public function jsonSerialize(): mixed
     {
-        return new ArrayObject();
+        return new stdClass;
     }
 }

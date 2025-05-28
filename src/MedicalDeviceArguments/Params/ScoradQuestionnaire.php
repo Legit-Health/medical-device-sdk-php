@@ -31,19 +31,21 @@ readonly class ScoradQuestionnaire extends Questionnaire
         return ScoringSystemCode::Scorad->value;
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'surface' => $this->surface,
-                'erythema' => $this->erythema,
-                'swelling' => $this->swelling,
-                'crusting' => $this->crusting,
-                'excoriation' => $this->excoriation,
-                'lichenification' => $this->lichenification,
-                'dryness' => $this->dryness,
-                'itchiness' => $this->itchiness,
-                'sleeplessness' => $this->sleeplessness,
+            'questionnaireResponse' => [
+                'item' => [
+                    'surface' => $this->surface,
+                    'erythema' => $this->erythema,
+                    'swelling' => $this->swelling,
+                    'crusting' => $this->crusting,
+                    'excoriation' => $this->excoriation,
+                    'lichenification' => $this->lichenification,
+                    'dryness' => $this->dryness,
+                    'itchiness' => $this->itchiness,
+                    'sleeplessness' => $this->sleeplessness,
+                ]
             ]
         ];
     }

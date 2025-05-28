@@ -23,7 +23,6 @@ final readonly class Attachment
             $json['data'],
             $json['height'],
             $json['width'],
-            $json['data'],
             $json['colorModel']
         );
     }

@@ -2,22 +2,23 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\{SeverityAssessmentArguments, SeverityAssessmentManualArguments};
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\{SeverityAssessmentArguments};
 use LegitHealth\MedicalDevice\Common\{BearerToken, Code};
 use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\{BodySiteCode, KnownCondition, Questionnaire, ScoringSystems};
 use LegitHealth\MedicalDevice\MedicalDeviceClient;
 use stdClass;
 use DateTimeImmutable;
 use Dotenv\Dotenv;
+use LegitHealth\MedicalDevice\RequestException;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
 
-abstract class AbstractSeverityAssessmentManualTest extends TestCase
+abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
 {
     private BearerToken $bearerToken;
-    private string $currentDir;
+    protected string $currentDir;
     private HttpClientInterface $httpClient;
     private MedicalDeviceClient $medicalDeviceClient;
 
@@ -36,11 +37,11 @@ abstract class AbstractSeverityAssessmentManualTest extends TestCase
     #[DataProvider('missingFieldProvider')]
     public function testMissingFieldsAreReported(string $path, array $expectedDetail): void
     {
-        $args = $this->buildValidArguments();
+        $args = $this->buildValidArguments($this->currentDir);
         $this->removeFieldByDotPath($args, $path);
         $response = $this->httpClient->request(
             'POST',
-            'severity-assessment/manual',
+            'severity-assessment/automatic/local',
             [
                 'json'    => $args,
                 'headers' => ['Authorization' => $this->bearerToken->asAuthorizationHeader()],
@@ -56,10 +57,16 @@ abstract class AbstractSeverityAssessmentManualTest extends TestCase
     }
 
     #[DataProvider('requestProvider')]
-    public function testRequest(string $imagePath, Questionnaire $questionnaire, array $knownCondition, array $expectedValues): void
-    {
+    public function testRequest(
+        string $imagePath,
+        Questionnaire $questionnaire,
+        array $knownCondition,
+        ?array $expectedValues,
+        ?BodySiteCode $bodySiteCode = null,
+        ?int $statusCode = null
+    ): void {
         $image = file_get_contents($this->currentDir . $imagePath);
-        $severityAssessmentArguments = new SeverityAssessmentManualArguments(
+        $severityAssessmentArguments = new SeverityAssessmentArguments(
             base64_encode($image),
             scoringSystem: new ScoringSystems([$questionnaire]),
             knownCondition: new KnownCondition(Code::fromJson([
@@ -74,9 +81,14 @@ abstract class AbstractSeverityAssessmentManualTest extends TestCase
                 ],
                 "text" => $knownCondition['text']
             ])),
-            bodySiteCode: BodySiteCode::ArmLeft
+            bodySiteCode: $bodySiteCode ?? BodySiteCode::ArmLeft
         );
-        $response = $this->medicalDeviceClient->severityAssessmentManual($severityAssessmentArguments, $this->bearerToken);
+        try {
+            $response = $this->medicalDeviceClient->severityAssessmentAutomaticLocal($severityAssessmentArguments, $this->bearerToken);
+        } catch (RequestException $requestException) {
+            $this->assertEquals($statusCode, $requestException->statusCode);
+            return;
+        }
 
         $this->assertEquals('DiagnosticReport', $response->resourceType);
         $this->assertGreaterThan(0, $response->analysisDuration);
@@ -87,17 +99,43 @@ abstract class AbstractSeverityAssessmentManualTest extends TestCase
         );
 
         $questionnaireResponse = $response->getPatientEvolutionInstance($questionnaire::getName());
-        $this->assertEquals($expectedValues['scoreValue'], $questionnaireResponse->score->value);
+        $expectedValues['scoreValue']($questionnaireResponse->score->value);
         $this->assertEquals($expectedValues['interpretationCategory'], $questionnaireResponse->score->interpretation->category);
         $this->assertEquals($expectedValues['intensity'], $questionnaireResponse->score->interpretation->intensity);
 
-        $questionnaireValues = $questionnaire->jsonSerialize()['questionnaireResponse']['item'];
-        foreach ($questionnaireResponse->item as $item) {
-            $this->assertEquals($questionnaireValues[$item->itemCode], $item->value);
-            $this->assertNotEmpty($item->interpretation);
-            $this->assertNotEmpty($item->code->text);
-            $this->assertCount(1, $item->code->coding);
-            $this->assertEquals($item->itemCode, $item->code->coding[0]->code);
+        if ($expectedValues['item'] === null) {
+            $this->assertNull($questionnaireResponse->item);
+        } else {
+            foreach ($expectedValues['item'] as $itemCode => $itemValue) {
+                $questionnaireResponseItem = $questionnaireResponse->getEvolutionItem($itemCode);
+                // Complete
+                $this->assertEquals($itemValue['value'], $questionnaireResponseItem->value);
+                $this->assertEquals($itemValue['interpreation'], $questionnaireResponseItem->interpretation);
+                $this->assertEquals($itemCode, $questionnaireResponseItem->code->text);
+                $this->assertCount(1, $questionnaireResponseItem->code->coding);
+                $this->assertEquals($itemCode, $questionnaireResponseItem->code->coding[0]->code);
+            }
+        }
+        if ($expectedValues['attachment'] === null) {
+            $this->assertNull($questionnaireResponse->attachment);
+        }
+        $this->assertCount(\count($expectedValues['attachment']), $questionnaireResponse->attachment);
+        foreach ($expectedValues['attachment'] as $attachmentCode => $expectedAttachment) {
+            $attachment = $questionnaireResponse->attachment[$attachmentCode] ?? null;
+            $this->assertNotNull($attachment);
+            $this->assertEquals($attachmentCode, $attachment->code);
+            $this->assertEquals($expectedAttachment['title'], $attachment->title);
+            $this->assertEquals($expectedAttachment['width'], $attachment->width);
+            $this->assertEquals($expectedAttachment['height'], $attachment->height);
+            $this->assertNotEmpty($attachment->data);
+            $this->assertEquals('image/jpeg', $attachment->contentType);
+            $this->assertEquals('RGB', $attachment->colorModel);
+        }
+
+        if (isset($expectedValues['globalScoreContribution'])) {
+            $expectedValues['globalScoreContribution']($questionnaireResponse->score->globalScoreContribution->value);
+            $this->assertEquals('Contribution of the body zone score to the full-body score', $questionnaireResponse->score->globalScoreContribution->code->text);
+            $this->assertEquals('globalScoreContribution', $questionnaireResponse->score->globalScoreContribution->code->coding[0]->code);
         }
     }
 
@@ -125,8 +163,8 @@ abstract class AbstractSeverityAssessmentManualTest extends TestCase
             ['loc' => ['body', 'bodySite']],
         ];
         yield 'payload data is required' => [
-            'payload.0.contentAttachment.data',
-            ['loc' => ['body', 'payload', 0, 'contentAttachment', 'data']],
+            'payload.contentAttachment.data',
+            ['loc' => ['body', 'payload', 'contentAttachment', 'data']],
         ];
         yield 'knownCondition.conclusion.coding[0].system is required' => [
             'knownCondition.conclusion.coding.0.system',
@@ -157,36 +195,6 @@ abstract class AbstractSeverityAssessmentManualTest extends TestCase
         }
     }
 
-    private function buildValidArguments(): array
-    {
-        $image = file_get_contents($this->currentDir . '/tests/resources/nevus.jpg');
-
-        $body = [
-            'bodySite' => 'armRight',
-            'payload' => [[
-                'contentAttachment' => [
-                    'data' => base64_encode($image),
-                ],
-            ]],
-            'knownCondition' => [
-                'conclusion' => [
-                    'coding' => [[
-                        'system' => 'https://icd.who.int/browse/2025-01/mms/en',
-                        'systemDisplay' => 'ICD-11',
-                        'version' => '2025-01',
-                        'code' => '2C30',
-                        'display' => 'Melanoma of skin',
-                    ]],
-                    'text' => 'Cutaneous melanoma',
-                ],
-            ],
-            'scoringSystem'  => [
-                static::questionnaireKey() => static::buildValidQuestionnaireResponse(),
-            ],
-        ];
-
-        return $body;
-    }
 
     /** Unset a nested array key by “dot path” */
     private function removeFieldByDotPath(array &$array, string $path): void
@@ -211,12 +219,7 @@ abstract class AbstractSeverityAssessmentManualTest extends TestCase
      */
     abstract protected static function getRequestValues(): array;
 
-    /**
-     * @return array<string,array{path:string,loc:array<mixed>}>
-     */
+    abstract protected function buildValidArguments(string $currentDir): array;
+
     abstract protected static function getSpecificMissingFields(): array;
-
-    abstract protected static function questionnaireKey(): string;
-
-    abstract protected static function buildValidQuestionnaireResponse(): mixed;
 }

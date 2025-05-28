@@ -12,7 +12,7 @@ class SevenPcTest extends AbstractSeverityAssessmentManualTest
     {
         return [[
             '/tests/resources/nevus.jpg',
-            new SevenPcQuestionnaire(1, 0, 0, 1, 0, 0, 1),
+            new SevenPcQuestionnaire(1, 1, 0, 1, 0, 0, 1),
             ["code" => "2F20.Z", "display" => "Melanocytic naevus, unspecified", "text" => "Melanocytic naevus"],
             ['scoreValue' => 6, 'interpretationCategory' => 'High risk', 'intensity' => Intensity::High]
         ]];
@@ -48,11 +48,9 @@ class SevenPcTest extends AbstractSeverityAssessmentManualTest
         ];
     }
 
-    protected static function buildValidQuestionnaireResponse(): array
+    protected static function buildValidQuestionnaireResponse(): mixed
     {
-        return [
-            'questionnaireResponse' => new SevenPcQuestionnaire(1, 0, 0, 1, 0, 0, 1)->asArray()
-        ];
+        return new SevenPcQuestionnaire(1, 0, 0, 1, 0, 0, 1)->jsonSerialize();
     }
 
     protected static function questionnaireKey(): string

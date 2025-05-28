@@ -14,11 +14,13 @@ readonly class SingleZoneApasiQuestionnaire extends Questionnaire
         return ScoringSystemCode::Apasi->value;
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'surface' => $this->surface
+            'questionnaireResponse' => [
+                'item' => [
+                    'surface' => $this->surface
+                ]
             ]
         ];
     }

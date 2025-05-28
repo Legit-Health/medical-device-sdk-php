@@ -57,32 +57,34 @@ readonly class ResvechQuestionnaire extends Questionnaire
         return ScoringSystemCode::Resvech->value;
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'woundDimensions' => $this->woundDimensions,
-                'tissues' => $this->tissues,
-                'edges' => $this->edges,
-                'tissueInWoundBed' => $this->tissueInWoundBed,
-                'exudate' => $this->exudate,
-                'frequencyOfPain' => $this->frequencyOfPain,
-                'macerationAroundWound' => $this->macerationAroundWound,
-                'tunneling' => $this->tunneling,
-                'increasingPain' => $this->increasingPain,
-                'erythemaAroundWound' => $this->erythemaAroundWound,
-                'edemaAroundWound' => $this->edemaAroundWound,
-                'temperatureRise' => $this->temperatureRise,
-                'increasingExudate' => $this->increasingExudate,
-                'purulentExudate' => $this->purulentExudate,
-                'tissueFriableOrBleedsEasily' => $this->tissueFriableOrBleedsEasily,
-                'stationaryWound' => $this->stationaryWound,
-                'biofilmCompatibleTissue' => $this->biofilmCompatibleTissue,
-                'odor' => $this->odor,
-                'hypergranulation' => $this->hypergranulation,
-                'increasingWound' => $this->increasingWound,
-                'satelliteLesions' => $this->satelliteLesions,
-                'tissuePaleness' => $this->tissuePaleness,
+            'questionnaireResponse' => [
+                'item' => [
+                    'woundDimensions' => $this->woundDimensions,
+                    'tissues' => $this->tissues,
+                    'edges' => $this->edges,
+                    'tissueInWoundBed' => $this->tissueInWoundBed,
+                    'exudate' => $this->exudate,
+                    'frequencyOfPain' => $this->frequencyOfPain,
+                    'macerationAroundWound' => $this->macerationAroundWound,
+                    'tunneling' => $this->tunneling,
+                    'increasingPain' => $this->increasingPain,
+                    'erythemaAroundWound' => $this->erythemaAroundWound,
+                    'edemaAroundWound' => $this->edemaAroundWound,
+                    'temperatureRise' => $this->temperatureRise,
+                    'increasingExudate' => $this->increasingExudate,
+                    'purulentExudate' => $this->purulentExudate,
+                    'tissueFriableOrBleedsEasily' => $this->tissueFriableOrBleedsEasily,
+                    'stationaryWound' => $this->stationaryWound,
+                    'biofilmCompatibleTissue' => $this->biofilmCompatibleTissue,
+                    'odor' => $this->odor,
+                    'hypergranulation' => $this->hypergranulation,
+                    'increasingWound' => $this->increasingWound,
+                    'satelliteLesions' => $this->satelliteLesions,
+                    'tissuePaleness' => $this->tissuePaleness,
+                ]
             ]
         ];
     }

@@ -21,14 +21,16 @@ readonly class PasiQuestionnaire extends Questionnaire
         return ScoringSystemCode::Pasi->value;
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'surface' => $this->surface,
-                'erythema' => $this->erythema,
-                'induration' => $this->induration,
-                'desquamation' => $this->desquamation,
+            'questionnaireResponse' => [
+                'item' => [
+                    'surface' => $this->surface,
+                    'erythema' => $this->erythema,
+                    'induration' => $this->induration,
+                    'desquamation' => $this->desquamation,
+                ]
             ]
         ];
     }

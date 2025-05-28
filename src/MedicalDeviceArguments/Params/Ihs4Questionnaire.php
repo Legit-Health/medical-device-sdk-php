@@ -15,13 +15,15 @@ readonly class Ihs4Questionnaire extends Questionnaire
         return ScoringSystemCode::Ihs4->value;
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'nodule' => $this->nodule,
-                'abscess' => $this->abscess,
-                'drainingTunnel' => $this->drainingTunnel
+            'questionnaireResponse' => [
+                'item' => [
+                    'nodule' => $this->nodule,
+                    'abscess' => $this->abscess,
+                    'drainingTunnel' => $this->drainingTunnel
+                ]
             ]
         ];
     }

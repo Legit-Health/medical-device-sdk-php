@@ -26,17 +26,20 @@ readonly class SevenPcQuestionnaire extends Questionnaire
     {
         return ScoringSystemCode::SevenPc->value;
     }
-    public function asArray(): array
+
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'changeInSize' => $this->changeInSize,
-                'irregularPigmentation' => $this->irregularPigmentation,
-                'irregularBorder' => $this->irregularBorder,
-                'inflammation' => $this->inflammation,
-                'largerThanOtherLesions' => $this->largerThanOtherLesions,
-                'itchOrAlteredSensation' => $this->itchOrAlteredSensation,
-                'crustingOrBleeding' => $this->crustingOrBleeding,
+            'questionnaireResponse' => [
+                'item' => [
+                    'changeInSize' => $this->changeInSize,
+                    'irregularPigmentation' => $this->irregularPigmentation,
+                    'irregularBorder' => $this->irregularBorder,
+                    'inflammation' => $this->inflammation,
+                    'largerThanOtherLesions' => $this->largerThanOtherLesions,
+                    'itchOrAlteredSensation' => $this->itchOrAlteredSensation,
+                    'crustingOrBleeding' => $this->crustingOrBleeding,
+                ]
             ]
         ];
     }

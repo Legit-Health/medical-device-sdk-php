@@ -4,7 +4,7 @@ namespace LegitHealth\MedicalDevice\MedicalDeviceArguments;
 
 use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\{KnownCondition, BodySiteCode, ScoringSystems, Subject};
 
-readonly class SeverityAssessmentArguments implements MedicalDeviceArguments
+readonly class SeverityAssessmentManualArguments implements MedicalDeviceArguments
 {
     public function __construct(
         public string $image,
@@ -17,8 +17,10 @@ readonly class SeverityAssessmentArguments implements MedicalDeviceArguments
     {
         return [
             "payload" => [
-                "contentAttachment" => [
-                    "data" => $this->image
+                [
+                    "contentAttachment" => [
+                        "data" => $this->image
+                    ]
                 ]
             ],
             "bodySite" => $this->bodySiteCode->value,

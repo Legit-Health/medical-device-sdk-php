@@ -14,11 +14,13 @@ readonly class SingleZoneAuasQuestionnaire extends Questionnaire
         return ScoringSystemCode::Auas->value;
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'pruritus' => $this->pruritus
+            'questionnaireResponse' => [
+                'item' => [
+                    'pruritus' => $this->pruritus
+                ]
             ]
         ];
     }

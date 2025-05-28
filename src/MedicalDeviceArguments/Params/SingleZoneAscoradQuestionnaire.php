@@ -19,13 +19,15 @@ readonly class SingleZoneAscoradQuestionnaire extends Questionnaire
         return ScoringSystemCode::Ascorad->value;
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'surface' => $this->surface,
-                'pruritus' => $this->pruritus,
-                'sleeplessness' => $this->sleeplessness
+            'questionnaireResponse' => [
+                'item' => [
+                    'surface' => $this->surface,
+                    'pruritus' => $this->pruritus,
+                    'sleeplessness' => $this->sleeplessness
+                ]
             ]
         ];
     }

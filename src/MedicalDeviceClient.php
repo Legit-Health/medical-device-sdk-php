@@ -3,7 +3,7 @@
 namespace LegitHealth\MedicalDevice;
 
 use LegitHealth\MedicalDevice\Common\BearerToken;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\{DiagnosisSupportArguments, MedicalDeviceArguments, RequestOptions, SeverityAssessmentArguments};
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\{DiagnosisSupportArguments, MedicalDeviceArguments, RequestOptions, SeverityAssessmentArguments, SeverityAssessmentManualArguments};
 use LegitHealth\MedicalDevice\MedicalDeviceResponse\{AccessToken, DiagnosisSupportResponse, SeverityAssessmentResponse};
 use Throwable;
 use Symfony\Component\HttpClient\HttpClient;
@@ -12,7 +12,7 @@ use Symfony\Contracts\HttpClient\HttpClientInterface;
 final class MedicalDeviceClient
 {
     private const SEVERITY_ASSESSMENT_MANUAL = 'severity-assessment/manual';
-    private const SEVERITY_ASSESSMENT_AUTOMATIC_LOCAL = 'severity-assessment/image-based/local';
+    private const SEVERITY_ASSESSMENT_AUTOMATIC_LOCAL = 'severity-assessment/automatic/local';
     private const DIAGNOSIS_SUPPORT_ENDPOINT = 'diagnosis-support';
     private const LOGIN = 'login';
 
@@ -63,7 +63,7 @@ final class MedicalDeviceClient
     /**
      * @throws RequestException
      */
-    public function severityAssessmentManual(SeverityAssessmentArguments $arguments, BearerToken $bearerToken, ?RequestOptions $requestOptions = null): SeverityAssessmentResponse
+    public function severityAssessmentManual(SeverityAssessmentManualArguments $arguments, BearerToken $bearerToken, ?RequestOptions $requestOptions = null): SeverityAssessmentResponse
     {
         $json = $this->send($arguments, self::SEVERITY_ASSESSMENT_MANUAL, $bearerToken, $requestOptions);
         return SeverityAssessmentResponse::fromJson($json);
@@ -102,6 +102,9 @@ final class MedicalDeviceClient
             }
             return $response->toArray();
         } catch (Throwable $exception) {
+            if ($exception instanceof RequestException) {
+                throw $exception;
+            }
             throw new RequestException(
                 sprintf('An error occurred while sending the request: %s', $exception->getMessage())
             );

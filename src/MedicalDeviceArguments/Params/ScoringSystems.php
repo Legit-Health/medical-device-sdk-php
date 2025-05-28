@@ -20,11 +20,7 @@ readonly final class ScoringSystems
     {
         $json = [];
         foreach ($this->questionnaires as $questionnaire) {
-            $questionnaireArray = $questionnaire->asArray();
-            $json[$questionnaire->getName()] = [];
-            if (\count($questionnaireArray) > 0) {
-                $json[$questionnaire->getName()]['questionnaireResponse'] = $questionnaireArray;
-            }
+            $json[$questionnaire->getName()] = $questionnaire;
         }
         return $json;
     }

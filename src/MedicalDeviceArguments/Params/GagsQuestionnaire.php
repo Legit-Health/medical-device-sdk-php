@@ -25,16 +25,18 @@ readonly class GagsQuestionnaire extends Questionnaire
         return ScoringSystemCode::Gags->value;
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'forehead' => $this->forehead,
-                'rightCheek' => $this->rightCheek,
-                'leftCheek' => $this->leftCheek,
-                'nose' => $this->nose,
-                'chin' => $this->chin,
-                'chestAndUpperBack' => $this->chestAndUpperBack
+            'questionnaireResponse' => [
+                'item' => [
+                    'forehead' => $this->forehead,
+                    'rightCheek' => $this->rightCheek,
+                    'leftCheek' => $this->leftCheek,
+                    'nose' => $this->nose,
+                    'chin' => $this->chin,
+                    'chestAndUpperBack' => $this->chestAndUpperBack
+                ]
             ]
         ];
     }

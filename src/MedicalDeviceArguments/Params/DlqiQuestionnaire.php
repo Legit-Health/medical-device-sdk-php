@@ -32,20 +32,23 @@ readonly class DlqiQuestionnaire extends Questionnaire
     {
         return ScoringSystemCode::Dlqi->value;
     }
-    public function asArray(): array
+
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'question1' => $this->question1,
-                'question2' => $this->question2,
-                'question3' => $this->question3,
-                'question4' => $this->question4,
-                'question5' => $this->question5,
-                'question6' => $this->question6,
-                'question7' => $this->question7,
-                'question8' => $this->question8,
-                'question9' => $this->question9,
-                'question10' => $this->question10
+            'questionnaireResponse' => [
+                'item' => [
+                    'question1' => $this->question1,
+                    'question2' => $this->question2,
+                    'question3' => $this->question3,
+                    'question4' => $this->question4,
+                    'question5' => $this->question5,
+                    'question6' => $this->question6,
+                    'question7' => $this->question7,
+                    'question8' => $this->question8,
+                    'question9' => $this->question9,
+                    'question10' => $this->question10
+                ]
             ]
         ];
     }

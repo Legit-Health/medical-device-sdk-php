@@ -65,11 +65,9 @@ class DlqiTest extends AbstractSeverityAssessmentManualTest
         ];
     }
 
-    protected static function buildValidQuestionnaireResponse(): array
+    protected static function buildValidQuestionnaireResponse(): mixed
     {
-        return [
-            'questionnaireResponse' => new DlqiQuestionnaire(1, 2, 3, 1, 2, 3, 1, 2, 3, 1)->asArray()
-        ];
+        return new DlqiQuestionnaire(1, 2, 3, 1, 2, 3, 1, 2, 3, 1)->jsonSerialize();
     }
 
     protected static function questionnaireKey(): string

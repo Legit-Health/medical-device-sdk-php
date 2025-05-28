@@ -19,13 +19,15 @@ readonly class PgaQuestionnaire extends Questionnaire
         return ScoringSystemCode::Pga->value;
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'erythema' => $this->erythema,
-                'desquamation' => $this->desquamation,
-                'induration' => $this->induration,
+            'questionnaireResponse' => [
+                'item' => [
+                    'erythema' => $this->erythema,
+                    'desquamation' => $this->desquamation,
+                    'induration' => $this->induration,
+                ]
             ]
         ];
     }

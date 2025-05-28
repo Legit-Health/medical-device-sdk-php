@@ -15,12 +15,14 @@ readonly class UasQuestionnaire extends Questionnaire
         return ScoringSystemCode::Uas->value;
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'itchiness' => $this->itchiness,
-                'hive' => $this->hive,
+            'questionnaireResponse' => [
+                'item' => [
+                    'itchiness' => $this->itchiness,
+                    'hive' => $this->hive,
+                ]
             ]
         ];
     }

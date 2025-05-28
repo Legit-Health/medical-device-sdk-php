@@ -3,10 +3,11 @@
 namespace LegitHealth\MedicalDevice\MedicalDeviceArguments\Params;
 
 use InvalidArgumentException;
+use JsonSerializable;
+use stdClass;
 
-abstract readonly class Questionnaire
+abstract readonly class Questionnaire implements JsonSerializable
 {
-    abstract public function asArray(): array;
     abstract public static function getName(): string;
 
     protected function ensureIsInRange(int|float $value, int $min, int $max, string $name): void

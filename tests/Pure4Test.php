@@ -40,11 +40,9 @@ class Pure4Test extends AbstractSeverityAssessmentManualTest
         ];
     }
 
-    protected static function buildValidQuestionnaireResponse(): array
+    protected static function buildValidQuestionnaireResponse(): mixed
     {
-        return [
-            'questionnaireResponse' => new Pure4Questionnaire(1, 0, 1, 0)->asArray()
-        ];
+        return new Pure4Questionnaire(1, 0, 1, 0)->jsonSerialize();
     }
 
     protected static function questionnaireKey(): string

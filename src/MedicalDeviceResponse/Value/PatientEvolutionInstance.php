@@ -7,21 +7,24 @@ use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\ScoringSystemCode;
 final readonly class PatientEvolutionInstance
 {
     /**
-     * @param array<string,EvolutionItem> $items
-     * @param Attachment[] $attachments
+     * @param array<string,EvolutionItem>|null $item
+     * @param array<string,Attachment> $attachment
      * @param Detection[] $detections
      * */
     public function __construct(
         public ScoringSystemCode $scoringSystemCode,
         public ScoringSystemScore $score,
-        public array $items,
-        public array $attachments,
+        public ?array $item,
+        public ?array $attachment,
         public array $detections
     ) {}
 
-    public function getEvolutionItem(string $code): EvolutionItem
+    public function getEvolutionItem(string $code): ?EvolutionItem
     {
-        return $this->items[$code];
+        if ($this->item || !isset($this->item['code'])) {
+            return null;
+        }
+        return $this->item[$code];
     }
 
     /**
@@ -29,6 +32,6 @@ final readonly class PatientEvolutionInstance
      */
     public function getEvolutionItems(): array
     {
-        return array_values($this->items);
+        return array_values($this->item);
     }
 }

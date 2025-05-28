@@ -35,14 +35,20 @@ readonly class SeverityAssessmentResponse
             if ($patientEvolutionInstance === null) {
                 continue;
             }
-            $evolutionItems = [];
-            foreach ($patientEvolutionInstance['item'] as $itemCode => $itemJson) {
-                $evolutionItems[$itemCode] = EvolutionItem::fromJson($itemCode, $itemJson);
+            $evolutionItems = null;
+            if ($patientEvolutionInstance['item'] !== null) {
+                $evolutionItems = [];
+                foreach ($patientEvolutionInstance['item'] as $itemCode => $itemJson) {
+                    $evolutionItems[$itemCode] = EvolutionItem::fromJson($itemCode, $itemJson);
+                }
             }
 
-            $attachments = [];
-            foreach ($patientEvolutionInstance['media']['attachment'] ?? [] as $attachmentCode => $attachmentJson) {
-                $attachments[$attachmentCode] = Attachment::fromJson($attachmentCode, $attachmentJson);
+            $attachments = null;
+            if (isset($patientEvolutionInstance['media']['attachment']) && $patientEvolutionInstance['media']['attachment'] !== null) {
+                $attachments = [];
+                foreach ($patientEvolutionInstance['media']['attachment'] ?? [] as $attachmentCode => $attachmentJson) {
+                    $attachments[$attachmentCode] = Attachment::fromJson($attachmentCode, $attachmentJson);
+                }
             }
 
             $detections = array_map(

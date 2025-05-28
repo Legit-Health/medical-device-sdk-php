@@ -21,14 +21,16 @@ readonly class Pure4Questionnaire extends Questionnaire
         return ScoringSystemCode::Pure4->value;
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'question1' => $this->question1,
-                'question2' => $this->question2,
-                'question3' => $this->question3,
-                'question4' => $this->question4,
+            'questionnaireResponse' => [
+                'item' => [
+                    'question1' => $this->question1,
+                    'question2' => $this->question2,
+                    'question3' => $this->question3,
+                    'question4' => $this->question4,
+                ]
             ]
         ];
     }
