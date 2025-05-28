@@ -20,7 +20,8 @@
     },
     "autoload": {
         "psr-4": {
-            "LegitHealth\\MedicalDevice\\": "src/"
+            "LegitHealth\\MedicalDevice\\": "src/",
+            "LegitHealth\\MedicalDevice\\Tests\\": "tests/"
         }
     },
     "authors": [

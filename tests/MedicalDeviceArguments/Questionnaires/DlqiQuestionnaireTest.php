@@ -79,7 +79,7 @@ class DlqiQuestionnaireTest extends TestCase
     public function testToArray()
     {
         $dlqiQuestionnaire = new DlqiQuestionnaire(1, 2, 3, 1, 2, 3, 1, 2, 3, 1);
-        $arr = $dlqiQuestionnaire->toArray();
+        $arr = $dlqiQuestionnaire->asArray();
 
         $this->assertCount(10, $arr['item']);
         $this->assertEquals(1, $arr['item']['question1']);

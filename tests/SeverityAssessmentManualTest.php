@@ -4,13 +4,11 @@ namespace LegitHealth\MedicalDevice\Tests;
 
 use LegitHealth\MedicalDevice\MedicalDeviceArguments\{SeverityAssessmentArguments};
 use LegitHealth\MedicalDevice\Common\{BearerToken, Code};
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\{BodySiteCode, KnownCondition, ScoringSystemCode, ScoringSystems, SevenPcQuestionnaire};
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\{BodySiteCode, DlqiQuestionnaire, KnownCondition, Pure4Questionnaire, Questionnaire, ScoringSystems, SevenPcQuestionnaire};
 use LegitHealth\MedicalDevice\MedicalDeviceClient;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\{Intensity};
+use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
 use DateTimeImmutable;
 use Dotenv\Dotenv;
-use Exception;
-use LegitHealth\MedicalDevice\RequestException;
 use PHPUnit\Framework\TestCase;
 
 class SeverityAssessmentManualTest extends TestCase
@@ -40,31 +38,57 @@ class SeverityAssessmentManualTest extends TestCase
             "largerThanOtherLesions" => 0,
             "crustingOrBleeding" => 1
         ];
-        $fileToUpload = $this->currentDir . '/tests/resources/nevus.jpg';
-        $image = file_get_contents($fileToUpload);
         $sevenPcQuestionnaire = new SevenPcQuestionnaire(...$sevenPcQuestionnaireValues);
+
+        $this->assertSeverityAssessmentQuestionnaire(
+            '/tests/resources/nevus.jpg',
+            $sevenPcQuestionnaire,
+            ["code" => "2F20.Z", "display" => "Melanocytic naevus, unspecified", "text" => "Melanocytic naevus"],
+            ['scoreValue' => 6, 'interpretationCategory' => 'High risk', 'intensity' => Intensity::High]
+        );
+    }
+
+    public function testDlqi(): void
+    {
+        $this->assertSeverityAssessmentQuestionnaire(
+            '/tests/resources/nevus.jpg',
+            new DlqiQuestionnaire(1, 2, 3, 1, 2, 3, 1, 2, 3, 1),
+            ["code" => "2F20.Z", "display" => "Melanocytic naevus, unspecified", "text" => "Melanocytic naevus"],
+            ['scoreValue' => 19, 'interpretationCategory' => 'Very large effect', 'intensity' => Intensity::High]
+        );
+    }
+
+    public function testPure4(): void
+    {
+        $this->assertSeverityAssessmentQuestionnaire(
+            '/tests/resources/nevus.jpg',
+            new Pure4Questionnaire(1, 0, 1, 0),
+            ["code" => "2F20.Z", "display" => "Melanocytic naevus, unspecified", "text" => "Melanocytic naevus"],
+            ['scoreValue' => 2, 'interpretationCategory' => 'Positive', 'intensity' => Intensity::High]
+        );
+    }
+
+    public function assertSeverityAssessmentQuestionnaire(string $imagePath, Questionnaire $questionnaire, array $knownCondition, array $expectedValues): void
+    {
+        $image = file_get_contents($this->currentDir . $imagePath);
         $severityAssessmentArguments = new SeverityAssessmentArguments(
             base64_encode($image),
-            scoringSystem: new ScoringSystems([$sevenPcQuestionnaire]),
+            scoringSystem: new ScoringSystems([$questionnaire]),
             knownCondition: new KnownCondition(Code::fromJson([
                 "coding" => [
                     [
                         "system" => "https://icd.who.int/browse/2025-01/mms/en",
                         "systemDisplay" => "ICD-11",
                         "version" => "2025-01",
-                        "code" => "2F20.Z",
-                        "display" => "Melanocytic naevus, unspecified"
+                        "code" => $knownCondition['code'],
+                        "display" => $knownCondition['display']
                     ]
                 ],
-                "text" => "Melanocytic naevus"
+                "text" => $knownCondition['text']
             ])),
             bodySiteCode: BodySiteCode::ArmLeft
         );
-        try {
-            $response = $this->medicalDeviceClient->severityAssessmentManual($severityAssessmentArguments, $this->bearerToken);
-        } catch (RequestException $e) {
-            var_dump($e->content);
-        }
+        $response = $this->medicalDeviceClient->severityAssessmentManual($severityAssessmentArguments, $this->bearerToken);
 
         $this->assertEquals('DiagnosticReport', $response->resourceType);
         $this->assertGreaterThan(0, $response->analysisDuration);
@@ -74,13 +98,14 @@ class SeverityAssessmentManualTest extends TestCase
             $response->issued->format('Ymd')
         );
 
-        $sevenPc = $response->getPatientEvolutionInstance(ScoringSystemCode::SevenPc);
-        $this->assertEquals(6, $sevenPc->score->value);
-        $this->assertEquals('High risk', $sevenPc->score->interpretation->category);
-        $this->assertEquals(Intensity::High, $sevenPc->score->interpretation->intensity);
+        $questionnaireResponse = $response->getPatientEvolutionInstance($questionnaire::getName());
+        $this->assertEquals($expectedValues['scoreValue'], $questionnaireResponse->score->value);
+        $this->assertEquals($expectedValues['interpretationCategory'], $questionnaireResponse->score->interpretation->category);
+        $this->assertEquals($expectedValues['intensity'], $questionnaireResponse->score->interpretation->intensity);
 
-        foreach ($sevenPc->items as $item) {
-            $this->assertEquals($sevenPcQuestionnaireValues[$item->itemCode], $item->value);
+        $questionnaireValues = $questionnaire->asArray()['item'];
+        foreach ($questionnaireResponse->items as $item) {
+            $this->assertEquals($questionnaireValues[$item->itemCode], $item->value);
             $this->assertNotEmpty($item->interpretation);
             $this->assertNotEmpty($item->code->text);
             $this->assertCount(1, $item->code->coding);
