@@ -2,7 +2,9 @@
 
 namespace LegitHealth\MedicalDevice\Common;
 
-final readonly class CodingItem
+use JsonSerializable;
+
+final readonly class CodingItem implements JsonSerializable
 {
     public function __construct(
         public string $code,
@@ -32,5 +34,10 @@ final readonly class CodingItem
             'systemDisplay' => $this->systemDisplay,
             'version' => $this->version,
         ];
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return $this->asArray();
     }
 }

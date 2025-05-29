@@ -25,7 +25,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'aiConfidence' => [
                                     'code' => 'aiConfidence',
-                                    'text' => 'Confidence of the AI model on prediction'
+                                    'text' => 'Confidence of the AI model on prediction',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -36,7 +37,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -47,7 +49,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -58,7 +61,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -69,7 +73,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -80,7 +85,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -91,7 +97,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -102,7 +109,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -113,7 +121,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -124,7 +133,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -135,7 +145,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -146,7 +157,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -157,7 +169,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -168,7 +181,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -179,7 +193,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -190,7 +205,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -201,7 +217,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -212,7 +229,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -223,7 +241,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -234,7 +253,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -245,7 +265,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -256,7 +277,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -267,7 +289,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ],
@@ -278,7 +301,8 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
-                                    'text' => 'Probability of the item being present in the wound as assessed by AI.'
+                                    'text' => 'Probability of the item being present in the wound as assessed by AI.',
+                                    'typeOfValue' => 'percentage'
                                 ]
                             ]
                         ]

@@ -8,6 +8,7 @@ use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\{AiConfidence, Clinica
 use DateTimeImmutable;
 use Dotenv\Dotenv;
 use LegitHealth\MedicalDevice\Common\BearerToken;
+use LegitHealth\MedicalDevice\RequestException;
 use PHPUnit\Framework\TestCase;
 
 class DiagnosisSupportTest extends TestCase
@@ -89,6 +90,34 @@ class DiagnosisSupportTest extends TestCase
             (new DateTimeImmutable())->format('Ymd'),
             $response->issued->format('Ymd')
         );
+    }
+
+    public function testErrorWhenNotBase64()
+    {
+        $fileToUpload1 = $this->currentDir . '/tests/resources/psoriasis_01.jpg';
+        $image1 = file_get_contents($fileToUpload1);
+
+        $diagnosisSupportArguments = new DiagnosisSupportArguments(
+            medias: [
+                'data:image/jpeg;base64,' . base64_encode($image1)
+            ]
+        );
+        try {
+            $this->medicalDeviceClient->diagnosisSupport($diagnosisSupportArguments, $this->bearerToken);
+        } catch (RequestException $requestException) {
+            $this->assertEquals(422, $requestException->statusCode);
+            $detail = $requestException->content['detail'];
+            $this->assertCount(1, $detail);
+            $this->assertEquals('value_error', $detail[0]['type']);
+            $this->assertEquals('Value error, Only base64 data is allowed', $detail[0]['msg']);
+            $this->assertEquals([
+                "body",
+                "payload",
+                0,
+                "contentAttachment",
+                "data"
+            ], $detail[0]['loc']);
+        }
     }
 
     public function assertDiagnosisSupport(array $lesionImages, array $firstConclusionJson): void

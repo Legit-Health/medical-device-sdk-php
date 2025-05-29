@@ -2,19 +2,20 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceArguments\Params;
 
+use JsonSerializable;
 use LegitHealth\MedicalDevice\Common\Code;
 
-readonly class KnownCondition
+readonly class KnownCondition implements JsonSerializable
 {
     public function __construct(
         public Code $conclusion
     ) {}
 
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'conclusion' => $this->conclusion->asArray()
+            'conclusion' => $this->conclusion
         ];
     }
 }

@@ -70,7 +70,7 @@ abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
             base64_encode($image),
             scoringSystem: new ScoringSystems([$questionnaire]),
             knownCondition: new KnownCondition(Code::fromJson([
-                "coding" => [
+                "coding" => $knownCondition['code'] === null ? null : [
                     [
                         "system" => "https://icd.who.int/browse/2025-01/mms/en",
                         "systemDisplay" => "ICD-11",
@@ -108,19 +108,28 @@ abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
         } else {
             foreach ($expectedValues['item'] as $itemCode => $itemValue) {
                 $questionnaireResponseItem = $questionnaireResponse->getEvolutionItem($itemCode);
-                // Complete
-                $this->assertEquals($itemValue['value'], $questionnaireResponseItem->value);
+                if (is_callable($itemValue['value'])) {
+                    $itemValue['value']($questionnaireResponseItem->value);
+                } else {
+                    $this->assertEquals($itemValue['value'], $questionnaireResponseItem->value);
+                }
                 $this->assertEquals($itemValue['interpretation'], $questionnaireResponseItem->interpretation);
                 if (isset($itemValue['additionalData'])) {
                     foreach ($itemValue['additionalData'] as $additionalDataCode => $additionalDataExpected) {
                         $additionalDataValue = match ($additionalDataCode) {
                             'aiConfidence' =>  $questionnaireResponseItem->additionalData->aiConfidence,
-                            'presenceProbability' => $questionnaireResponseItem->additionalData->presenceProbability
+                            'presenceProbability' => $questionnaireResponseItem->additionalData->presenceProbability,
+                            'inflammatoryLesionCount' => $questionnaireResponseItem->additionalData->inflammatoryLesionCount
                         };
                         $this->assertEquals($additionalDataExpected['text'], $additionalDataValue->code->text);
                         $this->assertEquals($additionalDataExpected['code'], $additionalDataValue->code->coding[0]->code);
-                        $this->assertGreaterThanOrEqual(0, $additionalDataValue->value);
-                        $this->assertLessThanOrEqual(100, $additionalDataValue->value);
+
+                        if ($additionalDataExpected['typeOfValue'] === 'scalar') {
+                            $this->assertGreaterThanOrEqual(0, $additionalDataValue->value);
+                        } else if ($additionalDataExpected['typeOfValue'] === 'percentage') {
+                            $this->assertGreaterThanOrEqual(0, $additionalDataValue->value);
+                            $this->assertLessThanOrEqual(100, $additionalDataValue->value);
+                        }
                     }
                 }
                 $this->assertEquals($itemValue['text'], $questionnaireResponseItem->code->text);

@@ -22,7 +22,7 @@ readonly class SeverityAssessmentArguments implements MedicalDeviceArguments
                 ]
             ],
             "bodySite" => $this->bodySiteCode->value,
-            "knownCondition" => $this->knownCondition->asArray(),
+            "knownCondition" => $this->knownCondition,
             "scoringSystem" => $this->scoringSystem->asArray(),
         ];
     }

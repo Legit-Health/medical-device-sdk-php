@@ -2,20 +2,22 @@
 
 namespace LegitHealth\MedicalDevice\Common;
 
-final readonly class Code
+use JsonSerializable;
+
+final readonly class Code implements JsonSerializable
 {
     /**
      * @param CodingItem[] $coding
      */
     public function __construct(
-        public array $coding,
+        public ?array $coding,
         public string $text
     ) {}
 
     public static function fromJson(array $json): self
     {
         return new self(
-            array_map(fn($json) => CodingItem::fromJson($json), $json['coding'] ?? []),
+            isset($json['coding']) ? array_map(fn($json) => CodingItem::fromJson($json), $json['coding']) : null,
             $json['text'],
         );
     }
@@ -26,5 +28,10 @@ final readonly class Code
             'text' => $this->text,
             'coding' => array_map(fn($codingItem) => $codingItem->asArray(), $this->coding)
         ];
+    }
+
+    public function jsonSerialize(): mixed
+    {
+        return $this->asArray();
     }
 }
