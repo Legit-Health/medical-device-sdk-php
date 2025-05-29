@@ -139,7 +139,7 @@ class SingleZoneAscoradTest extends AbstractSeverityAssessmentAutomaticLocalTest
     {
 
         $body = [
-            'bodySite' => 'headLeft',
+            'bodySite' => 'armLeft',
             'payload' => [
                 'contentAttachment' => [
                     'data' => base64_encode(file_get_contents($currentDir . '/tests/resources/dermatitis.jpg')),
