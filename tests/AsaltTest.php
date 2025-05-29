@@ -75,7 +75,7 @@ class AsaltTest extends AbstractSeverityAssessmentAutomaticLocalTest
             'bodySite' => 'headLeft',
             'payload' => [
                 'contentAttachment' => [
-                    'data' => base64_encode(file_get_contents($currentDir . '/tests/resources/vitiligo.jpg')),
+                    'data' => base64_encode(file_get_contents($currentDir . '/tests/resources/alopecia.jpg')),
                 ],
             ],
             'knownCondition' => [

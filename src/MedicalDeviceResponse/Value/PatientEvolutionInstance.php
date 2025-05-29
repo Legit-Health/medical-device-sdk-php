@@ -21,7 +21,7 @@ final readonly class PatientEvolutionInstance
 
     public function getEvolutionItem(string $code): ?EvolutionItem
     {
-        if ($this->item || !isset($this->item['code'])) {
+        if ($this->item === null || !isset($this->item[$code])) {
             return null;
         }
         return $this->item[$code];

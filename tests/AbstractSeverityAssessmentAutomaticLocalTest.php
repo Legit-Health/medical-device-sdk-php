@@ -110,8 +110,20 @@ abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
                 $questionnaireResponseItem = $questionnaireResponse->getEvolutionItem($itemCode);
                 // Complete
                 $this->assertEquals($itemValue['value'], $questionnaireResponseItem->value);
-                $this->assertEquals($itemValue['interpreation'], $questionnaireResponseItem->interpretation);
-                $this->assertEquals($itemCode, $questionnaireResponseItem->code->text);
+                $this->assertEquals($itemValue['interpretation'], $questionnaireResponseItem->interpretation);
+                if (isset($itemValue['additionalData'])) {
+                    foreach ($itemValue['additionalData'] as $additionalDataCode => $additionalDataExpected) {
+                        $additionalDataValue = match ($additionalDataCode) {
+                            'aiConfidence' =>  $questionnaireResponseItem->additionalData->aiConfidence,
+                            'presenceProbability' => $questionnaireResponseItem->additionalData->presenceProbability
+                        };
+                        $this->assertEquals($additionalDataExpected['text'], $additionalDataValue->code->text);
+                        $this->assertEquals($additionalDataExpected['code'], $additionalDataValue->code->coding[0]->code);
+                        $this->assertGreaterThanOrEqual(0, $additionalDataValue->value);
+                        $this->assertLessThanOrEqual(100, $additionalDataValue->value);
+                    }
+                }
+                $this->assertEquals($itemValue['text'], $questionnaireResponseItem->code->text);
                 $this->assertCount(1, $questionnaireResponseItem->code->coding);
                 $this->assertEquals($itemCode, $questionnaireResponseItem->code->coding[0]->code);
             }
