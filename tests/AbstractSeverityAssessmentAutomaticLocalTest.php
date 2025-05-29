@@ -116,11 +116,7 @@ abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
                 $this->assertEquals($itemValue['interpretation'], $questionnaireResponseItem->interpretation);
                 if (isset($itemValue['additionalData'])) {
                     foreach ($itemValue['additionalData'] as $additionalDataCode => $additionalDataExpected) {
-                        $additionalDataValue = match ($additionalDataCode) {
-                            'aiConfidence' =>  $questionnaireResponseItem->additionalData->aiConfidence,
-                            'presenceProbability' => $questionnaireResponseItem->additionalData->presenceProbability,
-                            'inflammatoryLesionCount' => $questionnaireResponseItem->additionalData->inflammatoryLesionCount
-                        };
+                        $additionalDataValue = $questionnaireResponseItem->additionalData[$additionalDataCode];
                         $this->assertEquals($additionalDataExpected['text'], $additionalDataValue->code->text);
                         $this->assertEquals($additionalDataExpected['code'], $additionalDataValue->code->coding[0]->code);
 
@@ -138,19 +134,32 @@ abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
             }
         }
         if ($expectedValues['attachment'] === null) {
-            $this->assertNull($questionnaireResponse->attachment);
+            $this->assertNull($questionnaireResponse->media->attachment);
+        } else {
+            $this->assertCount(\count($expectedValues['attachment']), $questionnaireResponse->media->attachment);
+            foreach ($expectedValues['attachment'] as $attachmentCode => $expectedAttachment) {
+                $attachment = $questionnaireResponse->media->attachment[$attachmentCode] ?? null;
+                $this->assertNotNull($attachment);
+                $this->assertEquals($attachmentCode, $attachment->code);
+                $this->assertEquals($expectedAttachment['title'], $attachment->title);
+                $this->assertEquals($expectedAttachment['width'], $attachment->width);
+                $this->assertEquals($expectedAttachment['height'], $attachment->height);
+                $this->assertNotEmpty($attachment->data);
+                $this->assertEquals('image/jpeg', $attachment->contentType);
+                $this->assertEquals('RGB', $attachment->colorModel);
+            }
         }
-        $this->assertCount(\count($expectedValues['attachment']), $questionnaireResponse->attachment);
-        foreach ($expectedValues['attachment'] as $attachmentCode => $expectedAttachment) {
-            $attachment = $questionnaireResponse->attachment[$attachmentCode] ?? null;
-            $this->assertNotNull($attachment);
-            $this->assertEquals($attachmentCode, $attachment->code);
-            $this->assertEquals($expectedAttachment['title'], $attachment->title);
-            $this->assertEquals($expectedAttachment['width'], $attachment->width);
-            $this->assertEquals($expectedAttachment['height'], $attachment->height);
-            $this->assertNotEmpty($attachment->data);
-            $this->assertEquals('image/jpeg', $attachment->contentType);
-            $this->assertEquals('RGB', $attachment->colorModel);
+
+        if (isset($expectedValues['detection']) && $expectedValues['detection']) {
+            $this->assertGreaterThan(0, $questionnaireResponse->media->detection);
+            $detection = $questionnaireResponse->media->detection[0];
+            $this->assertGreaterThan(0, $detection->confidence);
+            $this->assertGreaterThan(0, $detection->box->p1->x);
+            $this->assertGreaterThan(0, $detection->box->p1->y);
+            $this->assertGreaterThan(0, $detection->box->p2->x);
+            $this->assertGreaterThan(0, $detection->box->p2->y);
+            $this->assertEquals('Wheal', $detection->code->text);
+            $this->assertEquals('wheal', $detection->code->coding[0]->code);
         }
 
         if (isset($expectedValues['globalScoreContribution'])) {

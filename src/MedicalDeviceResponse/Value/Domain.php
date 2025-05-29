@@ -13,7 +13,7 @@ final readonly class Domain
     {
         return new self(
             isDermatological: $json['isDermatological'],
-            additionalData: new DomainAdditionalData(AiConfidence::fromJson($json['additionalData']['aiConfidence']))
+            additionalData: new DomainAdditionalData(AdditionalDataItem::fromJson($json['additionalData']['aiConfidence']))
         );
     }
 }

@@ -2,11 +2,13 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceResponse\Value;
 
+use LegitHealth\MedicalDevice\Common\Code;
+
 final readonly class Detection
 {
     public function __construct(
         public float $confidence,
-        public DetectionCode $code,
+        public Code $code,
         public Box $box
     ) {}
 
@@ -14,7 +16,7 @@ final readonly class Detection
     {
         return new self(
             $json['confidence'],
-            DetectionCode::fromJson($json['code']),
+            Code::fromJson($json['code']),
             new Box(
                 new Point2d($json['box']['x1'], $json['box']['y1']),
                 new Point2d($json['box']['x2'], $json['box']['y2']),

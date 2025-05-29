@@ -14,8 +14,8 @@ final readonly class Modality
         return new self(
             value: ModalityValue::from($json['value']),
             additionalData: new ModalityAdditionalData(
-                aiConfidenceClinical: AiConfidence::fromJson($json['additionalData']['aiConfidenceClinical']),
-                aiConfidenceDermoscopic: AiConfidence::fromJson($json['additionalData']['aiConfidenceDermoscopic'])
+                aiConfidenceClinical: AdditionalDataItem::fromJson($json['additionalData']['aiConfidenceClinical']),
+                aiConfidenceDermoscopic: AdditionalDataItem::fromJson($json['additionalData']['aiConfidenceDermoscopic'])
             )
         );
     }

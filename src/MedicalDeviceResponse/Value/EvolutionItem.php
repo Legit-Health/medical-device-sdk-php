@@ -11,17 +11,13 @@ final readonly class EvolutionItem
         public Code $code,
         public float $value,
         public ?string $interpretation,
-        public ?EvolutionItemAdditionalData $additionalData
+        public ?array $additionalData
     ) {}
 
     public static function fromJson(string $itemCode, array $json): self
     {
-        $getAiConfidence = fn(string $key) => isset($json['additionalData'][$key])
-            ? AiConfidence::fromJson($json['additionalData'][$key])
-            : null;
-
-        $getScalarValue = fn(string $key) => isset($json['additionalData'][$key])
-            ? ScalarValue::fromJson($json['additionalData'][$key])
+        $getAdditionalDataItem = fn(string $key) => isset($json['additionalData'][$key])
+            ? AdditionalDataItem::fromJson($json['additionalData'][$key])
             : null;
 
         return new self(
@@ -29,11 +25,12 @@ final readonly class EvolutionItem
             Code::fromJson($json['code']),
             (float)$json['value'],
             $json['interpretation'] ?? null,
-            isset($json['additionalData']) ? new EvolutionItemAdditionalData(
-                $getAiConfidence('aiConfidence'),
-                $getAiConfidence('presenceProbability'),
-                $getScalarValue('inflammatoryLesionCount')
-            ) : null
+            isset($json['additionalData']) ? array_filter([
+                'aiConfidence' => $getAdditionalDataItem('aiConfidence'),
+                'presenceProbability' => $getAdditionalDataItem('presenceProbability'),
+                'inflammatoryLesionCount' => $getAdditionalDataItem('inflammatoryLesionCount'),
+                'whealsCount' => $getAdditionalDataItem('whealsCount')
+            ], fn($item) => $item !== null) : null
         );
     }
 }

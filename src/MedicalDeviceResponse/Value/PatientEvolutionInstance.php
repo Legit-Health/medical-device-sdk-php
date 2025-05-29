@@ -15,8 +15,7 @@ final readonly class PatientEvolutionInstance
         public ScoringSystemCode $scoringSystemCode,
         public ScoringSystemScore $score,
         public ?array $item,
-        public ?array $attachment,
-        public array $detections
+        public ?PatientEvolutionInstanceMedia $media
     ) {}
 
     public function getEvolutionItem(string $code): ?EvolutionItem

@@ -4,7 +4,7 @@ namespace LegitHealth\MedicalDevice\MedicalDeviceResponse\Value;
 
 use LegitHealth\MedicalDevice\Common\Code;
 
-final readonly class ScalarValue
+final readonly class AdditionalDataItem
 {
     public function __construct(
         public float $value,

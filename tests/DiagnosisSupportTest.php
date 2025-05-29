@@ -4,7 +4,7 @@ namespace LegitHealth\MedicalDevice\Tests;
 
 use LegitHealth\MedicalDevice\MedicalDeviceClient;
 use LegitHealth\MedicalDevice\MedicalDeviceArguments\{DiagnosisSupportArguments, RequestOptions};
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\{AiConfidence, ClinicalIndicator, Conclusion, Domain, Modality, ModalityValue, PerformanceIndicator, Quality};
+use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\{AdditionalDataItem, ClinicalIndicator, Conclusion, Domain, Modality, ModalityValue, PerformanceIndicator, Quality};
 use DateTimeImmutable;
 use Dotenv\Dotenv;
 use LegitHealth\MedicalDevice\Common\BearerToken;
@@ -227,7 +227,7 @@ class DiagnosisSupportTest extends TestCase
         );
     }
 
-    private function assertAiConfidence(AiConfidence $aiConfidence, string $code, string $text): void
+    private function assertAiConfidence(AdditionalDataItem $aiConfidence, string $code, string $text): void
     {
         $this->assertGreaterThanOrEqual(0, $aiConfidence->value);
         $this->assertLessThanOrEqual(100, $aiConfidence->value);

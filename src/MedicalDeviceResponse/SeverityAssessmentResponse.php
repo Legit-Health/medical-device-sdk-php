@@ -10,6 +10,7 @@ use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\{
     EvolutionItem,
     MediaValidity,
     PatientEvolutionInstance,
+    PatientEvolutionInstanceMedia,
     ScoringSystemScore,
 };
 
@@ -60,8 +61,7 @@ readonly class SeverityAssessmentResponse
                 ScoringSystemCode::from($scoringSystemCode),
                 ScoringSystemScore::fromJson($patientEvolutionInstance['score']),
                 $evolutionItems,
-                $attachments,
-                $detections
+                new PatientEvolutionInstanceMedia($attachments, $detections)
             );
         }
         return new self(
