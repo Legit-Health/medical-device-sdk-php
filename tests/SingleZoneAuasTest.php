@@ -2,7 +2,6 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\AsaltQuestionnaire;
 use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\BodySiteCode;
 use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\SingleZoneAuasQuestionnaire;
 use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
@@ -49,7 +48,7 @@ class SingleZoneAuasTest extends AbstractSeverityAssessmentAutomaticLocalTest
                     ],
                     'detection' => true
                 ],
-                BodySiteCode::HeadLeft
+                BodySiteCode::ArmLeft
             ]
         ];
     }
@@ -63,10 +62,10 @@ class SingleZoneAuasTest extends AbstractSeverityAssessmentAutomaticLocalTest
     {
 
         $body = [
-            'bodySite' => 'headLeft',
+            'bodySite' => 'armLeft',
             'payload' => [
                 'contentAttachment' => [
-                    'data' => base64_encode(file_get_contents($currentDir . '/tests/resources/alopecia.jpg')),
+                    'data' => base64_encode(file_get_contents($currentDir . '/tests/resources/urticaria.jpg')),
                 ],
             ],
             'knownCondition' => [
@@ -75,14 +74,14 @@ class SingleZoneAuasTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         'system' => 'https://icd.who.int/browse/2025-01/mms/en',
                         'systemDisplay' => 'ICD-11',
                         'version' => '2025-01',
-                        'code' => 'ED70',
-                        'display' => 'Alopecia or hair loss',
+                        'code' => 'EB05',
+                        'display' => 'Urticaria of unspecified type',
                     ]],
-                    'text' => 'Alopecia',
+                    'text' => 'Urticaria',
                 ]
             ],
             'scoringSystem'  => [
-                AsaltQuestionnaire::getName() => new AsaltQuestionnaire()->jsonSerialize()
+                SingleZoneAuasQuestionnaire::getName() => new SingleZoneAuasQuestionnaire(3)->jsonSerialize()
             ],
         ];
 

@@ -16,21 +16,20 @@ final readonly class EvolutionItem
 
     public static function fromJson(string $itemCode, array $json): self
     {
-        $getAdditionalDataItem = fn(string $key) => isset($json['additionalData'][$key])
-            ? AdditionalDataItem::fromJson($json['additionalData'][$key])
-            : null;
+        $additionalData = null;
+        if (isset($json['additionalData'])) {
+            $additionalData = [];
+            foreach ($json['additionalData'] as $additionalDataItemCode => $additionalDataItem) {
+                $additionalData[$additionalDataItemCode] = AdditionalDataItem::fromJson($additionalDataItem);
+            }
+        }
 
         return new self(
             $itemCode,
             Code::fromJson($json['code']),
             (float)$json['value'],
             $json['interpretation'] ?? null,
-            isset($json['additionalData']) ? array_filter([
-                'aiConfidence' => $getAdditionalDataItem('aiConfidence'),
-                'presenceProbability' => $getAdditionalDataItem('presenceProbability'),
-                'inflammatoryLesionCount' => $getAdditionalDataItem('inflammatoryLesionCount'),
-                'whealsCount' => $getAdditionalDataItem('whealsCount')
-            ], fn($item) => $item !== null) : null
+            $additionalData
         );
     }
 }

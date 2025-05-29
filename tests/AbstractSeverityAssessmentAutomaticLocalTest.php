@@ -113,7 +113,7 @@ abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
                 } else {
                     $this->assertEquals($itemValue['value'], $questionnaireResponseItem->value);
                 }
-                $this->assertEquals($itemValue['interpretation'], $questionnaireResponseItem->interpretation);
+                $this->assertEquals($itemValue['interpretation'] ?? null, $questionnaireResponseItem->interpretation);
                 if (isset($itemValue['additionalData'])) {
                     foreach ($itemValue['additionalData'] as $additionalDataCode => $additionalDataExpected) {
                         $additionalDataValue = $questionnaireResponseItem->additionalData[$additionalDataCode];
