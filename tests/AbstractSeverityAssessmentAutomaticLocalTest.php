@@ -150,7 +150,9 @@ abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
             }
         }
 
-        if (isset($expectedValues['detection']) && $expectedValues['detection']) {
+        if (isset($expectedValues['detection'])) {
+            $expectedCodes = array_keys($expectedValues['detection']);
+            $expectedTexts = array_values($expectedValues['detection']);
             $this->assertGreaterThan(0, $questionnaireResponse->media->detection);
             $detection = $questionnaireResponse->media->detection[0];
             $this->assertGreaterThan(0, $detection->confidence);
@@ -158,8 +160,8 @@ abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
             $this->assertGreaterThan(0, $detection->box->p1->y);
             $this->assertGreaterThan(0, $detection->box->p2->x);
             $this->assertGreaterThan(0, $detection->box->p2->y);
-            $this->assertEquals('Wheal', $detection->code->text);
-            $this->assertEquals('wheal', $detection->code->coding[0]->code);
+            $this->assertContains($detection->code->text, $expectedTexts);
+            $this->assertContains($detection->code->coding[0]->code, $expectedCodes);
         }
 
         if (isset($expectedValues['globalScoreContribution'])) {

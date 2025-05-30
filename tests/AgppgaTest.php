@@ -60,7 +60,7 @@ class AgppgaTest extends AbstractSeverityAssessmentAutomaticLocalTest
                     'intensity' => Intensity::Moderate,
                     'attachment' => null
                 ],
-                BodySiteCode::HeadLeft
+                BodySiteCode::ArmLeft
             ]
         ];
     }
@@ -74,7 +74,7 @@ class AgppgaTest extends AbstractSeverityAssessmentAutomaticLocalTest
     {
 
         $body = [
-            'bodySite' => 'headLeft',
+            'bodySite' => 'armLeft',
             'payload' => [
                 'contentAttachment' => [
                     'data' => base64_encode(file_get_contents($currentDir . '/tests/resources/pustular_psoriasis.jpg')),

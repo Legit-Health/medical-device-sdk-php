@@ -46,7 +46,7 @@ class SingleZoneAuasTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'width' => 701
                         ]
                     ],
-                    'detection' => true
+                    'detection' => ['wheal' => 'Wheal']
                 ],
                 BodySiteCode::ArmLeft
             ]
