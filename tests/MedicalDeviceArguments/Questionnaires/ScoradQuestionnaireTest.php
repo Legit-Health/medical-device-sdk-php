@@ -407,22 +407,22 @@ class ScoradQuestionnaireTest extends TestCase
         $this->assertTrue($exceptionIsThrown);
     }
 
-    public function testToArray()
+    public function testJsonSerialize()
     {
         $scoradLocalQuestionnaire = new ScoradQuestionnaire(25, 0, 1, 2, 3, 0, 1, 5, 6);
-        $arr = $scoradLocalQuestionnaire->toArray();
+        $arr = $scoradLocalQuestionnaire->jsonSerialize();
 
-        $this->assertCount(9, $arr['item']);
+        $this->assertCount(9, $arr['questionnaireResponse']['item']);
 
-        $this->assertEquals(25, $arr['item']['surface']);
-        $this->assertEquals(0, $arr['item']['erythema']);
-        $this->assertEquals(1, $arr['item']['swelling']);
-        $this->assertEquals(2, $arr['item']['crusting']);
-        $this->assertEquals(3, $arr['item']['excoriation']);
-        $this->assertEquals(0, $arr['item']['lichenification']);
-        $this->assertEquals(1, $arr['item']['dryness']);
-        $this->assertEquals(5, $arr['item']['itchiness']);
-        $this->assertEquals(6, $arr['item']['sleeplessness']);
+        $this->assertEquals(25, $arr['questionnaireResponse']['item']['surface']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['erythema']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['swelling']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['crusting']);
+        $this->assertEquals(3, $arr['questionnaireResponse']['item']['excoriation']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['lichenification']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['dryness']);
+        $this->assertEquals(5, $arr['questionnaireResponse']['item']['itchiness']);
+        $this->assertEquals(6, $arr['questionnaireResponse']['item']['sleeplessness']);
     }
 
     public function testGetName()

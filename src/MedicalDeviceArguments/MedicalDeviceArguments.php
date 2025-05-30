@@ -2,7 +2,6 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceArguments;
 
-interface MedicalDeviceArguments
-{
-    public function asArray(): array;
-}
+use JsonSerializable;
+
+interface MedicalDeviceArguments extends JsonSerializable {}

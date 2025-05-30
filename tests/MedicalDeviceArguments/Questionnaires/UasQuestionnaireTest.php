@@ -77,15 +77,15 @@ class UasQuestionnaireTest extends TestCase
         $this->assertTrue($exceptionIsThrown);
     }
 
-    public function testToArray()
+    public function testJsonSerialize()
     {
         $auasLocalQuestionnaire = new UasQuestionnaire(3, 2);
-        $arr = $auasLocalQuestionnaire->toArray();
+        $arr = $auasLocalQuestionnaire->jsonSerialize();
 
-        $this->assertCount(2, $arr['item']);
+        $this->assertCount(2, $arr['questionnaireResponse']['item']);
 
-        $this->assertEquals(3, $arr['item']['itchiness']);
-        $this->assertEquals(2, $arr['item']['hive']);
+        $this->assertEquals(3, $arr['questionnaireResponse']['item']['itchiness']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['hive']);
     }
 
     public function testGetName()

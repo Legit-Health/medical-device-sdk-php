@@ -2,7 +2,9 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceArguments\Params;
 
-readonly final class ScoringSystems
+use JsonSerializable;
+
+readonly final class ScoringSystems implements JsonSerializable
 {
     /**
      * @param Questionnaire[] $questionnaires
@@ -16,7 +18,7 @@ readonly final class ScoringSystems
         return new self([]);
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         $json = [];
         foreach ($this->questionnaires as $questionnaire) {

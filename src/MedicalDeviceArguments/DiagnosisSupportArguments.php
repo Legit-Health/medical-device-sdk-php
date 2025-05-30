@@ -18,7 +18,7 @@ readonly class DiagnosisSupportArguments implements MedicalDeviceArguments
         }
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         $json = [
             "payload" => array_map(fn($attachment) => [

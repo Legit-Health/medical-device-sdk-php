@@ -55,25 +55,25 @@ class PgaQuestionnaireTest extends TestCase
         }
     }
 
-    public function testToArray()
+    public function testJsonSerialize()
     {
         $pgaQuestionnaire = new PgaQuestionnaire(0, 1, 1);
-        $arr = $pgaQuestionnaire->toArray();
+        $arr = $pgaQuestionnaire->jsonSerialize();
 
-        $this->assertCount(3, $arr['item']);
+        $this->assertCount(3, $arr['questionnaireResponse']['item']);
 
-        $this->assertEquals(0, $arr['item']['erythema']);
-        $this->assertEquals(1, $arr['item']['desquamation']);
-        $this->assertEquals(1, $arr['item']['induration']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['erythema']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['desquamation']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['induration']);
 
         $pgaQuestionnaire = new PgaQuestionnaire(4, 2, 0);
-        $arr = $pgaQuestionnaire->toArray();
+        $arr = $pgaQuestionnaire->jsonSerialize();
 
-        $this->assertCount(3, $arr['item']);
+        $this->assertCount(3, $arr['questionnaireResponse']['item']);
 
-        $this->assertEquals(4, $arr['item']['erythema']);
-        $this->assertEquals(2, $arr['item']['desquamation']);
-        $this->assertEquals(0, $arr['item']['induration']);
+        $this->assertEquals(4, $arr['questionnaireResponse']['item']['erythema']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['desquamation']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['induration']);
     }
 
     public function testGetName()

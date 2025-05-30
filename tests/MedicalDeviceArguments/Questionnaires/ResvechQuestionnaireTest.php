@@ -116,7 +116,7 @@ class ResvechQuestionnaireTest extends TestCase
             $this->assertTrue($exceptionIsThrown);
         }
     }
-    public function testToArray()
+    public function testJsonSerialize()
     {
         $questionnaire = new ResvechQuestionnaire(
             0,
@@ -142,32 +142,32 @@ class ResvechQuestionnaireTest extends TestCase
             0,
             1
         );
-        $arr = $questionnaire->toArray();
+        $arr = $questionnaire->jsonSerialize();
 
-        $this->assertCount(22, $arr['item']);
+        $this->assertCount(22, $arr['questionnaireResponse']['item']);
 
-        $this->assertEquals(0, $arr['item']['woundDimensions']);
-        $this->assertEquals(1, $arr['item']['tissues']);
-        $this->assertEquals(2, $arr['item']['edges']);
-        $this->assertEquals(3, $arr['item']['tissueInWoundBed']);
-        $this->assertEquals(4, $arr['item']['exudate']);
-        $this->assertEquals(0, $arr['item']['frequencyOfPain']);
-        $this->assertEquals(1, $arr['item']['macerationAroundWound']);
-        $this->assertEquals(2, $arr['item']['tunneling']);
-        $this->assertEquals(3, $arr['item']['increasingPain']);
-        $this->assertEquals(4, $arr['item']['erythemaAroundWound']);
-        $this->assertEquals(0, $arr['item']['edemaAroundWound']);
-        $this->assertEquals(1, $arr['item']['temperatureRise']);
-        $this->assertEquals(2, $arr['item']['increasingExudate']);
-        $this->assertEquals(1, $arr['item']['purulentExudate']);
-        $this->assertEquals(4, $arr['item']['tissueFriableOrBleedsEasily']);
-        $this->assertEquals(0, $arr['item']['stationaryWound']);
-        $this->assertEquals(1, $arr['item']['biofilmCompatibleTissue']);
-        $this->assertEquals(2, $arr['item']['odor']);
-        $this->assertEquals(3, $arr['item']['hypergranulation']);
-        $this->assertEquals(4, $arr['item']['increasingWound']);
-        $this->assertEquals(0, $arr['item']['satelliteLesions']);
-        $this->assertEquals(1, $arr['item']['tissuePaleness']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['woundDimensions']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['tissues']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['edges']);
+        $this->assertEquals(3, $arr['questionnaireResponse']['item']['tissueInWoundBed']);
+        $this->assertEquals(4, $arr['questionnaireResponse']['item']['exudate']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['frequencyOfPain']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['macerationAroundWound']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['tunneling']);
+        $this->assertEquals(3, $arr['questionnaireResponse']['item']['increasingPain']);
+        $this->assertEquals(4, $arr['questionnaireResponse']['item']['erythemaAroundWound']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['edemaAroundWound']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['temperatureRise']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['increasingExudate']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['purulentExudate']);
+        $this->assertEquals(4, $arr['questionnaireResponse']['item']['tissueFriableOrBleedsEasily']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['stationaryWound']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['biofilmCompatibleTissue']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['odor']);
+        $this->assertEquals(3, $arr['questionnaireResponse']['item']['hypergranulation']);
+        $this->assertEquals(4, $arr['questionnaireResponse']['item']['increasingWound']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['satelliteLesions']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['tissuePaleness']);
     }
 
     public function testGetName()

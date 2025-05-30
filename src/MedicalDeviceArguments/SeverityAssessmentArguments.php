@@ -13,7 +13,7 @@ readonly class SeverityAssessmentArguments implements MedicalDeviceArguments
         public ScoringSystems $scoringSystem = new ScoringSystems([])
     ) {}
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
             "payload" => [
@@ -23,7 +23,7 @@ readonly class SeverityAssessmentArguments implements MedicalDeviceArguments
             ],
             "bodySite" => $this->bodySiteCode->value,
             "knownCondition" => $this->knownCondition,
-            "scoringSystem" => $this->scoringSystem->asArray(),
+            "scoringSystem" => $this->scoringSystem
         ];
     }
 }

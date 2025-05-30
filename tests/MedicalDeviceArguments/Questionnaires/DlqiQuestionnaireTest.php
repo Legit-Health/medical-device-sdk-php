@@ -76,22 +76,22 @@ class DlqiQuestionnaireTest extends TestCase
         }
     }
 
-    public function testToArray()
+    public function testJsonSerialize()
     {
         $dlqiQuestionnaire = new DlqiQuestionnaire(1, 2, 3, 1, 2, 3, 1, 2, 3, 1);
-        $arr = $dlqiQuestionnaire->asArray();
+        $arr = $dlqiQuestionnaire->jsonSerialize();
 
-        $this->assertCount(10, $arr['item']);
-        $this->assertEquals(1, $arr['item']['question1']);
-        $this->assertEquals(2, $arr['item']['question2']);
-        $this->assertEquals(3, $arr['item']['question3']);
-        $this->assertEquals(1, $arr['item']['question4']);
-        $this->assertEquals(2, $arr['item']['question5']);
-        $this->assertEquals(3, $arr['item']['question6']);
-        $this->assertEquals(1, $arr['item']['question7']);
-        $this->assertEquals(2, $arr['item']['question8']);
-        $this->assertEquals(3, $arr['item']['question9']);
-        $this->assertEquals(1, $arr['item']['question10']);
+        $this->assertCount(10, $arr['questionnaireResponse']['item']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['question1']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['question2']);
+        $this->assertEquals(3, $arr['questionnaireResponse']['item']['question3']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['question4']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['question5']);
+        $this->assertEquals(3, $arr['questionnaireResponse']['item']['question6']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['question7']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['question8']);
+        $this->assertEquals(3, $arr['questionnaireResponse']['item']['question9']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['question10']);
     }
 
     public function testGetName()

@@ -11,13 +11,13 @@ class SevenPcQuestionnaireTest extends TestCase
     public function testValidate()
     {
         $questionsOrder = [
-            'irregularSize',
+            'changeInSize',
             'irregularPigmentation',
             'irregularBorder',
             'inflammation',
             'largerThanOtherLesions',
-            'itchOrAltered',
-            'crustedOrBleeding'
+            'itchOrAlteredSensation',
+            'crustingOrBleeding'
         ];
         $exceptionIsThrown = false;
         try {
@@ -82,20 +82,20 @@ class SevenPcQuestionnaireTest extends TestCase
         }
     }
 
-    public function testToArray()
+    public function testJsonSerialize()
     {
         $questionnaire = new SevenPCQuestionnaire(0, 1, 0, 1, 0, 1, 0);
-        $arr = $questionnaire->toArray();
+        $arr = $questionnaire->jsonSerialize();
 
-        $this->assertCount(7, $arr['item']);
+        $this->assertCount(7, $arr['questionnaireResponse']['item']);
 
-        $this->assertEquals(0, $arr['item']['irregularSize']);
-        $this->assertEquals(1, $arr['item']['irregularPigmentation']);
-        $this->assertEquals(0, $arr['item']['irregularBorder']);
-        $this->assertEquals(1, $arr['item']['inflammation']);
-        $this->assertEquals(0, $arr['item']['largerThanOtherLesions']);
-        $this->assertEquals(1, $arr['item']['itchOrAltered']);
-        $this->assertEquals(0, $arr['item']['crustedOrBleeding']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['changeInSize']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['irregularPigmentation']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['irregularBorder']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['inflammation']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['largerThanOtherLesions']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['itchOrAlteredSensation']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['crustingOrBleeding']);
     }
 
     public function testGetName()

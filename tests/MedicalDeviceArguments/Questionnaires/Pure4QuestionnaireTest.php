@@ -80,17 +80,17 @@ class Pure4QuestionnaireTest extends TestCase
         }
     }
 
-    public function testToArray()
+    public function testJsonSerialize()
     {
         $pure4Questionnaire = new Pure4Questionnaire(0, 1, 0, 1);
-        $arr = $pure4Questionnaire->toArray();
+        $arr = $pure4Questionnaire->jsonSerialize();
 
-        $this->assertCount(4, $arr['item']);
+        $this->assertCount(4, $arr['questionnaireResponse']['item']);
 
-        $this->assertEquals(0, $arr['item']['question1']);
-        $this->assertEquals(1, $arr['item']['question2']);
-        $this->assertEquals(0, $arr['item']['question3']);
-        $this->assertEquals(1, $arr['item']['question4']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['question1']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['question2']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['question3']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['question4']);
 
         $pure4Questionnaire = new Pure4Questionnaire(...[
             'question1' => 1,
@@ -98,14 +98,14 @@ class Pure4QuestionnaireTest extends TestCase
             'question3' => 1,
             'question4' => 0,
         ]);
-        $arr = $pure4Questionnaire->toArray();
+        $arr = $pure4Questionnaire->jsonSerialize();
 
-        $this->assertCount(4, $arr['item']);
+        $this->assertCount(4, $arr['questionnaireResponse']['item']);
 
-        $this->assertEquals(1, $arr['item']['question1']);
-        $this->assertEquals(0, $arr['item']['question2']);
-        $this->assertEquals(1, $arr['item']['question3']);
-        $this->assertEquals(0, $arr['item']['question4']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['question1']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['question2']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['question3']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['question4']);
     }
 
 

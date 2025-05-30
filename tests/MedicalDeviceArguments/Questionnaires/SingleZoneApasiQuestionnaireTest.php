@@ -35,12 +35,12 @@ class SingleZoneApasiQuestionnaireTest extends TestCase
         $this->assertTrue($exceptionIsThrown);
     }
 
-    public function testToArray()
+    public function testJsonSerialize()
     {
         $apasiLocalQuestionnaire = new SingleZoneApasiQuestionnaire(5);
-        $arr = $apasiLocalQuestionnaire->toArray();
-        $this->assertEquals(5, $arr['item']['surface']);
-        $this->assertCount(1, array_keys($arr['item']));
+        $arr = $apasiLocalQuestionnaire->jsonSerialize();
+        $this->assertEquals(5, $arr['questionnaireResponse']['item']['surface']);
+        $this->assertCount(1, array_keys($arr['questionnaireResponse']['item']));
     }
 
     public function testGetName()

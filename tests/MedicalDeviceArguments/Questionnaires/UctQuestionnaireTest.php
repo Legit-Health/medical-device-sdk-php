@@ -115,17 +115,17 @@ class UctQuestionnaireTest extends TestCase
         $this->assertTrue($exceptionIsThrown);
     }
 
-    public function testToArray()
+    public function testJsonSerialize()
     {
         $uctQuestionnaire = new UctQuestionnaire(1, 2, 0, 4);
-        $arr = $uctQuestionnaire->toArray();
+        $arr = $uctQuestionnaire->jsonSerialize();
 
-        $this->assertCount(4, $arr['item']);
+        $this->assertCount(4, $arr['questionnaireResponse']['item']);
 
-        $this->assertEquals(1, $arr['item']['physicalSymptoms']);
-        $this->assertEquals(2, $arr['item']['qualityOfLife']);
-        $this->assertEquals(0, $arr['item']['treatmentNotEnough']);
-        $this->assertEquals(4, $arr['item']['overallUnderControl']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['physicalSymptoms']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['qualityOfLife']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['treatmentNotEnough']);
+        $this->assertEquals(4, $arr['questionnaireResponse']['item']['overallUnderControl']);
     }
 
     public function testGetName()

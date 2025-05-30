@@ -85,7 +85,7 @@ final class MedicalDeviceClient
     {
         try {
             $response = $this->httpClient->request('POST', $path, [
-                'json' => $arguments->asArray(),
+                'json' => $arguments,
                 'headers' => [
                     'Authorization' => $bearerToken->asAuthorizationHeader()
                 ],

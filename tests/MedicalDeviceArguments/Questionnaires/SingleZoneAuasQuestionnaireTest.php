@@ -43,13 +43,13 @@ class SingleZoneAuasQuestionnaireTest extends TestCase
         $this->assertTrue($exceptionIsThrown);
     }
 
-    public function testToArray()
+    public function testJsonSerialize()
     {
         $auasLocalQuestionnaire = new SingleZoneAuasQuestionnaire(3);
-        $arr = $auasLocalQuestionnaire->toArray();
+        $arr = $auasLocalQuestionnaire->jsonSerialize();
 
-        $this->assertCount(1, array_keys($arr['item']));
-        $this->assertEquals(3, $arr['item']['pruritus']);
+        $this->assertCount(1, array_keys($arr['questionnaireResponse']['item']));
+        $this->assertEquals(3, $arr['questionnaireResponse']['item']['pruritus']);
     }
 
     public function testGetName()

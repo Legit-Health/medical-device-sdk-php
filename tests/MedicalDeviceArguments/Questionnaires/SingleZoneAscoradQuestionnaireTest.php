@@ -119,14 +119,14 @@ class SingleZoneAscoradQuestionnaireTest extends TestCase
         $this->assertTrue($exceptionIsThrown);
     }
 
-    public function testToArray()
+    public function testJsonSerialize()
     {
         $singleZoneAscoradQuestionnaire = new SingleZoneAscoradQuestionnaire(27, 2, 1);
-        $arr = $singleZoneAscoradQuestionnaire->toArray();
-        $this->assertCount(3, array_keys($arr['item']));
-        $this->assertEquals(27, $arr['item']['surface']);
-        $this->assertEquals(2, $arr['item']['pruritus']);
-        $this->assertEquals(1, $arr['item']['sleeplessness']);
+        $arr = $singleZoneAscoradQuestionnaire->jsonSerialize();
+        $this->assertCount(3, array_keys($arr['questionnaireResponse']['item']));
+        $this->assertEquals(27, $arr['questionnaireResponse']['item']['surface']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['pruritus']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['sleeplessness']);
     }
 
     public function testGetName()

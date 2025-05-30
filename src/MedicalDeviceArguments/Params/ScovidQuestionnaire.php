@@ -33,20 +33,22 @@ readonly class ScovidQuestionnaire extends Questionnaire
         return ScoringSystemCode::Scovid->value;
     }
 
-    public function asArray(): array
+    public function jsonSerialize(): mixed
     {
         return [
-            'item' => [
-                'pain' => $this->pain,
-                'itchiness' => $this->itchiness,
-                'fever' => $this->fever,
-                'cough' => $this->cough,
-                'cephalea' => $this->cephalea,
-                'myalgiaOrArthralgia' => $this->myalgiaOrArthralgia,
-                'malaise' => $this->malaise,
-                'lossOfTasteOrOlfactory' => $this->lossOfTasteOrOlfactory,
-                'shortnessOfBreath' => $this->shortnessOfBreath,
-                'otherSkinProblems' => $this->otherSkinProblems,
+            'questionnaireResponse' => [
+                'item' => [
+                    'pain' => $this->pain,
+                    'itchiness' => $this->itchiness,
+                    'fever' => $this->fever,
+                    'cough' => $this->cough,
+                    'cephalea' => $this->cephalea,
+                    'myalgiaOrArthralgia' => $this->myalgiaOrArthralgia,
+                    'malaise' => $this->malaise,
+                    'lossOfTasteOrOlfactory' => $this->lossOfTasteOrOlfactory,
+                    'shortnessOfBreath' => $this->shortnessOfBreath,
+                    'otherSkinProblems' => $this->otherSkinProblems,
+                ]
             ]
         ];
     }

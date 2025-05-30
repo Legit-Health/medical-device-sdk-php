@@ -162,17 +162,17 @@ class PasiQuestionnaireTest extends TestCase
         $this->assertTrue($exceptionIsThrown);
     }
 
-    public function testToArray()
+    public function testJsonSerialize()
     {
         $pasiLocalQuestionnaire = new PasiQuestionnaire(5, 1, 2, 3);
-        $arr = $pasiLocalQuestionnaire->toArray();
+        $arr = $pasiLocalQuestionnaire->jsonSerialize();
 
-        $this->assertCount(4, $arr['item']);
+        $this->assertCount(4, $arr['questionnaireResponse']['item']);
 
-        $this->assertEquals(5, $arr['item']['surface']);
-        $this->assertEquals(1, $arr['item']['erythema']);
-        $this->assertEquals(2, $arr['item']['induration']);
-        $this->assertEquals(3, $arr['item']['desquamation']);
+        $this->assertEquals(5, $arr['questionnaireResponse']['item']['surface']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['erythema']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['induration']);
+        $this->assertEquals(3, $arr['questionnaireResponse']['item']['desquamation']);
     }
 
     public function testGetName()

@@ -53,27 +53,27 @@ class GagsQuestionnaireTest extends TestCase
         }
     }
 
-    public function testToArray()
+    public function testJsonSerialize()
     {
         $gagsQuestionnaire = new GagsQuestionnaire(0, 1, 2, 3, 4, 1);
-        $arr = $gagsQuestionnaire->toArray();
+        $arr = $gagsQuestionnaire->jsonSerialize();
 
-        $this->assertEquals(0, $arr['item']['forehead']);
-        $this->assertEquals(1, $arr['item']['rightCheek']);
-        $this->assertEquals(2, $arr['item']['leftCheek']);
-        $this->assertEquals(3, $arr['item']['nose']);
-        $this->assertEquals(4, $arr['item']['chin']);
-        $this->assertEquals(1, $arr['item']['chestAndUpperBack']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['forehead']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['rightCheek']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['leftCheek']);
+        $this->assertEquals(3, $arr['questionnaireResponse']['item']['nose']);
+        $this->assertEquals(4, $arr['questionnaireResponse']['item']['chin']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['chestAndUpperBack']);
 
         $gagsQuestionnaire = new GagsQuestionnaire(4, 3, 2, 1, 0, 4);
-        $arr = $gagsQuestionnaire->toArray();
+        $arr = $gagsQuestionnaire->jsonSerialize();
 
-        $this->assertEquals(4, $arr['item']['forehead']);
-        $this->assertEquals(3, $arr['item']['rightCheek']);
-        $this->assertEquals(2, $arr['item']['leftCheek']);
-        $this->assertEquals(1, $arr['item']['nose']);
-        $this->assertEquals(0, $arr['item']['chin']);
-        $this->assertEquals(4, $arr['item']['chestAndUpperBack']);
+        $this->assertEquals(4, $arr['questionnaireResponse']['item']['forehead']);
+        $this->assertEquals(3, $arr['questionnaireResponse']['item']['rightCheek']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['leftCheek']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['nose']);
+        $this->assertEquals(0, $arr['questionnaireResponse']['item']['chin']);
+        $this->assertEquals(4, $arr['questionnaireResponse']['item']['chestAndUpperBack']);
     }
 
     public function testGetName()
