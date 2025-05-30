@@ -3,10 +3,10 @@
 namespace LegitHealth\MedicalDevice\Tests;
 
 use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\BodySiteCode;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\SingleZoneAscoradQuestionnaire;
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\SingleZoneAeasiQuestionnaire;
 use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
 
-class SingleZoneAscoradTest extends AbstractSeverityAssessmentAutomaticLocalTest
+class SingleZoneAeasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
 
     protected static function getRequestValues(): array
@@ -14,24 +14,17 @@ class SingleZoneAscoradTest extends AbstractSeverityAssessmentAutomaticLocalTest
         return [
             [
                 '/tests/resources/dermatitis.jpg',
-                new SingleZoneAscoradQuestionnaire(60, 5, 7),
+                new SingleZoneAeasiQuestionnaire(60, 40),
                 ["code" => "EA89", "display" => "Generalised eczematous dermatitis of unspecified type", "text" => "Eczematous dermatitis"],
                 [
                     'item' => [
                         "surface" => [
-                            'value' => 60,
-                            'text' => 'Percentage of the body zone\'s surface area affected by the lesion.',
-                            'additionalData' => [
-                                'surfaceAreaOverBsa' => [
-                                    'code' => 'surfaceAreaOverBsa',
-                                    'text' => 'Affected surface area as a percentage of the whole body',
-                                    'typeOfValue' => 'scalar'
-                                ]
-                            ]
+                            'value' => 4,
+                            'text' => 'Surface area score'
                         ],
-                        "crusting" => [
+                        "redness" => [
                             'value' => 2,
-                            'text' => 'Crusting',
+                            'text' => 'Redness',
                             'additionalData' => [
                                 'aiConfidence' => [
                                     'code' => 'aiConfidence',
@@ -40,20 +33,9 @@ class SingleZoneAscoradTest extends AbstractSeverityAssessmentAutomaticLocalTest
                                 ]
                             ]
                         ],
-                        "dryness" => [
-                            'value' => 1,
-                            'text' => 'Dryness',
-                            'additionalData' => [
-                                'aiConfidence' => [
-                                    'code' => 'aiConfidence',
-                                    'text' => 'Confidence of the AI model on prediction',
-                                    'typeOfValue' => 'percentage'
-                                ]
-                            ]
-                        ],
-                        "erythema" => [
+                        "thickness" => [
                             'value' => 2,
-                            'text' => 'Erythema',
+                            'text' => 'Thickness',
                             'additionalData' => [
                                 'aiConfidence' => [
                                     'code' => 'aiConfidence',
@@ -62,9 +44,9 @@ class SingleZoneAscoradTest extends AbstractSeverityAssessmentAutomaticLocalTest
                                 ]
                             ]
                         ],
-                        "excoriation" => [
+                        "scratching" => [
                             'value' => 0,
-                            'text' => 'Excoriation',
+                            'text' => 'Scratching',
                             'additionalData' => [
                                 'aiConfidence' => [
                                     'code' => 'aiConfidence',
@@ -83,38 +65,20 @@ class SingleZoneAscoradTest extends AbstractSeverityAssessmentAutomaticLocalTest
                                     'typeOfValue' => 'percentage'
                                 ]
                             ]
-                        ],
-                        "swelling" => [
-                            'value' => 2,
-                            'text' => 'Swelling',
-                            'additionalData' => [
-                                'aiConfidence' => [
-                                    'code' => 'aiConfidence',
-                                    'text' => 'Confidence of the AI model on prediction',
-                                    'typeOfValue' => 'percentage'
-                                ]
-                            ]
-                        ],
-                        "pruritus" => [
-                            'value' => 5,
-                            'text' => 'Pruritus'
-                        ],
-                        "sleeplessness" => [
-                            'value' => 7,
-                            'text' => 'Sleeplessness'
                         ]
                     ],
-                    'scoreValue' => fn(float $value) => self::assertGreaterThan(40, $value),
-                    'interpretationCategory' => 'Severe',
-                    'intensity' => Intensity::High,
+                    'scoreValue' => fn(float $value) => self::assertGreaterThan(15, $value),
+                    'interpretationCategory' => 'Moderate',
+                    'intensity' => Intensity::Moderate,
+                    'globalScoreContribution' => fn(float $value) => self::assertGreaterThanOrEqual(3, $value),
                     'attachment' => [
                         'maskRaw' => [
-                            'title' => 'Lesion mask raw',
+                            'title' => 'Eczema mask raw',
                             'height' => 350,
                             'width' => 650
                         ],
                         'maskBinary' => [
-                            'title' => 'Lesion mask binary',
+                            'title' => 'Eczema mask binary',
                             'height' => 350,
                             'width' => 650
                         ],
@@ -133,18 +97,14 @@ class SingleZoneAscoradTest extends AbstractSeverityAssessmentAutomaticLocalTest
     protected static function getSpecificMissingFields(): array
     {
         return [
-            'scoringSystem.ascorad.questionnaireResponse.item.surface is required' => [
-                'path' => 'scoringSystem.ascorad.questionnaireResponse.item.surface',
-                'expectedDetail' => ['loc' => ['body', 'scoringSystem', 'ascorad', 'questionnaireResponse', 'item', 'surface']],
+            'scoringSystem.aeasi.questionnaireResponse.item.surface is required' => [
+                'path' => 'scoringSystem.aeasi.questionnaireResponse.item.surface',
+                'expectedDetail' => ['loc' => ['body', 'scoringSystem', 'aeasi', 'questionnaireResponse', 'item', 'surface']],
             ],
-            'scoringSystem.ascorad.questionnaireResponse.item.pruritus is required' => [
-                'path' => 'scoringSystem.ascorad.questionnaireResponse.item.pruritus',
-                'expectedDetail' => ['loc' => ['body', 'scoringSystem', 'ascorad', 'questionnaireResponse', 'item', 'pruritus']],
+            'scoringSystem.aeasi.questionnaireResponse.item.patientAge is required' => [
+                'path' => 'scoringSystem.aeasi.questionnaireResponse.item.patientAge',
+                'expectedDetail' => ['loc' => ['body', 'scoringSystem', 'aeasi', 'questionnaireResponse', 'item', 'patientAge']],
             ],
-            'scoringSystem.ascorad.questionnaireResponse.item.sleeplessness is required' => [
-                'path' => 'scoringSystem.ascorad.questionnaireResponse.item.sleeplessness',
-                'expectedDetail' => ['loc' => ['body', 'scoringSystem', 'ascorad', 'questionnaireResponse', 'item', 'sleeplessness']],
-            ]
         ];
     }
 
@@ -171,7 +131,7 @@ class SingleZoneAscoradTest extends AbstractSeverityAssessmentAutomaticLocalTest
                 ]
             ],
             'scoringSystem'  => [
-                SingleZoneAscoradQuestionnaire::getName() => new SingleZoneAscoradQuestionnaire(50, 7, 3)->jsonSerialize()
+                SingleZoneAeasiQuestionnaire::getName() => new SingleZoneAeasiQuestionnaire(40, 30)->jsonSerialize()
             ],
         ];
 

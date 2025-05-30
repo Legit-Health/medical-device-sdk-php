@@ -85,7 +85,12 @@ class SingleZoneApasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
 
     protected static function getSpecificMissingFields(): array
     {
-        return [];
+        return [
+            'scoringSystem.apasi.questionnaireResponse.item.surface is required' => [
+                'path' => 'scoringSystem.apasi.questionnaireResponse.item.surface',
+                'expectedDetail' => ['loc' => ['body', 'scoringSystem', 'apasi', 'questionnaireResponse', 'item', 'surface']],
+            ]
+        ];
     }
 
     protected function buildValidArguments(string $currentDir): array

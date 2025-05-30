@@ -55,7 +55,10 @@ class SingleZoneAuasTest extends AbstractSeverityAssessmentAutomaticLocalTest
 
     protected static function getSpecificMissingFields(): array
     {
-        return [];
+        return ['scoringSystem.auas.questionnaireResponse.item.pruritus is required' => [
+            'path' => 'scoringSystem.auas.questionnaireResponse.item.pruritus',
+            'expectedDetail' => ['loc' => ['body', 'scoringSystem', 'auas', 'questionnaireResponse', 'item', 'pruritus']],
+        ],];
     }
 
     protected function buildValidArguments(string $currentDir): array
