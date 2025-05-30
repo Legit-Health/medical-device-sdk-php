@@ -8,7 +8,6 @@ use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
 
 class SingleZoneApasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
-
     protected static function getRequestValues(): array
     {
         return [
@@ -56,10 +55,10 @@ class SingleZoneApasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             ]
                         ]
                     ],
-                    'scoreValue' => fn(float $value) => self::assertGreaterThan(15, $value),
+                    'scoreValue' => fn (float $value) => self::assertGreaterThan(15, $value),
                     'interpretationCategory' => 'Moderate',
                     'intensity' => Intensity::Moderate,
-                    'globalScoreContribution' => fn(float $value) => self::assertLessThanOrEqual(10, $value),
+                    'globalScoreContribution' => fn (float $value) => self::assertLessThanOrEqual(10, $value),
                     'attachment' => [
                         'maskRaw' => [
                             'title' => 'Lesion mask raw',

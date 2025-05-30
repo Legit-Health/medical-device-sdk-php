@@ -16,7 +16,9 @@ final class MedicalDeviceClient
     private const DIAGNOSIS_SUPPORT_ENDPOINT = 'diagnosis-support';
     private const LOGIN = 'login';
 
-    public function __construct(private HttpClientInterface $httpClient) {}
+    public function __construct(private HttpClientInterface $httpClient)
+    {
+    }
 
     public static function createWithBaseUri(string $baseUri): self
     {

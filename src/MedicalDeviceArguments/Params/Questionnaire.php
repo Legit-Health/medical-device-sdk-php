@@ -4,7 +4,6 @@ namespace LegitHealth\MedicalDevice\MedicalDeviceArguments\Params;
 
 use InvalidArgumentException;
 use JsonSerializable;
-use stdClass;
 
 abstract readonly class Questionnaire implements JsonSerializable
 {

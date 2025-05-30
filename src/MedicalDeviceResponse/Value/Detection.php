@@ -10,7 +10,8 @@ final readonly class Detection
         public float $confidence,
         public Code $code,
         public Box $box
-    ) {}
+    ) {
+    }
 
     public static function fromJson(array $json): self
     {

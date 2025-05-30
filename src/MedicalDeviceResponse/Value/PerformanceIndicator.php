@@ -8,7 +8,8 @@ final readonly class PerformanceIndicator
         public float $sensitivity,
         public float $specificity,
         public float $entropy
-    ) {}
+    ) {
+    }
 
     public static function fromJson(array $json): self
     {

@@ -12,5 +12,6 @@ final readonly class ImagingAnalysisInstance
         public MediaValidity $mediaValidity,
         public ImagingAnalysisInstancePerformanceIndicator $performanceIndicator,
         public ClinicalIndicator $clinicalIndicator
-    ) {}
+    ) {
+    }
 }

@@ -10,7 +10,8 @@ final readonly class ClinicalIndicator
         public float $malignancy,
         public float $urgentReferral,
         public float $highPriorityReferral
-    ) {}
+    ) {
+    }
 
     public static function fromJson(array $json): self
     {

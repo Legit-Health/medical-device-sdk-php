@@ -2,7 +2,6 @@
 
 namespace LegitHealth\MedicalDevice\MedicalDeviceArguments;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\Subject;
 use InvalidArgumentException;
 
 readonly class DiagnosisSupportArguments implements MedicalDeviceArguments
@@ -21,7 +20,7 @@ readonly class DiagnosisSupportArguments implements MedicalDeviceArguments
     public function jsonSerialize(): mixed
     {
         $json = [
-            "payload" => array_map(fn($attachment) => [
+            "payload" => array_map(fn ($attachment) => [
                 "contentAttachment" => ["data" => $attachment]
             ], $this->medias)
 

@@ -6,7 +6,9 @@ use ArrayObject;
 
 readonly class SingleZoneAgppgaQuestionnaire extends Questionnaire
 {
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
     public static function getName(): string
     {

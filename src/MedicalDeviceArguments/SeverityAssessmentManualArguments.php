@@ -11,7 +11,8 @@ readonly class SeverityAssessmentManualArguments implements MedicalDeviceArgumen
         public KnownCondition $knownCondition,
         public BodySiteCode $bodySiteCode,
         public ScoringSystems $scoringSystem = new ScoringSystems([])
-    ) {}
+    ) {
+    }
 
     public function jsonSerialize(): mixed
     {

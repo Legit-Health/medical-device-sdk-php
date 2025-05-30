@@ -8,7 +8,6 @@ use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
 
 class AgppgaTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
-
     protected static function getRequestValues(): array
     {
         return [
@@ -55,7 +54,7 @@ class AgppgaTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             ]
                         ],
                     ],
-                    'scoreValue' => fn(float $value) => self::assertGreaterThanOrEqual(2, $value),
+                    'scoreValue' => fn (float $value) => self::assertGreaterThanOrEqual(2, $value),
                     'interpretationCategory' => 'Moderate',
                     'intensity' => Intensity::Moderate,
                     'attachment' => null

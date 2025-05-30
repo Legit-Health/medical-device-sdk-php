@@ -8,7 +8,6 @@ use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
 
 class SingleZoneAuasTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
-
     protected static function getRequestValues(): array
     {
         return [
@@ -36,7 +35,7 @@ class SingleZoneAuasTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'text' => 'Severity of itch in the last 24 hours, scored from 0 (no itch) to 3 (severe itch).'
                         ]
                     ],
-                    'scoreValue' => fn(float $value) => self::assertEquals(5, $value),
+                    'scoreValue' => fn (float $value) => self::assertEquals(5, $value),
                     'interpretationCategory' => 'Intense',
                     'intensity' => Intensity::High,
                     'attachment' => [

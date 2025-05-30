@@ -202,7 +202,7 @@ abstract class AbstractSeverityAssessmentManualTest extends TestCase
         }
         unset($ref[array_shift($keys)]);
         if (\count($ref) === 0) {
-            $ref = new stdClass;
+            $ref = new stdClass();
         }
     }
 

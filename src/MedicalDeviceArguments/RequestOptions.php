@@ -6,7 +6,8 @@ readonly class RequestOptions
 {
     public function __construct(
         public ?int $timeout = null
-    ) {}
+    ) {
+    }
 
     public function asArray(): array
     {

@@ -7,7 +7,8 @@ final readonly class Domain
     public function __construct(
         public bool $isDermatological,
         public DomainAdditionalData $additionalData
-    ) {}
+    ) {
+    }
 
     public static function fromJson(array $json): self
     {

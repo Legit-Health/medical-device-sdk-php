@@ -11,7 +11,8 @@ final readonly class ExplainabilityMedia
         public int $height,
         public int $width,
         public string $colorModel,
-    ) {}
+    ) {
+    }
 
     public static function fromJson(array $json): self
     {

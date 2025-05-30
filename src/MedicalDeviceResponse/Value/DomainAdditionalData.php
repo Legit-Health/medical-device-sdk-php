@@ -6,5 +6,6 @@ final readonly class DomainAdditionalData
 {
     public function __construct(
         public AdditionalDataItem $aiConfidence
-    ) {}
+    ) {
+    }
 }

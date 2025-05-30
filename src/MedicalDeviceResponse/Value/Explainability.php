@@ -6,7 +6,8 @@ final readonly class Explainability
 {
     public function __construct(
         public ExplainabilityMedia $heatMap
-    ) {}
+    ) {
+    }
 
     public static function fromJson(?array $json): ?self
     {

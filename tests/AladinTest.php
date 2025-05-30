@@ -8,7 +8,6 @@ use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
 
 class AladinTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
-
     protected static function getRequestValues(): array
     {
         return [
@@ -32,7 +31,7 @@ class AladinTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             ]
                         ]
                     ],
-                    'scoreValue' => fn(float $value) => self::assertGreaterThanOrEqual(30, $value),
+                    'scoreValue' => fn (float $value) => self::assertGreaterThanOrEqual(30, $value),
                     'interpretationCategory' => 'Grade 4',
                     'intensity' => Intensity::Moderate,
                     'attachment' => [

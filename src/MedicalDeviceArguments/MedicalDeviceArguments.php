@@ -4,4 +4,6 @@ namespace LegitHealth\MedicalDevice\MedicalDeviceArguments;
 
 use JsonSerializable;
 
-interface MedicalDeviceArguments extends JsonSerializable {}
+interface MedicalDeviceArguments extends JsonSerializable
+{
+}

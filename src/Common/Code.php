@@ -12,12 +12,13 @@ final readonly class Code implements JsonSerializable
     public function __construct(
         public ?array $coding,
         public string $text
-    ) {}
+    ) {
+    }
 
     public static function fromJson(array $json): self
     {
         return new self(
-            isset($json['coding']) ? array_map(fn($json) => CodingItem::fromJson($json), $json['coding']) : null,
+            isset($json['coding']) ? array_map(fn ($json) => CodingItem::fromJson($json), $json['coding']) : null,
             $json['text'],
         );
     }
@@ -26,7 +27,7 @@ final readonly class Code implements JsonSerializable
     {
         return [
             'text' => $this->text,
-            'coding' => array_map(fn($codingItem) => $codingItem->asArray(), $this->coding)
+            'coding' => array_map(fn ($codingItem) => $codingItem->asArray(), $this->coding)
         ];
     }
 

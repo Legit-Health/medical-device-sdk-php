@@ -125,7 +125,7 @@ abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
 
                         if ($additionalDataExpected['typeOfValue'] === 'scalar') {
                             $this->assertGreaterThanOrEqual(0, $additionalDataValue->value);
-                        } else if ($additionalDataExpected['typeOfValue'] === 'percentage') {
+                        } elseif ($additionalDataExpected['typeOfValue'] === 'percentage') {
                             $this->assertGreaterThanOrEqual(0, $additionalDataValue->value);
                             $this->assertLessThanOrEqual(100, $additionalDataValue->value);
                         }
@@ -245,7 +245,7 @@ abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
         }
         unset($ref[array_shift($keys)]);
         if (\count($ref) === 0) {
-            $ref = new stdClass;
+            $ref = new stdClass();
         }
     }
 

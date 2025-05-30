@@ -8,7 +8,8 @@ readonly class Ihs4Questionnaire extends Questionnaire
         public int $nodule,
         public int $abscess,
         public int $drainingTunnel
-    ) {}
+    ) {
+    }
 
     public static function getName(): string
     {

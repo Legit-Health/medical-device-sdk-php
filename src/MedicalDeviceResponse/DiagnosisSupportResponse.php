@@ -30,7 +30,8 @@ final readonly class DiagnosisSupportResponse
         public array $imagingAnalysis,
         public float $analysisDuration,
         public DateTimeImmutable $issued
-    ) {}
+    ) {
+    }
 
     public static function createFromJson(array $json): self
     {
@@ -84,7 +85,7 @@ final readonly class DiagnosisSupportResponse
      */
     public function getPossibleConclusions(): array
     {
-        return array_filter($this->conclusions, fn($conclusion) => $conclusion->isPossible);
+        return array_filter($this->conclusions, fn ($conclusion) => $conclusion->isPossible);
     }
 
     /**

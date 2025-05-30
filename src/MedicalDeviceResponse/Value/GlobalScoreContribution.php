@@ -9,7 +9,8 @@ final readonly class GlobalScoreContribution
     public function __construct(
         public float $value,
         public Code $code
-    ) {}
+    ) {
+    }
 
     public static function fromJson(?array $json): ?self
     {

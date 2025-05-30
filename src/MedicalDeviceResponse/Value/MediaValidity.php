@@ -9,7 +9,8 @@ final readonly class MediaValidity
         public Domain $domain,
         public Modality $modality,
         public bool $isValid
-    ) {}
+    ) {
+    }
 
     public static function fromJson(array $json): self
     {

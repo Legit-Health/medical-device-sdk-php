@@ -10,7 +10,8 @@ final readonly class AdditionalDataItem
         public float $value,
         public Code $code,
         public ?string $interpretation
-    ) {}
+    ) {
+    }
 
     public static function fromJson(array $json): self
     {

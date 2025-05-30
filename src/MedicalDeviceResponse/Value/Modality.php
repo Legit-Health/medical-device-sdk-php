@@ -7,7 +7,8 @@ final readonly class Modality
     public function __construct(
         public ModalityValue $value,
         public ModalityAdditionalData $additionalData
-    ) {}
+    ) {
+    }
 
     public static function fromJson(array $json): self
     {

@@ -12,7 +12,8 @@ final readonly class CodingItem implements JsonSerializable
         public ?string $system,
         public string $systemDisplay,
         public ?string $version
-    ) {}
+    ) {
+    }
 
     public static function fromJson(array $json): self
     {

@@ -7,7 +7,6 @@ use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
 
 class Pure4Test extends AbstractSeverityAssessmentManualTest
 {
-
     protected static function getRequestValues(): array
     {
         return [[

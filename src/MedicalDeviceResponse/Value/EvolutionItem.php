@@ -15,7 +15,8 @@ final readonly class EvolutionItem
         public float $value,
         public ?string $interpretation,
         public ?array $additionalData
-    ) {}
+    ) {
+    }
 
     public static function fromJson(string $itemCode, array $json): self
     {

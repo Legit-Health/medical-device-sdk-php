@@ -8,7 +8,8 @@ final readonly class Quality
         public bool $acceptable,
         public float $score,
         public string $interpretation
-    ) {}
+    ) {
+    }
 
     public static function fromJson(array $json): self
     {

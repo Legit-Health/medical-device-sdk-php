@@ -8,7 +8,8 @@ final readonly class ScoringSystemScore
         public float $value,
         public Interpretation $interpretation,
         public ?GlobalScoreContribution $globalScoreContribution
-    ) {}
+    ) {
+    }
 
     public static function fromJson(array $json): self
     {

@@ -6,7 +6,8 @@ final readonly class ImagingAnalysisInstancePerformanceIndicator
 {
     public function __construct(
         public float $entropy
-    ) {}
+    ) {
+    }
 
     public static function fromJson(array $json): self
     {

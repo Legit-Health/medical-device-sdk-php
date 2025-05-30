@@ -8,7 +8,6 @@ use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
 
 class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
-
     protected static function getRequestValues(): array
     {
         return [
@@ -307,7 +306,7 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             ]
                         ]
                     ],
-                    'scoreValue' => fn(float $value) => self::assertGreaterThanOrEqual(10, $value),
+                    'scoreValue' => fn (float $value) => self::assertGreaterThanOrEqual(10, $value),
                     'interpretationCategory' => 'Stage 4',
                     'intensity' => Intensity::High,
                     'attachment' => [

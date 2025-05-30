@@ -7,7 +7,6 @@ use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
 
 class NsilTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
-
     protected static function getRequestValues(): array
     {
         return [[
@@ -18,7 +17,7 @@ class NsilTest extends AbstractSeverityAssessmentAutomaticLocalTest
 
                 'item' => [
                     "dryness" => [
-                        'value' => fn(float $value) => self::assertGreaterThanOrEqual(1, $value),
+                        'value' => fn (float $value) => self::assertGreaterThanOrEqual(1, $value),
                         'interpretation' => null,
                         'text' => 'Dryness',
                         'additionalData' => [
@@ -52,7 +51,7 @@ class NsilTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         ]
                     ],
                 ],
-                'scoreValue' => fn(float $value) => self::assertGreaterThanOrEqual(1, $value),
+                'scoreValue' => fn (float $value) => self::assertGreaterThanOrEqual(1, $value),
                 'interpretationCategory' => 'Mild',
                 'intensity' => Intensity::Low,
                 'attachment' => [

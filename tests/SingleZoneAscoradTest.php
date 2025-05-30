@@ -8,7 +8,6 @@ use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
 
 class SingleZoneAscoradTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
-
     protected static function getRequestValues(): array
     {
         return [
@@ -104,7 +103,7 @@ class SingleZoneAscoradTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'text' => 'Sleeplessness'
                         ]
                     ],
-                    'scoreValue' => fn(float $value) => self::assertGreaterThan(40, $value),
+                    'scoreValue' => fn (float $value) => self::assertGreaterThan(40, $value),
                     'interpretationCategory' => 'Severe',
                     'intensity' => Intensity::High,
                     'attachment' => [

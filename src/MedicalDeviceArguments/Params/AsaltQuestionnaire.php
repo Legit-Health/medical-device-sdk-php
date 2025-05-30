@@ -6,7 +6,9 @@ use stdClass;
 
 readonly class AsaltQuestionnaire extends Questionnaire
 {
-    public function __construct() {}
+    public function __construct()
+    {
+    }
 
     public static function getName(): string
     {
@@ -15,6 +17,6 @@ readonly class AsaltQuestionnaire extends Questionnaire
 
     public function jsonSerialize(): mixed
     {
-        return new stdClass;
+        return new stdClass();
     }
 }

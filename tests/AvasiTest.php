@@ -7,7 +7,6 @@ use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
 
 class AvasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
-
     protected static function getRequestValues(): array
     {
         return [[
@@ -16,7 +15,7 @@ class AvasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
             ["code" => "ED63.0", "display" => "Vitiligo", "text" => "Vitiligo"],
             [
                 'item' => null,
-                'scoreValue' => fn(float $value) => self::assertGreaterThanOrEqual(40, $value),
+                'scoreValue' => fn (float $value) => self::assertGreaterThanOrEqual(40, $value),
                 'interpretationCategory' => 'Moderate',
                 'intensity' => Intensity::Moderate,
                 'attachment' => [

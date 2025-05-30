@@ -4,14 +4,15 @@ namespace LegitHealth\MedicalDevice\MedicalDeviceArguments\Params;
 
 use JsonSerializable;
 
-readonly final class ScoringSystems implements JsonSerializable
+final readonly class ScoringSystems implements JsonSerializable
 {
     /**
      * @param Questionnaire[] $questionnaires
      */
     public function __construct(
         public array $questionnaires
-    ) {}
+    ) {
+    }
 
     public static function createEmpty(): self
     {

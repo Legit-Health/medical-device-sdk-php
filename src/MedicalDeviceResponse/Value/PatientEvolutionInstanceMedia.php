@@ -11,5 +11,6 @@ final readonly class PatientEvolutionInstanceMedia
     public function __construct(
         public ?array $attachment,
         public array $detection
-    ) {}
+    ) {
+    }
 }

@@ -12,7 +12,8 @@ final readonly class Attachment
         public int $height,
         public int $width,
         public string $colorModel
-    ) {}
+    ) {
+    }
 
     public static function fromJson(string $code, array $json): self
     {

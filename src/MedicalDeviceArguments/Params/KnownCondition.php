@@ -9,7 +9,8 @@ readonly class KnownCondition implements JsonSerializable
 {
     public function __construct(
         public Code $conclusion
-    ) {}
+    ) {
+    }
 
 
     public function jsonSerialize(): mixed

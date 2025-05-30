@@ -6,7 +6,8 @@ readonly class BearerToken
 {
     public function __construct(
         public string $value
-    ) {}
+    ) {
+    }
 
     public function asAuthorizationHeader(): string
     {
