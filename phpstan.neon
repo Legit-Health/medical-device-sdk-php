@@ -1,10 +1,9 @@
 parameters:
-    phpVersion: 80200
+    phpVersion: 80400
     level: 8
     paths:
         - src
     reportUnmatchedIgnoredErrors: false
-    checkMissingIterableValueType: false
     banned_code:
         nodes:
             -
@@ -29,6 +28,8 @@ parameters:
                     - system
                     - var_dump
     ignoreErrors:
+        -
+            identifier: missingType.iterableValue
         - 
             message: '#Unsafe usage of new static\(\).#'
             path: %rootDir%/../../../src/MediaAnalyzerArguments/Questionnaires/Questionnaire.php 

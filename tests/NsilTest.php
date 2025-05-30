@@ -17,13 +17,14 @@ class NsilTest extends AbstractSeverityAssessmentAutomaticLocalTest
 
                 'item' => [
                     "dryness" => [
-                        'value' => fn (float $value) => self::assertGreaterThanOrEqual(1, $value),
+                        'value' => fn(float $value) => self::assertGreaterThanOrEqual(1, $value),
                         'interpretation' => null,
                         'text' => 'Dryness',
                         'additionalData' => [
                             'aiConfidence' => [
                                 'code' => 'aiConfidence',
-                                'text' => 'Confidence of the AI model on prediction'
+                                'text' => 'Confidence of the AI model on prediction',
+                                'typeOfValue' => 'percentage'
                             ]
                         ]
                     ],
@@ -34,7 +35,8 @@ class NsilTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         'additionalData' => [
                             'aiConfidence' => [
                                 'code' => 'aiConfidence',
-                                'text' => 'Confidence of the AI model on prediction'
+                                'text' => 'Confidence of the AI model on prediction',
+                                'typeOfValue' => 'percentage'
                             ]
                         ]
                     ],
@@ -51,7 +53,7 @@ class NsilTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         ]
                     ],
                 ],
-                'scoreValue' => fn (float $value) => self::assertGreaterThanOrEqual(1, $value),
+                'scoreValue' => fn(float $value) => self::assertGreaterThanOrEqual(1, $value),
                 'interpretationCategory' => 'Mild',
                 'intensity' => Intensity::Low,
                 'attachment' => [

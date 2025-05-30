@@ -8,16 +8,13 @@ final readonly class PatientEvolutionInstance
 {
     /**
      * @param array<string,EvolutionItem>|null $item
-     * @param array<string,Attachment> $attachment
-     * @param Detection[] $detections
      * */
     public function __construct(
         public ScoringSystemCode $scoringSystemCode,
         public ScoringSystemScore $score,
         public ?array $item,
         public ?PatientEvolutionInstanceMedia $media
-    ) {
-    }
+    ) {}
 
     public function getEvolutionItem(string $code): ?EvolutionItem
     {
@@ -30,8 +27,11 @@ final readonly class PatientEvolutionInstance
     /**
      * @return EvolutionItem[]
      */
-    public function getEvolutionItems(): array
+    public function getEvolutionItems(): ?array
     {
+        if ($this->item === null) {
+            return null;
+        }
         return array_values($this->item);
     }
 }

@@ -11,8 +11,7 @@ final readonly class ScoringSystems implements JsonSerializable
      */
     public function __construct(
         public array $questionnaires
-    ) {
-    }
+    ) {}
 
     public static function createEmpty(): self
     {
@@ -23,7 +22,7 @@ final readonly class ScoringSystems implements JsonSerializable
     {
         $json = [];
         foreach ($this->questionnaires as $questionnaire) {
-            $json[$questionnaire->getName()] = $questionnaire;
+            $json[$questionnaire::getName()] = $questionnaire;
         }
         return $json;
     }

@@ -26,8 +26,7 @@ readonly class SeverityAssessmentResponse
         public array $patientEvolution,
         public float $analysisDuration,
         public DateTimeImmutable $issued
-    ) {
-    }
+    ) {}
 
     public static function fromJson(array $json): self
     {
@@ -46,15 +45,15 @@ readonly class SeverityAssessmentResponse
             }
 
             $attachments = null;
-            if (isset($patientEvolutionInstance['media']['attachment']) && $patientEvolutionInstance['media']['attachment'] !== null) {
+            if (isset($patientEvolutionInstance['media']['attachment'])) {
                 $attachments = [];
-                foreach ($patientEvolutionInstance['media']['attachment'] ?? [] as $attachmentCode => $attachmentJson) {
+                foreach ($patientEvolutionInstance['media']['attachment'] as $attachmentCode => $attachmentJson) {
                     $attachments[$attachmentCode] = Attachment::fromJson($attachmentCode, $attachmentJson);
                 }
             }
 
             $detections = array_map(
-                fn (array $detectionJson) => Detection::fromJson($detectionJson),
+                fn(array $detectionJson) => Detection::fromJson($detectionJson),
                 $patientEvolutionInstance['media']['detection'] ?? []
             );
 
