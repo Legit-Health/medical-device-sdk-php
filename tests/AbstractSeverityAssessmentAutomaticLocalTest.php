@@ -119,6 +119,9 @@ abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
                         $additionalDataValue = $questionnaireResponseItem->additionalData[$additionalDataCode];
                         $this->assertEquals($additionalDataExpected['text'], $additionalDataValue->code->text);
                         $this->assertEquals($additionalDataExpected['code'], $additionalDataValue->code->coding[0]->code);
+                        if (isset($additionalDataExpected['interpretation'])) {
+                            $this->assertEquals($additionalDataExpected['interpretation'], $additionalDataValue->interpretation);
+                        }
 
                         if ($additionalDataExpected['typeOfValue'] === 'scalar') {
                             $this->assertGreaterThanOrEqual(0, $additionalDataValue->value);

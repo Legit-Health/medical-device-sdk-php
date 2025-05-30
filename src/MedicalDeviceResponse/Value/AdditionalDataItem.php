@@ -8,14 +8,16 @@ final readonly class AdditionalDataItem
 {
     public function __construct(
         public float $value,
-        public Code $code
+        public Code $code,
+        public ?string $interpretation
     ) {}
 
     public static function fromJson(array $json): self
     {
         return new self(
             $json['value'],
-            Code::fromJson($json['code'])
+            Code::fromJson($json['code']),
+            $json['interpretation'] ?? null,
         );
     }
 }
