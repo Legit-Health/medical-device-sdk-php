@@ -2,7 +2,7 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\{SeverityAssessmentArguments};
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\SeverityAssessmentAutomaticLocalArguments;
 use LegitHealth\MedicalDevice\Common\{BearerToken, Code};
 use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\{BodySiteCode, KnownCondition, Questionnaire, ScoringSystems};
 use LegitHealth\MedicalDevice\MedicalDeviceClient;
@@ -66,7 +66,7 @@ abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
         ?int $statusCode = null
     ): void {
         $image = file_get_contents($this->currentDir . $imagePath);
-        $severityAssessmentArguments = new SeverityAssessmentArguments(
+        $severityAssessmentArguments = new SeverityAssessmentAutomaticLocalArguments(
             base64_encode($image),
             scoringSystem: new ScoringSystems([$questionnaire]),
             knownCondition: new KnownCondition(Code::fromJson([

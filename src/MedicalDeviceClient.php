@@ -3,7 +3,13 @@
 namespace LegitHealth\MedicalDevice;
 
 use LegitHealth\MedicalDevice\Common\BearerToken;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\{DiagnosisSupportArguments, MedicalDeviceArguments, RequestOptions, SeverityAssessmentArguments, SeverityAssessmentManualArguments};
+use LegitHealth\MedicalDevice\MedicalDeviceArguments\{
+    DiagnosisSupportArguments,
+    MedicalDeviceArguments,
+    RequestOptions,
+    SeverityAssessmentAutomaticLocalArguments,
+    SeverityAssessmentManualArguments
+};
 use LegitHealth\MedicalDevice\MedicalDeviceResponse\{AccessToken, DiagnosisSupportResponse, SeverityAssessmentResponse};
 use Throwable;
 use Symfony\Component\HttpClient\HttpClient;
@@ -16,9 +22,7 @@ final class MedicalDeviceClient
     private const DIAGNOSIS_SUPPORT_ENDPOINT = 'diagnosis-support';
     private const LOGIN = 'login';
 
-    public function __construct(private HttpClientInterface $httpClient)
-    {
-    }
+    public function __construct(private HttpClientInterface $httpClient) {}
 
     public static function createWithBaseUri(string $baseUri): self
     {
@@ -56,7 +60,7 @@ final class MedicalDeviceClient
     /**
      * @throws RequestException
      */
-    public function severityAssessmentAutomaticLocal(SeverityAssessmentArguments $arguments, BearerToken $bearerToken, ?RequestOptions $requestOptions = null): SeverityAssessmentResponse
+    public function severityAssessmentAutomaticLocal(SeverityAssessmentAutomaticLocalArguments $arguments, BearerToken $bearerToken, ?RequestOptions $requestOptions = null): SeverityAssessmentResponse
     {
         $json = $this->send($arguments, self::SEVERITY_ASSESSMENT_AUTOMATIC_LOCAL, $bearerToken, $requestOptions);
         return SeverityAssessmentResponse::fromJson($json);
