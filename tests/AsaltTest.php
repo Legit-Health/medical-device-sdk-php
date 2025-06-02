@@ -2,9 +2,9 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\AsaltQuestionnaire;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\BodySiteCode;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
+use LegitHealth\MedicalDevice\Arguments\Params\AsaltQuestionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\BodySiteCode;
+use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
 class AsaltTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
@@ -17,10 +17,10 @@ class AsaltTest extends AbstractSeverityAssessmentAutomaticLocalTest
                 ["code" => "ED70", "display" => "Alopecia or hair loss", "text" => "Alopecia"],
                 [
                     'item' => null,
-                    'scoreValue' => fn (float $value) => self::assertGreaterThanOrEqual(30, $value),
+                    'scoreValue' => fn(float $value) => self::assertGreaterThanOrEqual(30, $value),
                     'interpretationCategory' => 'Moderate',
                     'intensity' => Intensity::Moderate,
-                    'globalScoreContribution' => fn (float $value) => self::assertLessThanOrEqual(10, $value),
+                    'globalScoreContribution' => fn(float $value) => self::assertLessThanOrEqual(10, $value),
                     'attachment' => [
                         'hairMaskRaw' => [
                             'title' => 'Hair mask raw',

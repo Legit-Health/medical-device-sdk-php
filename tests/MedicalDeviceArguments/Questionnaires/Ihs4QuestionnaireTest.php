@@ -2,7 +2,7 @@
 
 namespace LegitHealth\MedicalDevice\Tests\MedicalDeviceArguments\Questionnaires;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\Ihs4Questionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\Ihs4Questionnaire;
 use PHPUnit\Framework\TestCase;
 
 class Ihs4QuestionnaireTest extends TestCase
@@ -20,7 +20,7 @@ class Ihs4QuestionnaireTest extends TestCase
 
     public function testGetName()
     {
-        $ihs4LocalQuestionnaire = new Ihs4Questionnaire(5, 4, 2, );
+        $ihs4LocalQuestionnaire = new Ihs4Questionnaire(5, 4, 2,);
         $this->assertEquals('ihs4', $ihs4LocalQuestionnaire::getName());
     }
 }

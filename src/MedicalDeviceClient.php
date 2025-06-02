@@ -3,14 +3,14 @@
 namespace LegitHealth\MedicalDevice;
 
 use LegitHealth\MedicalDevice\Common\BearerToken;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\{
+use LegitHealth\MedicalDevice\Arguments\{
     DiagnosisSupportArguments,
     MedicalDeviceArguments,
     RequestOptions,
     SeverityAssessmentAutomaticLocalArguments,
     SeverityAssessmentManualArguments
 };
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\{AccessToken, DiagnosisSupportResponse, SeverityAssessmentResponse};
+use LegitHealth\MedicalDevice\Response\{AccessToken, DiagnosisSupportResponse, SeverityAssessmentResponse};
 use Throwable;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;

@@ -3,7 +3,7 @@
 namespace LegitHealth\MedicalDevice\Tests;
 
 use LegitHealth\MedicalDevice\Common\BearerToken;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\{NsilQuestionnaire};
+use LegitHealth\MedicalDevice\Arguments\Params\{NsilQuestionnaire};
 use LegitHealth\MedicalDevice\MedicalDeviceClient;
 use Dotenv\Dotenv;
 use PHPUnit\Framework\TestCase;

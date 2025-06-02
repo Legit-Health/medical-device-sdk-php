@@ -2,9 +2,9 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\BodySiteCode;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\SingleZoneApasiQuestionnaire;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
+use LegitHealth\MedicalDevice\Arguments\Params\BodySiteCode;
+use LegitHealth\MedicalDevice\Arguments\Params\SingleZoneApasiQuestionnaire;
+use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
 class SingleZoneApasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
@@ -55,10 +55,10 @@ class SingleZoneApasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             ]
                         ]
                     ],
-                    'scoreValue' => fn (float $value) => self::assertGreaterThan(15, $value),
+                    'scoreValue' => fn(float $value) => self::assertGreaterThan(15, $value),
                     'interpretationCategory' => 'Moderate',
                     'intensity' => Intensity::Moderate,
-                    'globalScoreContribution' => fn (float $value) => self::assertLessThanOrEqual(10, $value),
+                    'globalScoreContribution' => fn(float $value) => self::assertLessThanOrEqual(10, $value),
                     'attachment' => [
                         'maskRaw' => [
                             'title' => 'Lesion mask raw',

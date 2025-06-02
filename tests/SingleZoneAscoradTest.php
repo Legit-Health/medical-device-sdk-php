@@ -2,9 +2,9 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\BodySiteCode;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\SingleZoneAscoradQuestionnaire;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
+use LegitHealth\MedicalDevice\Arguments\Params\BodySiteCode;
+use LegitHealth\MedicalDevice\Arguments\Params\SingleZoneAscoradQuestionnaire;
+use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
 class SingleZoneAscoradTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
@@ -103,7 +103,7 @@ class SingleZoneAscoradTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'text' => 'Sleeplessness'
                         ]
                     ],
-                    'scoreValue' => fn (float $value) => self::assertGreaterThan(40, $value),
+                    'scoreValue' => fn(float $value) => self::assertGreaterThan(40, $value),
                     'interpretationCategory' => 'Severe',
                     'intensity' => Intensity::High,
                     'attachment' => [

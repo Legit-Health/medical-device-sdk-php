@@ -2,7 +2,7 @@
 
 namespace LegitHealth\MedicalDevice\Tests\MedicalDeviceArguments\Questionnaires;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\ScovidQuestionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\ScovidQuestionnaire;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 

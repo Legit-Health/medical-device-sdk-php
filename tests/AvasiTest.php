@@ -2,8 +2,8 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\AvasiQuestionnaire;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
+use LegitHealth\MedicalDevice\Arguments\Params\AvasiQuestionnaire;
+use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
 class AvasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
@@ -15,7 +15,7 @@ class AvasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
             ["code" => "ED63.0", "display" => "Vitiligo", "text" => "Vitiligo"],
             [
                 'item' => null,
-                'scoreValue' => fn (float $value) => self::assertGreaterThanOrEqual(40, $value),
+                'scoreValue' => fn(float $value) => self::assertGreaterThanOrEqual(40, $value),
                 'interpretationCategory' => 'Moderate',
                 'intensity' => Intensity::Moderate,
                 'attachment' => [

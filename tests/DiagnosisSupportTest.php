@@ -3,8 +3,8 @@
 namespace LegitHealth\MedicalDevice\Tests;
 
 use LegitHealth\MedicalDevice\MedicalDeviceClient;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\{DiagnosisSupportArguments, RequestOptions};
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\{AdditionalDataItem, ClinicalIndicator, Conclusion, Domain, Modality, ModalityValue, PerformanceIndicator, Quality};
+use LegitHealth\MedicalDevice\Arguments\{DiagnosisSupportArguments, RequestOptions};
+use LegitHealth\MedicalDevice\Response\Value\{AdditionalDataItem, ClinicalIndicator, Conclusion, Domain, Modality, ModalityValue, PerformanceIndicator, Quality};
 use DateTimeImmutable;
 use Dotenv\Dotenv;
 use LegitHealth\MedicalDevice\Common\BearerToken;

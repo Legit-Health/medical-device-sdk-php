@@ -2,9 +2,9 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\BodySiteCode;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\SingleZoneAeasiQuestionnaire;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
+use LegitHealth\MedicalDevice\Arguments\Params\BodySiteCode;
+use LegitHealth\MedicalDevice\Arguments\Params\SingleZoneAeasiQuestionnaire;
+use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
 class SingleZoneAeasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {

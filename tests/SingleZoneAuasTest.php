@@ -2,9 +2,9 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\BodySiteCode;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\SingleZoneAuasQuestionnaire;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
+use LegitHealth\MedicalDevice\Arguments\Params\BodySiteCode;
+use LegitHealth\MedicalDevice\Arguments\Params\SingleZoneAuasQuestionnaire;
+use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
 class SingleZoneAuasTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
@@ -35,7 +35,7 @@ class SingleZoneAuasTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'text' => 'Severity of itch in the last 24 hours, scored from 0 (no itch) to 3 (severe itch).'
                         ]
                     ],
-                    'scoreValue' => fn (float $value) => self::assertEquals(5, $value),
+                    'scoreValue' => fn(float $value) => self::assertEquals(5, $value),
                     'interpretationCategory' => 'Intense',
                     'intensity' => Intensity::High,
                     'attachment' => [

@@ -2,8 +2,8 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\SevenPcQuestionnaire;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
+use LegitHealth\MedicalDevice\Arguments\Params\SevenPcQuestionnaire;
+use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
 class SevenPcTest extends AbstractSeverityAssessmentManualTest
 {

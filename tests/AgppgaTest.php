@@ -2,9 +2,9 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\AgppgaQuestionnaire;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\BodySiteCode;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
+use LegitHealth\MedicalDevice\Arguments\Params\AgppgaQuestionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\BodySiteCode;
+use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
 class AgppgaTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
@@ -54,7 +54,7 @@ class AgppgaTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             ]
                         ],
                     ],
-                    'scoreValue' => fn (float $value) => self::assertGreaterThanOrEqual(2, $value),
+                    'scoreValue' => fn(float $value) => self::assertGreaterThanOrEqual(2, $value),
                     'interpretationCategory' => 'Moderate',
                     'intensity' => Intensity::Moderate,
                     'attachment' => null

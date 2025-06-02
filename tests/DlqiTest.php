@@ -2,8 +2,8 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\DlqiQuestionnaire;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
+use LegitHealth\MedicalDevice\Arguments\Params\DlqiQuestionnaire;
+use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
 class DlqiTest extends AbstractSeverityAssessmentManualTest
 {

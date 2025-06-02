@@ -2,7 +2,7 @@
 
 namespace LegitHealth\MedicalDevice\Tests\MedicalDeviceArguments\Questionnaires;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\SevenPcQuestionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\SevenPcQuestionnaire;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 

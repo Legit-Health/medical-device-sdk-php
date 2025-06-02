@@ -2,8 +2,8 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\NsilQuestionnaire;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
+use LegitHealth\MedicalDevice\Arguments\Params\NsilQuestionnaire;
+use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
 class NsilTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {

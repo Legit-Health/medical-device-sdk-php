@@ -2,9 +2,9 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\Aihs4Questionnaire;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\BodySiteCode;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
+use LegitHealth\MedicalDevice\Arguments\Params\Aihs4Questionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\BodySiteCode;
+use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
 class Aihs4Test extends AbstractSeverityAssessmentAutomaticLocalTest
 {
@@ -33,7 +33,7 @@ class Aihs4Test extends AbstractSeverityAssessmentAutomaticLocalTest
                             'text' => 'The number of nodules identified during clinical examination.'
                         ],
                     ],
-                    'scoreValue' => fn (float $value) => self::assertGreaterThanOrEqual(20, $value),
+                    'scoreValue' => fn(float $value) => self::assertGreaterThanOrEqual(20, $value),
                     'interpretationCategory' => 'Intense',
                     'intensity' => Intensity::High,
                     'attachment' => [

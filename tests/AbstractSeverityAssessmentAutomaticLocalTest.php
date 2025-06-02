@@ -2,9 +2,9 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\SeverityAssessmentAutomaticLocalArguments;
+use LegitHealth\MedicalDevice\Arguments\SeverityAssessmentAutomaticLocalArguments;
 use LegitHealth\MedicalDevice\Common\{BearerToken, Code};
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\{BodySiteCode, KnownCondition, Questionnaire, ScoringSystems};
+use LegitHealth\MedicalDevice\Arguments\Params\{BodySiteCode, KnownCondition, Questionnaire, ScoringSystems};
 use LegitHealth\MedicalDevice\MedicalDeviceClient;
 use stdClass;
 use DateTimeImmutable;

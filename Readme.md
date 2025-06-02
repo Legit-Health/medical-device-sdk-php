@@ -87,7 +87,7 @@ Here’s how to send a severity assessment request for a patient diagnosed with 
 First, create the objects representing the questionnaires used to track the evolution of psoriasis:
 
 ```php
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\ApasiLocalQuestionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\ApasiLocalQuestionnaire;
 use LegitHealth\Dapi\MediaAnalyzerArguments\Questionnaires\Questionnaires;
 
 // ...
@@ -117,7 +117,7 @@ $severityAssessmentArguments = new SeverityAssessmentArguments(
 
 Unlike diagnosis support requests, severity assessment requests support the following additional arguments:
 
-- `scoringSystems`: an array of strings with the names of the scoring systems to be calculated. It supports all codes returned by the `Questionnaire` classes within the `LegitHealth\MedicalDevice\MedicalDeviceArguments\Params` namespace.
+- `scoringSystems`: an array of strings with the names of the scoring systems to be calculated. It supports all codes returned by the `Questionnaire` classes within the `LegitHealth\MedicalDevice\Arguments\Params` namespace.
   
 - `questionnaires`: an object of the `Questionnaires` class with the answers required for practitioner or patient input. For psoriasis, the `surface` value is needed when creating an `ApasiLocalQuestionnaire` object.
 

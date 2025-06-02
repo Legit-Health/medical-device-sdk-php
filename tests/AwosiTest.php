@@ -2,9 +2,9 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\AwosiQuestionnaire;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\BodySiteCode;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
+use LegitHealth\MedicalDevice\Arguments\Params\AwosiQuestionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\BodySiteCode;
+use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
 class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
@@ -306,7 +306,7 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             ]
                         ]
                     ],
-                    'scoreValue' => fn (float $value) => self::assertGreaterThanOrEqual(10, $value),
+                    'scoreValue' => fn(float $value) => self::assertGreaterThanOrEqual(10, $value),
                     'interpretationCategory' => 'Stage 4',
                     'intensity' => Intensity::High,
                     'attachment' => [

@@ -2,7 +2,7 @@
 
 namespace LegitHealth\MedicalDevice\Tests\MedicalDeviceArguments\Questionnaires;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\SingleZoneApasiQuestionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\SingleZoneApasiQuestionnaire;
 use Throwable;
 use PHPUnit\Framework\TestCase;
 

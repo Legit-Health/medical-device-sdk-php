@@ -2,9 +2,9 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\AladinQuestionnaire;
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\BodySiteCode;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
+use LegitHealth\MedicalDevice\Arguments\Params\AladinQuestionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\BodySiteCode;
+use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
 class AladinTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
@@ -31,7 +31,7 @@ class AladinTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             ]
                         ]
                     ],
-                    'scoreValue' => fn (float $value) => self::assertGreaterThanOrEqual(30, $value),
+                    'scoreValue' => fn(float $value) => self::assertGreaterThanOrEqual(30, $value),
                     'interpretationCategory' => 'Grade 4',
                     'intensity' => Intensity::Moderate,
                     'attachment' => [

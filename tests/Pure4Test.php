@@ -2,8 +2,8 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\Pure4Questionnaire;
-use LegitHealth\MedicalDevice\MedicalDeviceResponse\Value\Intensity;
+use LegitHealth\MedicalDevice\Arguments\Params\Pure4Questionnaire;
+use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
 class Pure4Test extends AbstractSeverityAssessmentManualTest
 {

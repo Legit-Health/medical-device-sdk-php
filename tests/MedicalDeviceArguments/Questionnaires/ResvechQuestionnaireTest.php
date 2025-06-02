@@ -2,7 +2,7 @@
 
 namespace LegitHealth\MedicalDevice\Tests\MedicalDeviceArguments\Questionnaires;
 
-use LegitHealth\MedicalDevice\MedicalDeviceArguments\Params\ResvechQuestionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\ResvechQuestionnaire;
 use PHPUnit\Framework\TestCase;
 use Throwable;
 
