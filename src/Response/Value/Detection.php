@@ -18,8 +18,10 @@ final readonly class Detection
             $json['confidence'],
             Code::fromJson($json['code']),
             new Box(
-                new Point2d($json['box']['x1'], $json['box']['y1']),
-                new Point2d($json['box']['x2'], $json['box']['y2']),
+                $json['box']['x1'],
+                $json['box']['y1'],
+                $json['box']['x2'],
+                $json['box']['y2']
             )
         );
     }

@@ -159,10 +159,10 @@ abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
             $this->assertGreaterThan(0, $questionnaireResponse->media->detection);
             $detection = $questionnaireResponse->media->detection[0];
             $this->assertGreaterThan(0, $detection->confidence);
-            $this->assertGreaterThan(0, $detection->box->p1->x);
-            $this->assertGreaterThan(0, $detection->box->p1->y);
-            $this->assertGreaterThan(0, $detection->box->p2->x);
-            $this->assertGreaterThan(0, $detection->box->p2->y);
+            $this->assertGreaterThan(0, $detection->box->x1);
+            $this->assertGreaterThan(0, $detection->box->y1);
+            $this->assertGreaterThan(0, $detection->box->x2);
+            $this->assertGreaterThan(0, $detection->box->y2);
             $this->assertContains($detection->code->text, $expectedTexts);
             $this->assertContains($detection->code->coding[0]->code, $expectedCodes);
         }
