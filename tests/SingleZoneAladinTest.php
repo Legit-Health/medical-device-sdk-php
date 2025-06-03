@@ -2,18 +2,18 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\Arguments\Params\AladinQuestionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\SingleZoneAladinQuestionnaire;
 use LegitHealth\MedicalDevice\Arguments\Params\BodySiteCode;
 use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
-class AladinTest extends AbstractSeverityAssessmentAutomaticLocalTest
+class SingleZoneAladinTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
     protected static function getRequestValues(): array
     {
         return [
             [
                 '/tests/resources/acne.jpg',
-                new AladinQuestionnaire(),
+                new SingleZoneAladinQuestionnaire(),
                 ["code" => "ED80.Z", "display" => "Acne", "text" => "Acne"],
                 [
                     'item' => [
@@ -76,7 +76,7 @@ class AladinTest extends AbstractSeverityAssessmentAutomaticLocalTest
                 ]
             ],
             'scoringSystem'  => [
-                AladinQuestionnaire::getName() => new AladinQuestionnaire()->jsonSerialize()
+                SingleZoneAladinQuestionnaire::getName() => new SingleZoneAladinQuestionnaire()->jsonSerialize()
             ],
         ];
 

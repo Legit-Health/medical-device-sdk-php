@@ -2,16 +2,16 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\Arguments\Params\AvasiQuestionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\SingleZoneAvasiQuestionnaire;
 use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
-class AvasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
+class SingleZoneAvasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
     protected static function getRequestValues(): array
     {
         return [[
             '/tests/resources/vitiligo.jpg',
-            new AvasiQuestionnaire(),
+            new SingleZoneAvasiQuestionnaire(),
             ["code" => "ED63.0", "display" => "Vitiligo", "text" => "Vitiligo"],
             [
                 'item' => null,
@@ -77,7 +77,7 @@ class AvasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                 ]
             ],
             'scoringSystem'  => [
-                AvasiQuestionnaire::getName() => new AvasiQuestionnaire()->jsonSerialize()
+                SingleZoneAvasiQuestionnaire::getName() => new SingleZoneAvasiQuestionnaire()->jsonSerialize()
             ],
         ];
 

@@ -2,18 +2,18 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\Arguments\Params\AwosiQuestionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\SingleZoneAwosiQuestionnaire;
 use LegitHealth\MedicalDevice\Arguments\Params\BodySiteCode;
 use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
-class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
+class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
     protected static function getRequestValues(): array
     {
         return [
             [
                 '/tests/resources/ulcera.jpg',
-                new AwosiQuestionnaire(),
+                new SingleZoneAwosiQuestionnaire(),
                 ["code" => "EH90.Z", "display" => "Pressure ulcer of unspecified grade", "text" => "Pressure ulcer"],
                 [
                     'item' => [
@@ -425,7 +425,7 @@ class AwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                 ]
             ],
             'scoringSystem'  => [
-                AwosiQuestionnaire::getName() => new AwosiQuestionnaire()->jsonSerialize()
+                SingleZoneAwosiQuestionnaire::getName() => new SingleZoneAwosiQuestionnaire()->jsonSerialize()
             ],
         ];
 

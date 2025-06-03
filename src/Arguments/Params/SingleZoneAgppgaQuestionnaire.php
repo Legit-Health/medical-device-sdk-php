@@ -2,7 +2,7 @@
 
 namespace LegitHealth\MedicalDevice\Arguments\Params;
 
-use ArrayObject;
+use stdClass;
 
 readonly class SingleZoneAgppgaQuestionnaire extends Questionnaire
 {
@@ -15,6 +15,6 @@ readonly class SingleZoneAgppgaQuestionnaire extends Questionnaire
 
     public function jsonSerialize(): mixed
     {
-        return new ArrayObject();
+        return new stdClass();
     }
 }

@@ -4,7 +4,7 @@ namespace LegitHealth\MedicalDevice\Arguments\Params;
 
 use stdClass;
 
-readonly class AladinQuestionnaire extends Questionnaire
+readonly class SingleZoneAladinQuestionnaire extends Questionnaire
 {
     public function __construct() {}
 

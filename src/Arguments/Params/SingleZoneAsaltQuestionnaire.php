@@ -4,13 +4,13 @@ namespace LegitHealth\MedicalDevice\Arguments\Params;
 
 use stdClass;
 
-readonly class Aihs4Questionnaire extends Questionnaire
+readonly class  SingleZoneAsaltQuestionnaire extends Questionnaire
 {
     public function __construct() {}
 
     public static function getName(): string
     {
-        return ScoringSystemCode::Aihs4->value;
+        return ScoringSystemCode::Asalt->value;
     }
 
     public function jsonSerialize(): mixed

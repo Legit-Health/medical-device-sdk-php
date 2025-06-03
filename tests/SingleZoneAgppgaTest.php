@@ -2,18 +2,18 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\Arguments\Params\AgppgaQuestionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\SingleZoneAgppgaQuestionnaire;
 use LegitHealth\MedicalDevice\Arguments\Params\BodySiteCode;
 use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
-class AgppgaTest extends AbstractSeverityAssessmentAutomaticLocalTest
+class SingleZoneAgppgaTest extends AbstractSeverityAssessmentAutomaticLocalTest
 {
     protected static function getRequestValues(): array
     {
         return [
             [
                 '/tests/resources/pustular_psoriasis.jpg',
-                new AgppgaQuestionnaire(),
+                new SingleZoneAgppgaQuestionnaire(),
                 ["code" => "EA90.40", "display" => "Generalised pustular psoriasis", "text" => "Generalised pustular psoriasis"],
                 [
                     'item' => [
@@ -92,7 +92,7 @@ class AgppgaTest extends AbstractSeverityAssessmentAutomaticLocalTest
                 ]
             ],
             'scoringSystem'  => [
-                AgppgaQuestionnaire::getName() => new AgppgaQuestionnaire()->jsonSerialize()
+                SingleZoneAgppgaQuestionnaire::getName() => new SingleZoneAgppgaQuestionnaire()->jsonSerialize()
             ],
         ];
 

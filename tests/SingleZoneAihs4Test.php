@@ -2,18 +2,18 @@
 
 namespace LegitHealth\MedicalDevice\Tests;
 
-use LegitHealth\MedicalDevice\Arguments\Params\Aihs4Questionnaire;
+use LegitHealth\MedicalDevice\Arguments\Params\SingleZoneAihs4Questionnaire;
 use LegitHealth\MedicalDevice\Arguments\Params\BodySiteCode;
 use LegitHealth\MedicalDevice\Response\Value\Intensity;
 
-class Aihs4Test extends AbstractSeverityAssessmentAutomaticLocalTest
+class SingleZoneAihs4Test extends AbstractSeverityAssessmentAutomaticLocalTest
 {
     protected static function getRequestValues(): array
     {
         return [
             [
                 '/tests/resources/hidradenitis.jpg',
-                new Aihs4Questionnaire(),
+                new SingleZoneAihs4Questionnaire(),
                 ["code" => "ED92.0", "display" => "Hidradenitis suppurativa", "text" => "Hidradenitis suppurativa"],
                 [
                     'item' => [
@@ -78,7 +78,7 @@ class Aihs4Test extends AbstractSeverityAssessmentAutomaticLocalTest
                 ]
             ],
             'scoringSystem'  => [
-                Aihs4Questionnaire::getName() => new Aihs4Questionnaire()->jsonSerialize()
+                SingleZoneAihs4Questionnaire::getName() => new SingleZoneAihs4Questionnaire()->jsonSerialize()
             ],
         ];
 
