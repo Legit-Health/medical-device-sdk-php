@@ -5,12 +5,12 @@ namespace LegitHealth\MedicalDevice\Arguments\Params;
 readonly class UctQuestionnaire extends Questionnaire
 {
     public function __construct(
-        public int $physicalSymptoms,
+        public int $manifestations,
         public int $qualityOfLife,
         public int $treatmentNotEnough,
         public int $overallUnderControl,
     ) {
-        $this->ensureIsInRange($physicalSymptoms, 0, 4, 'physicalSymptoms');
+        $this->ensureIsInRange($manifestations, 0, 4, 'manifestations');
         $this->ensureIsInRange($qualityOfLife, 0, 4, 'qualityOfLife');
         $this->ensureIsInRange($treatmentNotEnough, 0, 4, 'treatmentNotEnough');
         $this->ensureIsInRange($overallUnderControl, 0, 4, 'overallUnderControl');
@@ -26,7 +26,7 @@ readonly class UctQuestionnaire extends Questionnaire
         return [
             'questionnaireResponse' => [
                 'item' => [
-                    'physicalSymptoms' => $this->physicalSymptoms,
+                    'manifestations' => $this->manifestations,
                     'qualityOfLife' => $this->qualityOfLife,
                     'treatmentNotEnough' => $this->treatmentNotEnough,
                     'overallUnderControl' => $this->overallUnderControl,

@@ -122,7 +122,7 @@ class UctQuestionnaireTest extends TestCase
 
         $this->assertCount(4, $arr['questionnaireResponse']['item']);
 
-        $this->assertEquals(1, $arr['questionnaireResponse']['item']['physicalSymptoms']);
+        $this->assertEquals(1, $arr['questionnaireResponse']['item']['manifestations']);
         $this->assertEquals(2, $arr['questionnaireResponse']['item']['qualityOfLife']);
         $this->assertEquals(0, $arr['questionnaireResponse']['item']['treatmentNotEnough']);
         $this->assertEquals(4, $arr['questionnaireResponse']['item']['overallUnderControl']);
