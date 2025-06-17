@@ -43,7 +43,7 @@ class UasQuestionnaireTest extends TestCase
         $this->assertTrue($exceptionIsThrown);
 
 
-        // hive
+        // wheals
         $exceptionIsThrown = false;
         try {
             new UasQuestionnaire(3, 0);
@@ -85,7 +85,7 @@ class UasQuestionnaireTest extends TestCase
         $this->assertCount(2, $arr['questionnaireResponse']['item']);
 
         $this->assertEquals(3, $arr['questionnaireResponse']['item']['itchiness']);
-        $this->assertEquals(2, $arr['questionnaireResponse']['item']['hive']);
+        $this->assertEquals(2, $arr['questionnaireResponse']['item']['wheals']);
     }
 
     public function testGetName()
