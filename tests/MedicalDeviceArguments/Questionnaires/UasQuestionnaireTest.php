@@ -84,7 +84,7 @@ class UasQuestionnaireTest extends TestCase
 
         $this->assertCount(2, $arr['questionnaireResponse']['item']);
 
-        $this->assertEquals(3, $arr['questionnaireResponse']['item']['itchiness']);
+        $this->assertEquals(3, $arr['questionnaireResponse']['item']['pruritus']);
         $this->assertEquals(2, $arr['questionnaireResponse']['item']['wheals']);
     }
 

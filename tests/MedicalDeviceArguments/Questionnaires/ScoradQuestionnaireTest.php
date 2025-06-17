@@ -20,7 +20,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => 0,
                 'lichenification' => 0,
                 'dryness' => 0,
-                'itchiness' => 0,
+                'pruritus' => 0,
                 'sleeplessness' => 0
             ]);
         } catch (Throwable) {
@@ -38,7 +38,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => 3,
                 'lichenification' => 3,
                 'dryness' => 3,
-                'itchiness' => 10,
+                'pruritus' => 10,
                 'sleeplessness' => 10
             ]);
         } catch (Throwable) {
@@ -56,7 +56,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => random_int(0, 3),
                 'lichenification' => random_int(0, 3),
                 'dryness' => random_int(0, 3),
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable) {
@@ -74,7 +74,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => random_int(0, 3),
                 'lichenification' => random_int(0, 3),
                 'dryness' => random_int(0, 3),
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
@@ -93,7 +93,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => random_int(0, 3),
                 'lichenification' => random_int(0, 3),
                 'dryness' => random_int(0, 3),
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
@@ -112,7 +112,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => random_int(0, 3),
                 'lichenification' => random_int(0, 3),
                 'dryness' => random_int(0, 3),
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
@@ -131,7 +131,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => random_int(0, 3),
                 'lichenification' => random_int(0, 3),
                 'dryness' => random_int(0, 3),
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
@@ -150,7 +150,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => random_int(0, 3),
                 'lichenification' => random_int(0, 3),
                 'dryness' => random_int(0, 3),
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
@@ -169,7 +169,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => random_int(0, 3),
                 'lichenification' => random_int(0, 3),
                 'dryness' => random_int(0, 3),
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
@@ -188,7 +188,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => random_int(0, 3),
                 'lichenification' => random_int(0, 3),
                 'dryness' => random_int(0, 3),
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
@@ -207,7 +207,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => random_int(0, 3),
                 'lichenification' => random_int(0, 3),
                 'dryness' => random_int(0, 3),
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
@@ -226,7 +226,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => 4,
                 'lichenification' => random_int(0, 3),
                 'dryness' => random_int(0, 3),
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
@@ -245,7 +245,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => -1,
                 'lichenification' => random_int(0, 3),
                 'dryness' => random_int(0, 3),
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
@@ -264,7 +264,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => 2,
                 'lichenification' => 4,
                 'dryness' => random_int(0, 3),
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
@@ -283,7 +283,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => 2,
                 'lichenification' => -1,
                 'dryness' => random_int(0, 3),
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
@@ -302,7 +302,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => 2,
                 'lichenification' => 3,
                 'dryness' => 4,
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
@@ -321,7 +321,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => 2,
                 'lichenification' => 3,
                 'dryness' => -1,
-                'itchiness' => random_int(0, 10),
+                'pruritus' => random_int(0, 10),
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
@@ -340,12 +340,12 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => 2,
                 'lichenification' => 3,
                 'dryness' => 1,
-                'itchiness' => 11,
+                'pruritus' => 11,
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
             $exceptionIsThrown = true;
-            $this->assertEquals('itchiness should be between 0 and 10', $e->getMessage());
+            $this->assertEquals('pruritus should be between 0 and 10', $e->getMessage());
         }
         $this->assertTrue($exceptionIsThrown);
 
@@ -359,12 +359,12 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => 2,
                 'lichenification' => 3,
                 'dryness' => 1,
-                'itchiness' => -1,
+                'pruritus' => -1,
                 'sleeplessness' => random_int(0, 10)
             ]);
         } catch (Throwable $e) {
             $exceptionIsThrown = true;
-            $this->assertEquals('itchiness should be between 0 and 10', $e->getMessage());
+            $this->assertEquals('pruritus should be between 0 and 10', $e->getMessage());
         }
         $this->assertTrue($exceptionIsThrown);
 
@@ -378,7 +378,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => 2,
                 'lichenification' => 3,
                 'dryness' => 1,
-                'itchiness' => 1,
+                'pruritus' => 1,
                 'sleeplessness' => 11
             ]);
         } catch (Throwable $e) {
@@ -397,7 +397,7 @@ class ScoradQuestionnaireTest extends TestCase
                 'excoriation' => 2,
                 'lichenification' => 3,
                 'dryness' => 1,
-                'itchiness' => 1,
+                'pruritus' => 1,
                 'sleeplessness' => -1
             ]);
         } catch (Throwable $e) {
@@ -421,7 +421,7 @@ class ScoradQuestionnaireTest extends TestCase
         $this->assertEquals(3, $arr['questionnaireResponse']['item']['excoriation']);
         $this->assertEquals(0, $arr['questionnaireResponse']['item']['lichenification']);
         $this->assertEquals(1, $arr['questionnaireResponse']['item']['dryness']);
-        $this->assertEquals(5, $arr['questionnaireResponse']['item']['itchiness']);
+        $this->assertEquals(5, $arr['questionnaireResponse']['item']['pruritus']);
         $this->assertEquals(6, $arr['questionnaireResponse']['item']['sleeplessness']);
     }
 

@@ -67,7 +67,7 @@ class ScovidQuestionnaireTest extends TestCase
         $this->assertCount(10, $arr['questionnaireResponse']['item']);
 
         $this->assertEquals(8, $arr['questionnaireResponse']['item']['pain']);
-        $this->assertEquals(10, $arr['questionnaireResponse']['item']['itchiness']);
+        $this->assertEquals(10, $arr['questionnaireResponse']['item']['pruritus']);
         $this->assertEquals(0, $arr['questionnaireResponse']['item']['fever']);
         $this->assertEquals(1, $arr['questionnaireResponse']['item']['cough']);
         $this->assertEquals(2, $arr['questionnaireResponse']['item']['cephalea']);

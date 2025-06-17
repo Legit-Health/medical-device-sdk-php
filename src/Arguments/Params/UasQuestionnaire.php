@@ -4,9 +4,9 @@ namespace LegitHealth\MedicalDevice\Arguments\Params;
 
 readonly class UasQuestionnaire extends Questionnaire
 {
-    public function __construct(public int $itchiness, public int $wheals)
+    public function __construct(public int $pruritus, public int $wheals)
     {
-        $this->ensureIsInRange($itchiness, 0, 3, 'itchiness');
+        $this->ensureIsInRange($pruritus, 0, 3, 'pruritus');
         $this->ensureIsInRange($wheals, 0, 3, 'wheals');
     }
 
@@ -20,7 +20,7 @@ readonly class UasQuestionnaire extends Questionnaire
         return [
             'questionnaireResponse' => [
                 'item' => [
-                    'itchiness' => $this->itchiness,
+                    'pruritus' => $this->pruritus,
                     'wheals' => $this->wheals,
                 ]
             ]

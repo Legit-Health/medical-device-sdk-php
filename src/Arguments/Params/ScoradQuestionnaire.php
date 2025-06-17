@@ -12,7 +12,7 @@ readonly class ScoradQuestionnaire extends Questionnaire
         public int $excoriation,
         public int $lichenification,
         public int $dryness,
-        public int $itchiness,
+        public int $pruritus,
         public int $sleeplessness
     ) {
         $this->ensureIsInRange($surface, 0, 100, 'surface');
@@ -22,7 +22,7 @@ readonly class ScoradQuestionnaire extends Questionnaire
         $this->ensureIsInRange($excoriation, 0, 3, 'excoriation');
         $this->ensureIsInRange($lichenification, 0, 3, 'lichenification');
         $this->ensureIsInRange($dryness, 0, 3, 'dryness');
-        $this->ensureIsInRange($itchiness, 0, 10, 'itchiness');
+        $this->ensureIsInRange($pruritus, 0, 10, 'pruritus');
         $this->ensureIsInRange($sleeplessness, 0, 10, 'sleeplessness');
     }
 
@@ -43,7 +43,7 @@ readonly class ScoradQuestionnaire extends Questionnaire
                     'excoriation' => $this->excoriation,
                     'lichenification' => $this->lichenification,
                     'dryness' => $this->dryness,
-                    'itchiness' => $this->itchiness,
+                    'pruritus' => $this->pruritus,
                     'sleeplessness' => $this->sleeplessness,
                 ]
             ]
