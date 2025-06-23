@@ -32,7 +32,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "bordersDamaged" => [
                             'value' => false,
                             'interpretation' => null,
-                            'text' => 'Borders.Damaged',
+                            'text' => 'Borders: Damaged',
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -44,7 +44,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "bordersDelimited" => [
                             'value' => true,
                             'interpretation' => null,
-                            'text' => 'Borders.Delimited',
+                            'text' => 'Borders: Delimited',
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -56,7 +56,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "bordersDiffused" => [
                             'value' => false,
                             'interpretation' => null,
-                            'text' => 'Borders.Diffused',
+                            'text' => 'Borders: Diffused',
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -68,7 +68,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "bordersThickened" => [
                             'value' => true,
                             'interpretation' => null,
-                            'text' => 'Borders.Thickened',
+                            'text' => 'Borders: Thickened',
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -80,7 +80,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "bordersIndistinguishable" => [
                             'value' => false,
                             'interpretation' => null,
-                            'text' => 'Borders.Indistinguishable',
+                            'text' => 'Borders: Indistinguishable',
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -128,7 +128,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "affectedTissueBoneAndOrAdjacent" => [
                             'value' => false,
                             'interpretation' => null,
-                            'text' => "Affected tissues.Bone and/or adjacent tissues",
+                            'text' => "Affected tissues: Bone and/or adjacent tissues",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -140,7 +140,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "affectedTissueDermisEpidermis" => [
                             'value' => true,
                             'interpretation' => null,
-                            'text' => "Affected tissues.Dermis-epidermis",
+                            'text' => "Affected tissues: Dermis-epidermis",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -152,7 +152,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "affectedTissueMuscle" => [
                             'value' => true,
                             'interpretation' => null,
-                            'text' => "Affected tissues.Muscle",
+                            'text' => "Affected tissues: Muscle",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -164,7 +164,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "affectedTissueSubcutaneous" => [
                             'value' => true,
                             'interpretation' => null,
-                            'text' => "Affected tissues.Subcutaneous tissue",
+                            'text' => "Affected tissues: Subcutaneous tissue",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -176,7 +176,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "affectedTissueHealedSkin" => [
                             'value' => false,
                             'interpretation' => null,
-                            'text' => "Affected tissues.Intact scarred skin",
+                            'text' => "Affected tissues: Intact scarred skin",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -188,7 +188,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "exudationFibrinous" => [
                             'value' => true,
                             'interpretation' => null,
-                            'text' => "Type of exudation.Fibrinous",
+                            'text' => "Type of exudation: Fibrinous",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -200,7 +200,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "exudationPurulent" => [
                             'value' => false,
                             'interpretation' => null,
-                            'text' => "Type of exudation.Purulent",
+                            'text' => "Type of exudation: Purulent",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -212,7 +212,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "exudationBloody" => [
                             'value' => false,
                             'interpretation' => null,
-                            'text' => "Type of exudation.Bloody",
+                            'text' => "Type of exudation: Bloody",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -224,7 +224,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "exudationSerous" => [
                             'value' => true,
                             'interpretation' => null,
-                            'text' => "Type of exudation.Serous",
+                            'text' => "Type of exudation: Serous",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -236,7 +236,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "exudationGreenish" => [
                             'value' => false,
                             'interpretation' => null,
-                            'text' => "Type of exudation.Greenish",
+                            'text' => "Type of exudation: Greenish",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -248,7 +248,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "tissueInWoundBedScarred" => [
                             'value' => false,
                             'interpretation' => null,
-                            'text' => "Type of tissue in the wound bed.Closed/Scarred",
+                            'text' => "Type of tissue in the wound bed: Closed/Scarred",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -260,7 +260,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "tissueInWoundBedSlough" => [
                             'value' => true,
                             'interpretation' => null,
-                            'text' => "Type of tissue in the wound bed.Slough",
+                            'text' => "Type of tissue in the wound bed: Slough",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -272,7 +272,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "tissueInWoundBedNecrotic" => [
                             'value' => false,
                             'interpretation' => null,
-                            'text' => "Type of tissue in the wound bed.Necrotic",
+                            'text' => "Type of tissue in the wound bed: Necrotic",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -284,7 +284,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "tissueInWoundBedGranulation" => [
                             'value' => true,
                             'interpretation' => null,
-                            'text' => "Type of tissue in the wound bed.Granulation",
+                            'text' => "Type of tissue in the wound bed: Granulation",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
@@ -296,7 +296,7 @@ class SingleZoneAwosiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         "tissueInWoundBedEpithelia" => [
                             'value' => false,
                             'interpretation' => null,
-                            'text' => "Type of tissue in the wound bed.Epithelia",
+                            'text' => "Type of tissue in the wound bed: Epithelia",
                             'additionalData' => [
                                 'presenceProbability' => [
                                     'code' => 'presenceProbability',
