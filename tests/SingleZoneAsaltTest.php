@@ -57,7 +57,7 @@ class SingleZoneAsaltTest extends AbstractSeverityAssessmentAutomaticLocalTest
                 ["code" => "ED70", "display" => "Alopecia or hair loss", "text" => "Alopecia"],
                 null,
                 BodySiteCode::ArmLeft,
-                500
+                422
             ]
         ];
     }
