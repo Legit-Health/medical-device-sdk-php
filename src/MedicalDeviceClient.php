@@ -20,6 +20,7 @@ final class MedicalDeviceClient
     private const SEVERITY_ASSESSMENT_MANUAL = 'severity-assessment/manual';
     private const SEVERITY_ASSESSMENT_AUTOMATIC_LOCAL = 'severity-assessment/automatic/local';
     private const DIAGNOSIS_SUPPORT_ENDPOINT = 'diagnosis-support';
+    private const DEVICE_INFORMATION = 'device-information';
     private const LOGIN = 'login';
 
     public function __construct(private HttpClientInterface $httpClient) {}
@@ -56,6 +57,35 @@ final class MedicalDeviceClient
 
         return new AccessToken($json['access_token'], $json['token_type'], $json['expires_in_minutes']);
     }
+
+    public function deviceInformation(BearerToken $bearerToken): array
+    {
+        try {
+            $response = $this->httpClient->request('GET', self::DEVICE_INFORMATION, [
+                'headers' => [
+                    'Authorization' => $bearerToken->asAuthorizationHeader()
+                ]
+            ]);
+
+            $statusCode = $response->getStatusCode();
+            if ($statusCode !== 200) {
+                throw new RequestException(
+                    sprintf('Request failed with status code %d for path %s', $statusCode, self::DEVICE_INFORMATION),
+                    statusCode: $statusCode,
+                    content: $response->toArray(false)
+                );
+            }
+            return $response->toArray();
+        } catch (Throwable $exception) {
+            if ($exception instanceof RequestException) {
+                throw $exception;
+            }
+            throw new RequestException(
+                sprintf('An error occurred while sending the request: %s', $exception->getMessage())
+            );
+        }
+    }
+
 
     /**
      * @throws RequestException
