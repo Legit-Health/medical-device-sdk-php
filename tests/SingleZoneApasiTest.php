@@ -13,12 +13,12 @@ class SingleZoneApasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
         return [
             [
                 '/tests/resources/psoriasis_01.jpg',
-                new SingleZoneApasiQuestionnaire(20),
+                new SingleZoneApasiQuestionnaire(4),
                 ["code" => "EA90", "display" => "Psoriasis", "text" => "Psoriasis"],
                 [
                     'item' => [
                         "surface" => [
-                            'value' => 2,
+                            'value' => 4,
                             'text' => 'Surface area score'
                         ],
                         "desquamation" => [
@@ -55,9 +55,9 @@ class SingleZoneApasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             ]
                         ]
                     ],
-                    'scoreValue' => fn(float $value) => self::assertGreaterThan(15, $value),
-                    'interpretationCategory' => 'Moderate',
-                    'intensity' => Intensity::Moderate,
+                    'scoreValue' => fn(float $value) => self::assertLessThanOrEqual(8, $value),
+                    'interpretationCategory' => 'Severe',
+                    'intensity' => Intensity::High,
                     'globalScoreContribution' => fn(float $value) => self::assertLessThanOrEqual(10, $value),
                     'attachment' => [
                         'maskRaw' => [
@@ -115,7 +115,7 @@ class SingleZoneApasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                 ]
             ],
             'scoringSystem'  => [
-                SingleZoneApasiQuestionnaire::getName() => new SingleZoneApasiQuestionnaire(50)->jsonSerialize()
+                SingleZoneApasiQuestionnaire::getName() => new SingleZoneApasiQuestionnaire(5)->jsonSerialize()
             ],
         ];
 

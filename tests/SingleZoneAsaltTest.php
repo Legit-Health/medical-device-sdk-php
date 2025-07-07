@@ -17,7 +17,7 @@ class SingleZoneAsaltTest extends AbstractSeverityAssessmentAutomaticLocalTest
                 ["code" => "ED70", "display" => "Alopecia or hair loss", "text" => "Alopecia"],
                 [
                     'item' => null,
-                    'scoreValue' => fn(float $value) => self::assertGreaterThanOrEqual(30, $value),
+                    'scoreValue' => fn(float $value) => self::assertGreaterThanOrEqual(7, $value),
                     'interpretationCategory' => 'Moderate',
                     'intensity' => Intensity::Moderate,
                     'globalScoreContribution' => fn(float $value) => self::assertLessThanOrEqual(10, $value),

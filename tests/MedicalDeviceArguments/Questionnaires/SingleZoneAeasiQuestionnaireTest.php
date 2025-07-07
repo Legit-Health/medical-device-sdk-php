@@ -16,7 +16,7 @@ class SingleZoneAeasiQuestionnaireTest extends TestCase
         } catch (Throwable) {
             $exceptionIsThrown = true;
         }
-        $this->assertFalse($exceptionIsThrown);
+        $this->assertTrue($exceptionIsThrown);
 
         $exceptionIsThrown = false;
         try {
@@ -47,6 +47,6 @@ class SingleZoneAeasiQuestionnaireTest extends TestCase
     public function testGetName()
     {
         $singleZoneAeasiQuestionnaire = new SingleZoneAeasiQuestionnaire(5, 30);
-        $this->assertEquals('aesii', $singleZoneAeasiQuestionnaire::getName());
+        $this->assertEquals('aeasi', $singleZoneAeasiQuestionnaire::getName());
     }
 }

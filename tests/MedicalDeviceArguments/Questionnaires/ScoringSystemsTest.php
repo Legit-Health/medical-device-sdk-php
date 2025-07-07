@@ -14,8 +14,8 @@ class ScoringSystemsTest extends TestCase
 {
     public function testJsonSerialize()
     {
-        $auasQuestionnaire = new SingleZoneApasiQuestionnaire(3);
-        $apasiQuestionnaire = new SingleZoneAuasQuestionnaire(3);
+        $auasQuestionnaire = new SingleZoneAuasQuestionnaire(3);
+        $apasiQuestionnaire = new SingleZoneApasiQuestionnaire(3);
         $questionnaires = new ScoringSystems([$auasQuestionnaire, $apasiQuestionnaire]);
 
         $arr = json_decode(json_encode($questionnaires), true);

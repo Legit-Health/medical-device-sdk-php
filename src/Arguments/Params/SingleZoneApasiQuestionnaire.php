@@ -6,7 +6,7 @@ readonly class SingleZoneApasiQuestionnaire extends Questionnaire
 {
     public function __construct(public float $surface)
     {
-        $this->ensureIsInRange($surface, 0, 100, 'surface');
+        $this->ensureIsInRange($surface, 0, 6, 'surface');
     }
 
     public static function getName(): string
@@ -19,7 +19,7 @@ readonly class SingleZoneApasiQuestionnaire extends Questionnaire
         return [
             'questionnaireResponse' => [
                 'item' => [
-                    'surface' => $this->surface
+                    'surface' => \intval($this->surface)
                 ]
             ]
         ];

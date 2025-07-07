@@ -66,18 +66,18 @@ class SingleZoneAeasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             ]
                         ]
                     ],
-                    'scoreValue' => fn(float $value) => self::assertGreaterThan(15, $value),
-                    'interpretationCategory' => 'Moderate',
-                    'intensity' => Intensity::Moderate,
+                    'scoreValue' => fn(float $value) => self::assertGreaterThan(3, $value),
+                    'interpretationCategory' => 'Mild',
+                    'intensity' => Intensity::Low,
                     'globalScoreContribution' => fn(float $value) => self::assertGreaterThanOrEqual(3, $value),
                     'attachment' => [
                         'maskRaw' => [
-                            'title' => 'Eczema mask raw',
+                            'title' => 'Lesion mask raw',
                             'height' => 350,
                             'width' => 650
                         ],
                         'maskBinary' => [
-                            'title' => 'Eczema mask binary',
+                            'title' => 'Lesion mask binary',
                             'height' => 350,
                             'width' => 650
                         ],

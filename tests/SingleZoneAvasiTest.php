@@ -40,7 +40,7 @@ class SingleZoneAvasiTest extends AbstractSeverityAssessmentAutomaticLocalTest
                         'width' => 800
                     ],
                     'segmentation' => [
-                        'title' => 'Segmented image',
+                        'title' => 'Segmentation',
                         'height' => 550,
                         'width' => 800
                     ]

@@ -33,6 +33,14 @@ class SingleZoneApasiQuestionnaireTest extends TestCase
             $exceptionIsThrown = true;
         }
         $this->assertTrue($exceptionIsThrown);
+
+        $exceptionIsThrown = false;
+        try {
+            new SingleZoneApasiQuestionnaire(8);
+        } catch (Throwable) {
+            $exceptionIsThrown = true;
+        }
+        $this->assertTrue($exceptionIsThrown);
     }
 
     public function testJsonSerialize()

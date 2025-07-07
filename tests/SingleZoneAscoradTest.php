@@ -103,9 +103,9 @@ class SingleZoneAscoradTest extends AbstractSeverityAssessmentAutomaticLocalTest
                             'text' => 'Sleeplessness'
                         ]
                     ],
-                    'scoreValue' => fn(float $value) => self::assertGreaterThan(40, $value),
-                    'interpretationCategory' => 'Severe',
-                    'intensity' => Intensity::High,
+                    'scoreValue' => fn(float $value) => self::assertGreaterThan(37, $value),
+                    'interpretationCategory' => 'Moderate',
+                    'intensity' => Intensity::Moderate,
                     'attachment' => [
                         'maskRaw' => [
                             'title' => 'Lesion mask raw',

@@ -47,7 +47,6 @@ abstract class AbstractSeverityAssessmentAutomaticLocalTest extends TestCase
                 'headers' => ['Authorization' => $this->bearerToken->asAuthorizationHeader()],
             ]
         );
-
         $this->assertEquals(422, $response->getStatusCode());
         $detail = $response->toArray(false)['detail'];
         $this->assertCount(1, $detail);
