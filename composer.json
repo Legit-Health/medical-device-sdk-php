@@ -5,7 +5,7 @@
     "type": "library",
     "require": {
         "php": "^8.4",
-        "symfony/http-client": "^7.1"
+        "symfony/http-client": "^8.0"
     },
     "require-dev": {
         "ekino/phpstan-banned-code": "^3.0",
