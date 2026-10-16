@@ -10,11 +10,13 @@ Ensure that you have a registered username and password for our API before makin
 
 To start sending requests to Legit.Health's Dermatology API, create an instance of the `LegitHealth\MedicalDevice\MedicalDeviceClient` class. There are several ways to instantiate this object, but the simplest is by using the `createWithBaseUri` method. This static method accepts a single argument: the API's base URL, which varies depending on the environment you're working in. For development purposes, use `https://medical-device-pre.legit.health`.
 
-The `MedicalDeviceClient` class provides three main methods:
+The `MedicalDeviceClient` class provides four main methods:
 
 - `login`: Requires your username and password, returning an access token that must be included in subsequent requests.
   
 - `diagnosisSupport`: Sends a diagnosis support request to the API. Use this method to analyze a set of images to determine the probability of detected pathologies, or to retrieve metrics such as malignancy or the need for referral.
+
+- `imageValidation`: Checks only whether a set of images is valid (quality, dermatological domain and modality), without running the diagnosis. It is much faster than `diagnosisSupport`.
 
 - `severityAssessment`: Sends a severity assessment request to evaluate the severity of a known condition. For example, you can use this method to assess the severity of a psoriasis lesion and calculate the corresponding `APASI` score
 
@@ -71,6 +73,19 @@ The response object, which is an instance of `DiagnosisSupportResponse`, contain
 - `imagingStudySeries`: an array of `ImagingStudySeriesInstance` objects with information related to each image, such as conclusions, performance indicators, and clinical indicators. It also contains a `media` object that includes the modality of the image and whether it passed our Dermatology Image Quality Assessment (DIQA).
 - `analysisDuration`: the time spent by the AI model analyzing the image.
 - `effectiveDateTime`: the date and time of the report.
+
+## Image Validation Request
+
+The `imageValidation` method takes an `ImageValidationArguments` object with 1 to 5 base64 images, a bearer token, and optional request options. It returns an `ImageValidationResponse` with `analysisDuration` and one `imagingAnalysis` item per image, in request order. Each item holds the `MediaValidity` of its image, with the same shape and values as in `diagnosisSupport`.
+
+```php
+$response = $medicalDeviceClient->imageValidation(
+    new ImageValidationArguments(medias: [base64_encode($image1)]),
+    $bearerToken
+);
+$isValid = $response->imagingAnalysis[0]->mediaValidity->isValid;
+$failedMedias = $response->getIndexOfFailedMedias();
+```
 
 ## Severity Assessment Requests
 
