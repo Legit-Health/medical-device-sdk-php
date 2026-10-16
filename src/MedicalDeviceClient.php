@@ -5,12 +5,13 @@ namespace LegitHealth\MedicalDevice;
 use LegitHealth\MedicalDevice\Common\BearerToken;
 use LegitHealth\MedicalDevice\Arguments\{
     DiagnosisSupportArguments,
+    ImageValidationArguments,
     MedicalDeviceArguments,
     RequestOptions,
     SeverityAssessmentAutomaticLocalArguments,
     SeverityAssessmentManualArguments
 };
-use LegitHealth\MedicalDevice\Response\{AccessToken, DiagnosisSupportResponse, SeverityAssessmentResponse};
+use LegitHealth\MedicalDevice\Response\{AccessToken, DiagnosisSupportResponse, ImageValidationResponse, SeverityAssessmentResponse};
 use Throwable;
 use Symfony\Component\HttpClient\HttpClient;
 use Symfony\Contracts\HttpClient\HttpClientInterface;
@@ -20,6 +21,7 @@ final class MedicalDeviceClient
     private const SEVERITY_ASSESSMENT_MANUAL = 'severity-assessment/manual';
     private const SEVERITY_ASSESSMENT_AUTOMATIC_LOCAL = 'severity-assessment/automatic/local';
     private const DIAGNOSIS_SUPPORT_ENDPOINT = 'diagnosis-support';
+    private const IMAGE_VALIDATION_ENDPOINT = 'image-validation';
     private const DEVICE_INFORMATION = 'device-information';
     private const LOGIN = 'login';
 
@@ -112,6 +114,15 @@ final class MedicalDeviceClient
     {
         $json = $this->send($arguments, self::DIAGNOSIS_SUPPORT_ENDPOINT, $bearerToken, $requestOptions);
         return DiagnosisSupportResponse::createFromJson($json);
+    }
+
+    /**
+     * @throws RequestException
+     */
+    public function imageValidation(ImageValidationArguments $arguments, BearerToken $bearerToken, ?RequestOptions $requestOptions = null): ImageValidationResponse
+    {
+        $json = $this->send($arguments, self::IMAGE_VALIDATION_ENDPOINT, $bearerToken, $requestOptions);
+        return ImageValidationResponse::createFromJson($json);
     }
 
     /**
